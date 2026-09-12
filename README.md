@@ -3,7 +3,7 @@
 A six-day Bangkok itinerary for 11–16 November 2026, built as a single self-contained
 HTML page. Mobile-first — it's meant to be opened on a phone while standing on a platform.
 
-**Live:** https://haseebjamshaid.github.io/bangkok-field-notes/
+**Live:** https://haseebjamshaid.github.io/bangkok-itinerary/
 
 ## What it does
 
