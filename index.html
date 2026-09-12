@@ -229,6 +229,29 @@ h1 span{display:block;font-weight:400;font-style:italic;font-size:.5em;letter-sp
 .tips li::before{content:"";position:absolute;left:1px;top:.6em;width:7px;height:7px;background:var(--rust);clip-path:polygon(50% 0,100% 50%,50% 100%,0 50%)}
 .tips b{color:var(--ink);font-weight:600}
 
+/* ---- sun cards ---- */
+.stop.is-sun .num{background:var(--mustard);box-shadow:0 0 0 2px var(--mustard);border-radius:50%}
+.stop.is-set .num{background:var(--rust);box-shadow:0 0 0 2px var(--rust)}
+.stop.is-sun .num .ic{width:17px;height:17px;stroke-width:2.1}
+.suncard{border:2px solid var(--mustard);background:linear-gradient(168deg,var(--mustard-soft),var(--card) 72%)}
+.stop.is-set .suncard{border-color:var(--rust);background:linear-gradient(168deg,var(--rust-soft),var(--card) 72%)}
+.sun-head{display:flex;align-items:baseline;gap:10px;flex-wrap:wrap}
+.sun-head .lbl{font-size:10.5px;color:var(--mustard)}
+.stop.is-set .sun-head .lbl{color:var(--rust)}
+.sun-t{font-family:"Barlow Condensed",sans-serif;font-weight:700;font-size:26px;line-height:1;
+  letter-spacing:.02em;color:var(--mustard);font-variant-numeric:tabular-nums}
+.stop.is-set .sun-t{color:var(--rust)}
+.suncard h3{margin-top:5px}
+.sun-strip{display:flex;flex-wrap:wrap;gap:6px;margin-top:12px}
+.sun-strip span{font-family:"Barlow Condensed",sans-serif;font-size:12.5px;letter-spacing:.05em;
+  text-transform:uppercase;color:var(--ink-2);background:var(--card);border:1.5px solid var(--mustard);
+  border-radius:7px;padding:3px 9px;font-variant-numeric:tabular-nums}
+.stop.is-set .sun-strip span{border-color:var(--rust)}
+.sun-strip b{color:var(--ink);font-weight:700}
+.sun-warn{margin-top:10px;padding:9px 11px;border:1.5px dashed var(--rust);border-radius:9px;
+  font-size:13.5px;color:var(--ink-2);background:var(--card)}
+.sun-warn b{color:var(--ink)}
+
 /* ---- legs ---- */
 .leg{display:grid;grid-template-columns:34px 1fr;gap:10px}
 .leg-spine{position:relative}
@@ -411,6 +434,8 @@ svg.map .stop-g.sel .ring{stroke:var(--rust);stroke-dasharray:4 3}
     <symbol id="i-cash" viewBox="0 0 24 24"><rect x="3" y="6" width="18" height="12" rx="2"/><circle cx="12" cy="12" r="2.8"/><path d="M6.5 9.5h.01M17.5 14.5h.01"/></symbol>
     <symbol id="i-scarf" viewBox="0 0 24 24"><path d="M7 4h10l-1 8H8L7 4Z"/><path d="M8 12l-2 8h5l1-8M16 12l2 8h-5l-1-8"/></symbol>
     <symbol id="i-pin" viewBox="0 0 24 24"><path d="M12 21.5s-6.5-6.2-6.5-11A6.5 6.5 0 0 1 19 10.5c0 4.8-7 11-7 11Z"/><circle cx="12" cy="10.5" r="2.3"/></symbol>
+    <symbol id="i-sunrise" viewBox="0 0 24 24"><path d="M12 3.5v3M5.6 6.6l2.1 2.1M18.4 6.6l-2.1 2.1M2.5 17h4M17.5 17h4"/><path d="M7.5 17a4.5 4.5 0 0 1 9 0"/><path d="M2.5 21h19"/></symbol>
+    <symbol id="i-sunset" viewBox="0 0 24 24"><path d="M12 8.5v-5M9 6l3-3 3 3"/><path d="M2.5 17h4M17.5 17h4"/><path d="M7.5 17a4.5 4.5 0 0 1 9 0"/><path d="M2.5 21h19"/></symbol>
     <symbol id="i-check" viewBox="0 0 24 24"><path d="M4.5 12.5l4.5 4.5L19.5 6.5"/></symbol>
   </defs>
 </svg>
@@ -482,175 +507,212 @@ const LL={
 
 const DAYS=[
 /* ---------------- DAY 1 ---------------- */
+/* ---------------- DAY 1 ---------------- */
 { id:'wed', tab:'Wed 11', n:1, date:'Wed 11 Nov', title:'Touchdown & the Home Turf',
-  best:'Shaking off the flight and learning your <b>15-minute radius</b>. Everything tonight is walkable or one BTS stop away, and it ends with a rooftop drink twenty minutes’ stroll from your bed.',
+  best:'Shaking off the flight and learning your <b>15-minute radius</b>. Everything tonight is walkable or one stop away, sunset is on your own roof, and it ends with a drink twenty minutes’ stroll from your bed.',
   tip:'Buy your Rabbit Card tonight at Siam BTS (฿100 card + ฿200 credit, no passport needed). You’ll ride the BTS about fourteen times this trip and the ticket-machine queue at Siam is the worst in the city.',
-  order:'Suvarnabhumi → Airport Link → <b>Hotel</b> → Erawan Shrine → Chit Lom BTS → skywalk → Siam BTS → Siam Square (dinner) → Speakeasy rooftop → <b>Hotel</b>',
+  order:'Suvarnabhumi → Airport Link → <b>Base</b> → sunset on the roof → Erawan Shrine → Chit Lom → skywalk → Siam Square (dinner) → Speakeasy rooftop → <b>Base</b>',
   tally:[['Transport','~฿80'],['Tickets','฿0'],['On foot','~4 km']],
   stops:[
+   {sun:'rise',t:'06:14',n:'Somewhere over the Bay of Bengal',
+    p:'Today’s sunrise happens without you — you’re still in the air. The first one you can actually stand under is tomorrow, and it’s the best of the week. Set the alarm tonight.',
+    strip:[['Dawn','05:53'],['Sunrise','06:14'],['Tomorrow','out by 05:35']]},
    {base:true,ic:'i-plane',n:'Suvarnabhumi Airport',short:'Suvarnabhumi · 28 km',t:'14:10',tl:'Land',ll:LL.airport,off:'E',
     p:'Immigration and bags ≈ 60 min. Grab a SIM at the arrivals hall (AIS or TrueMove, ~฿300 for 8 days) and pull baht from an ATM <b>before</b> heading down to the train.'},
    {base:true,ic:'i-home',n:'Base camp — Pratunam',short:'Base',t:'16:05',tl:'Check in',ll:LL.hotel,lbl:'l',
-    p:'Drop bags, shower, change into sandals. Out the door by 17:30 — the shrine is prettier at dusk.',
+    p:'Drop bags, shower, change into sandals. Then go straight up — you have about ninety minutes before the sun goes.',
     leg:{total:'~40 min',cost:'฿40',hops:[
       {m:'walk',txt:'Follow <b>“Train to City”</b> signs down to <b>B1</b>',meta:'3 min'},
       {m:'arl',txt:'City Line → <b>Ratchaprarop</b> (6 stops). Tap a contactless card at the gate.',meta:'28 min · ฿40 · every 15 min'},
       {m:'walk',txt:'Exit → Ratchaprarop Rd → left into <b>Phetchaburi Soi 11</b>',meta:'6 min'}]}},
-   {ref:29,ic:'i-temple',n:'Erawan Shrine',t:'17:50',stay:'25 min',cost:'Free',hours:'06:00–22:00 · dancers on request',ll:LL.erawanShrine,lbl:'l',
-    p:'Four-faced Brahma on the busiest corner in the city. A ฿50 garland-and-incense set at the gate is the done thing; if someone has paid the dancers, you get the show for nothing.',
+   {sun:'set',t:'17:49',n:'Your own rooftop, eight floors up',ll:LL.rooftop,
+    p:'Zero effort on a travel day: take the lift. Pratunam has no tall neighbours on the western side, so the sun drops cleanly over the Victory Monument sprawl with the Baiyoke tower catching the last light to your right. Order something cold and attempt nothing else until it’s dark.',
+    strip:[['Sunset','17:49'],['Be up by','17:25'],['Dark','18:10']]},
+   {ref:29,ic:'i-temple',n:'Erawan Shrine',t:'18:30',stay:'25 min',cost:'Free',hours:'06:00–22:00 · dancers on request',ll:LL.erawanShrine,lbl:'l',
+    p:'Four-faced Brahma on the busiest corner in the city, and far better after dark — gold, candles and incense smoke against the traffic. A ฿50 garland-and-incense set at the gate is the done thing; if someone has paid the dancers, you get the show for nothing.',
     leg:{total:'18 min',cost:'฿0',hops:[
       {m:'walk',txt:'South down <b>Ratchadamri Rd</b> past Pratunam market and Big C to the Ratchaprasong corner',meta:'18 min'},
-      {m:'suk',alt:true,txt:'Too hot? BTS Ratchathewi → <b>Chit Lom</b> (2 stops) then 3 min walk',meta:'~10 min · ฿20'}]}},
-   {ref:'30 · 28',ic:'i-walk',n:'Chit Lom BTS & the skywalk to Siam',short:'Chit Lom',t:'18:15',stay:'15 min',cost:'Free',ll:LL.chitlom,lbl:'r',
-    p:'Climb up to Chit Lom station and take the covered <b>R-Walk skywalk</b> west, past Gaysorn and CentralWorld, straight into Siam BTS. It is how locals cross Ratchaprasong without touching the pavement.',
+      {m:'suk',alt:true,txt:'Legs gone already? BTS Ratchathewi → <b>Chit Lom</b> (2 stops) then 3 min walk',meta:'~10 min · ฿20'}]}},
+   {ref:'30 · 28',ic:'i-walk',n:'Chit Lom BTS & the skywalk to Siam',short:'Chit Lom',t:'19:00',stay:'15 min',cost:'Free',ll:LL.chitlom,lbl:'r',
+    p:'Climb up to Chit Lom station and take the covered <b>R-Walk skywalk</b> west, past Gaysorn and CentralWorld, straight into Siam BTS. It’s how locals cross Ratchaprasong without touching the pavement.',
     leg:{total:'4 min',cost:'฿0',hops:[{m:'walk',txt:'Across the intersection to the station stairs',meta:'4 min'}]}},
-   {ref:27,ic:'i-food',n:'Siam Square',t:'18:35',stay:'1 h 40',cost:'~฿400 for two',hours:'shops till 22:00',ll:LL.siamSq,lbl:'l',
+   {ref:27,ic:'i-food',n:'Siam Square',t:'19:20',stay:'1 h 30',cost:'~฿400 for two',hours:'shops till 22:00',ll:LL.siamSq,lbl:'l',
     p:'Bangkok’s teen-fashion grid, rebuilt around Siam Square One and the Lido Connect arcade. Dinner here.',
-    tips:['<b>Somtam Nua</b> (Siam Sq Soi 5): som tam and fried chicken, ~฿120 a plate.','<b>Inter</b> (Soi 9): old-school Thai plates since 1981, nothing over ฿150.','Sois 2–7 for indie Thai streetwear; Siam Sq One roof for a breeze.'],
+    tips:['<b>Somtam Nua</b> (Siam Sq Soi 5): som tam and fried chicken, ~฿120 a plate.','<b>Inter</b> (Soi 9): old-school Thai plates since 1981, nothing over ฿150.','Buy the Rabbit Card at the BTS office before it shuts at 22:00.'],
     leg:{total:'12 min',cost:'฿0',hops:[{m:'sky',txt:'Skywalk Chit Lom → <b>Siam BTS</b>; down the Exit 2 stairs into the Square',meta:'12 min'}]}},
-   {ref:24,ic:'i-cocktail',n:'The Speakeasy Rooftop Bar, Hotel Muse',short:'Speakeasy',t:'20:30',stay:'1 h 15',cost:'cocktails ~฿380+',hours:'17:00–02:00 · DJ Thu–Sat from 20:30',ll:LL.muse,lbl:'r',
-    p:'Two floors of 1920s Europe on the 24th–25th: a retractable-roof terrace below, an open-air Secret Garden and glass domes above. Smart-casual; a Negroni and the skyline and then bed.',
+   {ref:24,ic:'i-cocktail',n:'The Speakeasy Rooftop Bar, Hotel Muse',short:'Speakeasy',t:'21:05',stay:'1 h 10',cost:'cocktails ~฿380+',hours:'17:00–02:00 · DJ Thu–Sat from 20:30',ll:LL.muse,lbl:'r',
+    p:'Two floors of 1920s Europe on the 24th–25th: a retractable-roof terrace below, an open-air Secret Garden and glass domes above. Smart-casual. One Negroni, then bed — tomorrow starts in the dark.',
     leg:{total:'~10 min',cost:'฿17',hops:[
       {m:'suk',txt:'Siam → <b>Chit Lom</b> (1 stop, toward Kheha)',meta:'2 min · ฿17'},
       {m:'walk',txt:'Exit 4 → south down <b>Lang Suan Rd</b>; Hotel Muse on your right, lifts to 24F',meta:'7 min'}]}},
-   {base:true,ic:'i-home',n:'Back to base',short:'Hotel',t:'22:00',tl:'Home',ll:LL.hotel,lbl:false,
-    p:'Sleep. Tomorrow is the early one.',
-    leg:{total:'20 min',cost:'฿0',hops:[
-      {m:'walk',txt:'Lang Suan → Ratchadamri north → left on Phetchaburi → <b>Soi 11</b>',meta:'20 min'},
-      {m:'suk',alt:true,txt:'Or Chit Lom → <b>Ratchathewi</b> (2 stops) + 6 min walk',meta:'~10 min · ฿20'}]}},
+   {base:true,ic:'i-home',n:'Back to base',short:'Base',t:'22:30',tl:'Home',ll:LL.hotel,lbl:false,
+    p:'Sleep properly. Alarm at <b>05:30</b> — tomorrow starts at the foot of the Golden Mount in the dark.',
+    leg:{total:'~12 min',cost:'~฿20',hops:[
+      {m:'suk',txt:'Chit Lom → <b>Ratchathewi</b> (2 stops, toward Khu Khot)',meta:'5 min · ~฿20'},
+      {m:'walk',txt:'Phaya Thai Rd → Phetchaburi → Soi 11',meta:'6 min'}]}},
   ]},
 
 /* ---------------- DAY 2 ---------------- */
-{ id:'thu', tab:'Thu 12', n:2, date:'Thu 12 Nov', title:'Dragons, the River & the Old Town',
-  best:'The two temple photographs you came for, then the Old Town on foot with the <b>best plate of crab in Bangkok</b> in the middle. Long day, early start, canal boat home.',
-  tip:'This is the one day with taxis, because no train goes within 12 km of the dragon. Insist on the meter (“meter, ka”); about ฿160 each way from MRT Lak Song. If a driver refuses, the next one won’t.',
-  order:'<b>Hotel</b> → BTS → MRT → taxi → Wat Samphran → taxi → MRT → Wat Arun → ferry → Krua Apsorn → Natthaphon → Wat Suthat → JEDI → Wat Saket (sunset) → canal boat → <b>Hotel</b>',
-  tally:[['Transport','~฿560'],['Tickets','฿400–500'],['On foot','~6 km']],
+{ id:'thu', tab:'Thu 12', n:2, date:'Thu 12 Nov', title:'Sunrise on the Mount, Sunset on the River',
+  best:'The big one, bookended exactly as you asked: <b>first light at the Golden Mount, last light on Wat Arun</b>. In between, the entire Old Town on foot — you barely use a train all day.',
+  tip:'The Golden Mount gate opens at 07:30, so you watch the sunrise from the canal below it and climb the moment they unlock. That hour on the summit is the quietest it ever gets — often just you and the monks doing their morning round of the bells.',
+  order:'<b>Base</b> 05:35 → canal boat → <b>sunrise at Mahakan Fort</b> → Golden Mount → JEDI → Wat Suthat → Natthaphon → Krua Apsorn → Wat Pho → ferry → Wat Arun → <b>sunset from Tha Tien</b> → <b>Base</b>',
+  tally:[['Transport','~฿120'],['Tickets','฿700'],['On foot','~7 km'],['Awake','05:30–19:30']],
   stops:[
-   {base:true,ic:'i-home',n:'Base camp — Pratunam',short:'Base',t:'07:00',tl:'Leave',ll:LL.hotel,lbl:'r',
-    p:'Coffee to go. Temples want shoulders and knees covered — pack the scarf.'},
-   {ref:1,ic:'i-temple',n:'Wat Samphran, the Dragon Temple',short:'Wat Samphran · 38 km',t:'08:35',stay:'1 h',cost:'Free · donation',hours:'06:00–18:00',ll:LL.samphran,off:'W',
-    p:'A 17-storey pink cylinder with an 80-metre green dragon coiled around it, in a sleepy Nakhon Pathom suburb. When the door is open you climb up <b>inside the dragon’s body</b> to the top.',
-    tips:['Working monastery — modest dress, quiet voices.','Morning light hits the dragon head-on from the car-park side.'],
-    leg:{total:'~1 h 30',cost:'~฿245',hops:[
-      {m:'walk',txt:'Hotel → <b>BTS Ratchathewi</b>',meta:'6 min'},
-      {m:'suk',txt:'Ratchathewi → <b>Siam</b> (1 stop); cross the platform',meta:'2 min'},
-      {m:'silom',txt:'Siam → <b>Bang Wa</b>, the last stop (13 stops)',meta:'30 min · ~฿59'},
-      {m:'mrt',txt:'Covered link to MRT Bang Wa → <b>Lak Song</b> (4 stops, toward Lak Song)',meta:'9 min · ~฿24'},
-      {m:'taxi',txt:'Lak Song Exit 2 → <b>“Wat Samphran, Sam Phran”</b>. The only leg of the trip no rail reaches.',meta:'22 min · ~฿160'},
-      {m:'bus',alt:true,txt:'Purist route: bus 84 (AC) from Bang Wa toward Om Noi, then a songthaew the last 4 km — adds ~45 min',meta:'~฿25 + ฿20'}]}},
-   {ref:2,ic:'i-temple',n:'Wat Arun, Temple of Dawn',short:'Wat Arun',t:'10:45',stay:'1 h',cost:'฿200',hours:'08:00–18:00',ll:LL.watArun,lbl:'l',
-    p:'Porcelain-mosaic prang on the west bank; you can climb the first two terraces. Late morning the light is flat but the crowds are thinner than at sunset, and your ticket includes a water.',
-    tips:['Thai-dress rental at the gate (~฿200–500) if you want the photo.','Best angle: from the river steps on the left as you exit.'],
-    leg:{total:'~1 h 05',cost:'~฿190',hops:[
-      {m:'taxi',txt:'Back to <b>MRT Lak Song</b>',meta:'22 min · ~฿160'},
-      {m:'mrt',txt:'Lak Song → <b>Itsaraphap</b> (7 stops, toward Tha Phra / Hua Lamphong)',meta:'15 min · ~฿30'},
-      {m:'walk',txt:'Exit 2 → left along Itsaraphap Rd → right on <b>Wang Doem Rd</b> until the prang appears',meta:'12 min'}]}},
-   {ref:4,ic:'i-food',n:'Krua Apsorn @Dinso',short:'Krua Apsorn',t:'12:25',stay:'1 h',cost:'~฿700 for two',hours:'Mon–Sat 10:30–19:30 · closed Sun',ll:LL.kruaApsorn,lbl:'t',
-    p:'Bib Gourmand, royal-household-approved, unchanged for decades. Order the <b>fluffy crab omelette</b> (khai jiao poo), stir-fried crab in yellow curry, and the tom yum. No lunch reservations — be there by 12:30.',
-    leg:{total:'~30 min',cost:'฿5',hops:[
-      {m:'ferry',txt:'Wat Arun pier → <b>Tha Tien</b>, pay ฿5 cash at the turnstile',meta:'4 min · ฿5'},
-      {m:'walk',txt:'Maha Rat Rd north past the Grand Palace wall → Na Phra Lan → Ratchadamnoen → <b>Dinso Rd</b>',meta:'22 min'},
-      {m:'taxi',alt:true,txt:'If the sun is winning: tuk-tuk from Tha Tien, agree ฿80–100 first',meta:'8 min'}]}},
-   {ref:5,ic:'i-food',n:'Natthaphon Coconut Ice Cream',short:'Natthaphon',t:'13:35',stay:'20 min',cost:'฿30–50',hours:'Mon–Sat 09:00–17:00',ll:LL.natthaphon,lbl:'l',
-    p:'Third-generation coconut ice cream from the same shophouse since 1947, on the loveliest old square in the city. Cup, with sticky rice, sweetcorn and roasted peanuts on top.',
-    leg:{total:'5 min',cost:'฿0',hops:[{m:'walk',txt:'Dinso Rd → <b>Phraeng Phuthon</b> square',meta:'5 min'}]}},
-   {bonus:true,ic:'i-temple',n:'Wat Suthat & the Giant Swing',short:'Wat Suthat',t:'14:00',stay:'40 min',cost:'฿100',hours:'08:30–20:00',ll:LL.watSuthat,lbl:'b',
-    p:'The calm one. The best murals in the Old Town and almost nobody inside; the red Giant Swing out front is free and 21 metres tall.',
-    leg:{total:'4 min',cost:'฿0',hops:[{m:'walk',txt:'Across the square to the swing',meta:'4 min'}]}},
-   {ref:21,ic:'i-coffee',n:'JEDI Café & Bar',short:'JEDI',t:'14:55',stay:'1 h 10',cost:'~฿150',hours:'daytime into evening',ll:LL.jedi,lbl:false,
-    p:'Air-conditioned siesta on a canal terrace around the corner from the Golden Mount. Jedi Latte, coconut pie, feet up until the sun drops a bit.',
-    leg:{total:'12 min',cost:'฿0',hops:[{m:'walk',txt:'East along <b>Bamrung Mueang Rd</b> (the Buddha-statue supply street) → right on Boripat Rd',meta:'12 min'}]}},
-   {ref:20,ic:'i-temple',n:'Wat Saket, the Golden Mount',short:'Golden Mount',t:'16:15',stay:'1 h 30',cost:'฿100',hours:'07:30–19:00',ll:LL.watSaket,lbl:'r',
-    p:'344 gentle spiral steps past bells and gongs to a 360° terrace over the Old Town. Be on top by <b>17:15</b>; sunset is 17:47 and the chedi glows as the city lights come on.',
-    tips:['Ring every bell on the way up — it is expected.','Toilets and cold water at the base.'],
-    leg:{total:'4 min',cost:'฿0',hops:[{m:'walk',txt:'Boripat Rd → the temple gate',meta:'4 min'}]}},
-   {base:true,ic:'i-home',n:'Back to base by canal boat',short:'Hotel',t:'18:35',tl:'Home',ll:LL.hotel,lbl:false,
-    p:'Duck when the boys shout — a tarp comes up against splash. Dinner: Pratunam street food along Phetchaburi Soi 19 or the Platinum Mall food court.',
-    leg:{total:'~26 min',cost:'~฿18',hops:[
-      {m:'walk',txt:'Down to <b>Phanfa Lilat pier</b>, right below the temple',meta:'4 min'},
-      {m:'canal',txt:'Golden Mount Line → <b>Pratunam</b>, the last stop. Pay on board; runs till 20:30 weekdays.',meta:'15 min · ~฿18'},
-      {m:'walk',txt:'Pratunam pier → Ratchaprarop → <b>Phetchaburi Soi 11</b>',meta:'7 min'}]}},
+   {base:true,ic:'i-home',n:'Base camp — Pratunam',short:'Base',t:'05:35',tl:'Leave',ll:LL.hotel,lbl:'r',
+    p:'Alarm 05:30, out the door in five — no breakfast yet, you’ll eat at JEDI at nine. Grab the scarf: four temples today.'},
+   {sun:'rise',t:'06:15',n:'Mahakan Fort & the canal, below the Golden Mount',ll:LL.mahakan,
+    p:'The summit is locked until 07:30, so you watch from directly beneath it instead — and it’s arguably the better seat. From the canal wall by the old fort you look <b>east up Khlong Ong Ang</b> with the sun coming up over Rattanakosin, and behind you the gold chedi catches the first light before anything else in the city does. The Loha Prasat spires are thirty seconds’ walk if you want them in frame.',
+    strip:[['Dawn','05:54'],['Sunrise','06:15'],['In position','06:05']],
+    warn:'First canal boat is <b>05:30</b> from Pratunam — you want the 05:45. If it hasn’t turned up by 05:50, a metered taxi is ~฿90 and 15 minutes on empty roads.',
+    leg:{total:'~25 min',cost:'~฿18',hops:[
+      {m:'walk',txt:'Down to <b>Pratunam pier</b> behind the market',meta:'7 min'},
+      {m:'canal',txt:'Golden Mount Line → <b>Phanfa Lilat</b>, the last stop',meta:'15 min · ~฿18'},
+      {m:'walk',txt:'Off the pier, up to the fort and the canal wall',meta:'3 min'},
+      {m:'taxi',alt:true,txt:'No boat: metered taxi, say “<b>Wat Saket</b>” — roads are empty at this hour',meta:'15 min · ~฿90'}]}},
+   {ref:20,ic:'i-temple',n:'Wat Saket, the Golden Mount',short:'Golden Mount',t:'07:30',stay:'1 h 20',cost:'฿100',hours:'gate 07:30 · summit till 19:00',ll:LL.watSaket,lbl:'r',
+    p:'Be at the gate as they unlock it. 344 gentle spiral steps past bells and gongs to a 360° terrace over the whole Old Town — and at this hour you’ll have it close to empty, with the morning still cool.',
+    tips:['Ring every bell on the way up; it’s expected, and at 07:30 you’re not drowning anyone out.','Full formal name: <b>Wat Saket Ratchawora Mahawihan</b>.','Toilets and cold water at the base.'],
+    leg:{total:'6 min',cost:'฿0',hops:[{m:'walk',txt:'Across Boripat Rd to the temple gate',meta:'6 min'}]}},
+   {ref:21,ic:'i-coffee',n:'JEDI Café & Bar',short:'JEDI',t:'09:05',stay:'1 h',cost:'~฿250 breakfast',hours:'opens ~09:00 · check the day before',ll:LL.jedi,lbl:false,
+    p:'Breakfast, four minutes from the gate: white-and-beige room, wooden tables, a terrace over the canal. Jedi Latte and the coconut pie. You’ve been up three hours — sit down.',
+    tips:['If the shutters are still down, the noodle shops along <b>Boripat Rd</b> open from 07:00.'],
+    leg:{total:'4 min',cost:'฿0',hops:[{m:'walk',txt:'Back down to <b>Boripat Rd</b>, No. 10',meta:'4 min'}]}},
+   {bonus:true,ic:'i-temple',n:'Wat Suthat & the Giant Swing',short:'Wat Suthat',t:'10:20',stay:'45 min',cost:'฿100',hours:'08:30–20:00',ll:LL.watSuthat,lbl:'b',
+    p:'The calm one. The best murals in the Old Town and almost nobody inside; the red Giant Swing out front is free and 21 metres tall. The walk over runs down <b>Bamrung Mueang Rd</b>, the street where temples buy their Buddha statues — worth doing slowly.',
+    leg:{total:'12 min',cost:'฿0',hops:[{m:'walk',txt:'West along <b>Bamrung Mueang Rd</b> past the statue foundries',meta:'12 min'}]}},
+   {ref:5,ic:'i-food',n:'Natthaphon Coconut Ice Cream',short:'Natthaphon',t:'11:10',stay:'20 min',cost:'฿30–50',hours:'Mon–Sat 09:00–17:00',ll:LL.natthaphon,lbl:'l',
+    p:'Third-generation coconut ice cream from the same shophouse since 1947, on the loveliest old square in the city. Cup, with sticky rice, sweetcorn and roasted peanuts on top. Yes, before lunch.',
+    leg:{total:'5 min',cost:'฿0',hops:[{m:'walk',txt:'Across to <b>Phraeng Phuthon</b> square',meta:'5 min'}]}},
+   {ref:4,ic:'i-food',n:'Krua Apsorn @Dinso',short:'Krua Apsorn',t:'11:40',stay:'1 h 10',cost:'~฿700 for two',hours:'Mon–Sat 10:30–19:30 · closed Sun',ll:LL.kruaApsorn,lbl:'t',
+    p:'Bib Gourmand, royal-household-approved, unchanged for decades. Order the <b>fluffy crab omelette</b> (khai jiao poo), stir-fried crab in yellow curry, and the tom yum. No reservations — arriving at 11:40 beats the queue by twenty minutes.',
+    leg:{total:'5 min',cost:'฿0',hops:[{m:'walk',txt:'Phraeng Phuthon → <b>Dinso Rd</b>, No. 169',meta:'5 min'}]}},
+   {bonus:true,ic:'i-temple',n:'Wat Pho & the Reclining Buddha',short:'Wat Pho',t:'13:20',stay:'1 h 30',cost:'฿300',hours:'08:00–18:30',ll:LL.watPho,lbl:'l',
+    p:'Not on your list, but it’s directly on the walk to the ferry and it is the one big temple you’d regret missing. 46 metres of gold-plated reclining Buddha, the 108 bronze bowls (bring ฿20 in coins), and the country’s oldest massage school inside if your legs have had enough — ~฿480 for the hour.',
+    leg:{total:'22 min',cost:'฿0',hops:[
+      {m:'walk',txt:'Dinso → Ratchadamnoen → Na Phra Lan → <b>Maha Rat Rd</b>',meta:'22 min'},
+      {m:'taxi',alt:true,txt:'Midday sun winning? Tuk-tuk, agree ฿80–100 first',meta:'8 min'}]}},
+   {ref:2,ic:'i-temple',n:'Wat Arun, Temple of Dawn',short:'Wat Arun',t:'15:15',stay:'2 h',cost:'฿200',hours:'08:00–18:00',ll:LL.watArun,lbl:'l',
+    p:'Porcelain-mosaic prang on the west bank — and despite the name, it is a sunset temple. You climb the first two terraces, then the late light turns the whole thing amber from about 16:45. Stay up there for it.',
+    tips:['Thai-dress rental at the gate (~฿200–500) if you want the photos.','Steep steps, flat shoes, and it gets slippery if there’s a shower.'],
+    leg:{total:'8 min',cost:'฿5',hops:[
+      {m:'walk',txt:'Through Tha Tien market to the pier',meta:'4 min'},
+      {m:'ferry',txt:'Cross-river ferry → <b>Wat Arun pier</b>, ฿5 cash at the turnstile',meta:'4 min · ฿5 · every 5–10 min'}]}},
+   {sun:'set',t:'17:48',n:'Tha Tien pier — Wat Arun in silhouette',ll:LL.thaTien,
+    p:'Here’s the trick: the sun sets <b>behind</b> Wat Arun, so the famous shot isn’t from inside it — it’s from the east bank looking back. Cross at 17:20, and from the Tha Tien waterfront you get the prang black against an orange river with the boats crossing in front of it. Stay until 18:09; the temple floodlights come on and it gets better.',
+    strip:[['Sunset','17:48'],['Cross by','17:20'],['Lights on','18:10']],
+    leg:{total:'8 min',cost:'฿5',hops:[
+      {m:'ferry',txt:'Back across to <b>Tha Tien</b> — last boats about 22:00',meta:'4 min · ฿5'},
+      {m:'walk',txt:'Left along the waterfront to the open deck by the pier',meta:'4 min'}]}},
+   {base:true,ic:'i-home',n:'Back to base',short:'Base',t:'19:30',tl:'Home',ll:LL.hotel,lbl:false,
+    p:'Dinner on the way: the Tha Tien lanes do cheap noodles, or hold out for the Pratunam street stalls on Phetchaburi Soi 19, open till late.',
+    leg:{total:'~45 min',cost:'~฿55',hops:[
+      {m:'walk',txt:'Maha Rat Rd → <b>MRT Sanam Chai</b>, Exit 1',meta:'10 min'},
+      {m:'mrt',txt:'Sanam Chai → <b>Silom</b> (4 stops, toward Tha Phra… take the Hua Lamphong direction)',meta:'11 min · ~฿28'},
+      {m:'walk',txt:'Up to <b>BTS Sala Daeng</b>',meta:'3 min'},
+      {m:'silom',txt:'Sala Daeng → <b>Siam</b> (2 stops); cross the platform',meta:'5 min'},
+      {m:'suk',txt:'Siam → <b>Ratchathewi</b> (1 stop, toward Khu Khot)',meta:'2 min · ~฿30'},
+      {m:'walk',txt:'To Phetchaburi Soi 11',meta:'6 min'}]}},
   ]},
 
 /* ---------------- DAY 3 ---------------- */
-{ id:'fri', tab:'Fri 13', n:3, date:'Fri 13 Nov', title:'Song Wat, Talat Noi & Chinatown After Dark',
-  best:'Coffee, vintage shops and riverside shophouses by day, then the <b>best street-food night in Asia</b>. Almost entirely on foot once you are there — eight of your list in one square kilometre.',
-  tip:'Cash day. The Song Wat cafés take cards, but Talat Noi, the bus and every Yaowarat stall are cash or Thai QR. Bring ~฿2,000 in small notes. Book Charmgang this week — it seats about thirty.',
-  order:'<b>Hotel</b> → bus 73 → Local Boys → % Arabica → Soul Songwat → Oyster & Things → Jude Records → Talat Noi → Wat Traimit → Wat Mangkon → Charmgang → Yaowarat → MRT → BTS → <b>Hotel</b>',
-  tally:[['Transport','~฿120'],['Tickets','฿100–200'],['On foot','~6.5 km']],
+{ id:'fri', tab:'Fri 13', n:3, date:'Fri 13 Nov', title:'The Dragon, Song Wat & Chinatown After Dark',
+  best:'A long ride west to the dragon first thing, then back for the best square kilometre in Bangkok: <b>coffee, vintage and shophouses by day, street food after dark</b>. Sunrise is from your own roof so you keep the 06:30 routine.',
+  tip:'Cash day. Song Wat cafés take cards, but Talat Noi, the taxi and every Yaowarat stall are cash or Thai QR. Bring ~฿2,500 in small notes. And book Charmgang — it seats about thirty.',
+  order:'<b>sunrise on the roof</b> → <b>Base</b> 06:40 → Wat Samphran → Song Wat (Local Boys, % Arabica, Soul Songwat, Oyster, Jude) → Talat Noi → Wat Traimit → Wat Mangkon → <b>sunset at Ratchawong pier</b> → Charmgang → Yaowarat → <b>Base</b>',
+  tally:[['Transport','~฿420'],['Tickets','฿100'],['On foot','~7 km']],
   stops:[
-   {base:true,ic:'i-home',n:'Base camp — Pratunam',short:'Base',t:'08:50',tl:'Leave',ll:LL.hotel,lbl:'r',
-    p:'No rush today; the first café opens at 08:30 and nothing else before 10:00.'},
-   {ref:6,ic:'i-coffee',n:'Local Boys Coffee Co.',short:'Local Boys',t:'09:40',stay:'40 min',cost:'~฿150',hours:'08:30–18:00',ll:LL.localBoys,lbl:'l',
+   {sun:'rise',t:'06:15',n:'The rooftop again — coffee, no travel',ll:LL.rooftop,
+    p:'Today’s sunrise is deliberately lazy: you’re going 38 km west straight after, so take it from upstairs with a coffee. The sun comes up over the Sukhumvit towers; the Baiyoke needle goes pink first.',
+    strip:[['Sunrise','06:15'],['Be up by','06:05'],['Then leave','06:40']]},
+   {base:true,ic:'i-home',n:'Base camp — Pratunam',short:'Base',t:'06:40',tl:'Leave',ll:LL.hotel,lbl:'r',
+    p:'Long ride first. Modest dress — Wat Samphran is a working monastery.'},
+   {ref:1,ic:'i-temple',n:'Wat Samphran, the Dragon Temple',short:'Wat Samphran · 38 km',t:'08:20',stay:'1 h',cost:'Free · donation',hours:'06:00–18:00',ll:LL.samphran,off:'W',
+    p:'A 17-storey pink cylinder with an 80-metre green dragon coiled around it, in a sleepy Nakhon Pathom suburb. When the door is open you climb up <b>inside the dragon’s body</b> to the top. Going early means morning light straight onto the dragon and the place to yourselves.',
+    tips:['The only leg of the whole trip no rail reaches — insist on the meter, “meter, ka”.','If a driver refuses the meter, the next one won’t.'],
+    leg:{total:'~1 h 35',cost:'~฿245',hops:[
+      {m:'walk',txt:'Hotel → <b>BTS Ratchathewi</b>',meta:'6 min'},
+      {m:'suk',txt:'Ratchathewi → <b>Siam</b> (1 stop); cross the platform',meta:'2 min'},
+      {m:'silom',txt:'Siam → <b>Bang Wa</b>, the last stop (13 stops)',meta:'30 min · ~฿59'},
+      {m:'mrt',txt:'Covered link to MRT Bang Wa → <b>Lak Song</b> (4 stops)',meta:'9 min · ~฿24'},
+      {m:'taxi',txt:'Lak Song Exit 2 → <b>“Wat Samphran, Sam Phran”</b>',meta:'22 min · ~฿160'},
+      {m:'bus',alt:true,txt:'Purist route: bus 84 (AC) from Bang Wa toward Om Noi, then a songthaew the last 4 km',meta:'adds ~45 min'}]}},
+   {ref:6,ic:'i-coffee',n:'Local Boys Coffee Co.',short:'Local Boys',t:'11:05',stay:'40 min',cost:'~฿150',hours:'08:30–18:00',ll:LL.localBoys,lbl:'l',
     p:'Orange-signed shophouse down a lane of wholesalers; neon and graffiti inside. The <b>peanut-butter coffee in a can</b> is the order.',
-    leg:{total:'~45 min',cost:'~฿20',hops:[
-      {m:'walk',txt:'To the bus stop <b>opposite Indra Square</b> on Ratchaprarop Rd',meta:'4 min'},
-      {m:'bus',txt:'Bus 73 (orange, AC) south → off at <b>Chaloem Buri junction / Yaowarat</b>. Say “Yaowarat” to the conductor.',meta:'30–35 min · ~฿20 cash'},
-      {m:'walk',txt:'South down Yaowarat Rd → <b>Song Wat Rd</b>',meta:'7 min'},
-      {m:'mrt',alt:true,txt:'Rail fallback if no 73 in ten minutes: BTS Ratchathewi → Siam → Sala Daeng, walk to MRT Silom → <b>Wat Mangkon</b> Exit 1, 10 min walk',meta:'~40 min · ~฿70'}]}},
-   {ref:13,ic:'i-coffee',n:'% Arabica × adidas Originals, Song Wat',short:'% Arabica',t:'10:25',stay:'30 min',cost:'~฿150',hours:'09:00–19:30',ll:LL.arabica,lbl:false,
+    leg:{total:'~1 h 05',cost:'~฿195',hops:[
+      {m:'taxi',txt:'Back to <b>MRT Lak Song</b>',meta:'22 min · ~฿160'},
+      {m:'mrt',txt:'Lak Song → <b>Wat Mangkon</b> (11 stops, toward Hua Lamphong)',meta:'28 min · ~฿37'},
+      {m:'walk',txt:'Exit 1 → south to <b>Song Wat Rd</b>',meta:'12 min'}]}},
+   {ref:13,ic:'i-coffee',n:'% Arabica × adidas Originals, Song Wat',short:'% Arabica',t:'11:50',stay:'30 min',cost:'~฿150',hours:'09:00–19:30',ll:LL.arabica,lbl:false,
     p:'Yes — a coffee bar inside an adidas store inside a restored Chinese shophouse. Take the cup upstairs to the <b>panoramic river window</b>.',
     leg:{total:'3 min',cost:'฿0',hops:[{m:'walk',txt:'Along Song Wat',meta:'3 min'}]}},
-   {ref:11,ic:'i-shop',n:'Soul Songwat & House of Vintage',short:'Soul Songwat',t:'11:00',stay:'50 min',cost:'Free to browse',hours:'10:00–22:00',ll:LL.soul,lbl:'b',
-    p:'A row of 1900s riverside warehouses turned into shops and cafés. <b>House of Vintage</b> on the upper floors: watches, denim, toys. Clay Circle ceramics downstairs is the bonus.',
+   {ref:11,ic:'i-shop',n:'Soul Songwat & House of Vintage',short:'Soul Songwat',t:'12:25',stay:'50 min',cost:'lunch ~฿400',hours:'10:00–22:00',ll:LL.soul,lbl:'b',
+    p:'A row of 1900s riverside warehouses turned into shops and cafés. <b>House of Vintage</b> on the upper floors: watches, denim, toys. Clay Circle ceramics downstairs. Lunch here too.',
     leg:{total:'5 min',cost:'฿0',hops:[{m:'walk',txt:'East along Song Wat to No. 1300',meta:'5 min'}]}},
-   {ref:7,ic:'i-shop',n:'Oyster & Things @songwat',short:'Oyster & Things',t:'11:55',stay:'30 min',cost:'browse',hours:'~11:00–19:00',ll:LL.oyster,lbl:false,
-    p:'1970s-mermaid home goods: shell cutlery, ceramic plates, tiny knick-knacks. Their newer Thonglor shop is bigger; this is the original building.',
+   {ref:7,ic:'i-shop',n:'Oyster & Things @songwat',short:'Oyster & Things',t:'13:20',stay:'30 min',cost:'browse',hours:'~11:00–19:00',ll:LL.oyster,lbl:false,
+    p:'1970s-mermaid home goods: shell cutlery, ceramic plates, tiny knick-knacks. Their Thonglor shop is bigger; this is the original building.',
     leg:{total:'3 min',cost:'฿0',hops:[{m:'walk',txt:'Back west to No. 1194',meta:'3 min'}]}},
-   {ref:32,ic:'i-vinyl',n:'Get Back and Jude Records',short:'Jude Records',t:'12:30',stay:'30 min',cost:'browse',hours:'11:00–20:00',ll:LL.jude,lbl:'r',
+   {ref:32,ic:'i-vinyl',n:'Get Back and Jude Records',short:'Jude Records',t:'13:55',stay:'30 min',cost:'browse',hours:'11:00–20:00',ll:LL.jude,lbl:'r',
     p:'Hidden record shop: ’60s rock, Britpop, disco, Thai alternative, and a wall of first-pressing 7-inches. Records, tapes, CDs and a drink while you dig.',
     leg:{total:'5 min',cost:'฿0',hops:[{m:'walk',txt:'North to <b>Yaowaphanit Rd</b>, No. 399',meta:'5 min'}]}},
-   {ref:10,ic:'i-pin',n:'Talat Noi',t:'13:15',stay:'2 h 30',cost:'So Heng Tai ฿100 incl. drink',hours:'Hong Sieng Kong 10:00–20:00',ll:LL.talatNoi,lbl:'l',
-    p:'The old Hokkien quarter: rusting engine parts, shrines, street art on Soi Wanit 2, the famous Fiat 500 in the alley. Late lunch at <b>Hong Sieng Kong</b>, a riverside café built into 200-year-old ruins.',
-    tips:['<b>So Heng Tai Mansion</b>: 200-year-old courtyard house with a diving pool in the middle; ฿100 with a drink.','Holy Rosary Church (1897) at the river end; Chinese shrine Chow Sue Kong nearby.'],
+   {ref:10,ic:'i-pin',n:'Talat Noi',t:'14:35',stay:'1 h 35',cost:'So Heng Tai ฿100 incl. drink',hours:'Hong Sieng Kong 10:00–20:00',ll:LL.talatNoi,lbl:'l',
+    p:'The old Hokkien quarter: rusting engine parts, shrines, street art on Soi Wanit 2, the famous Fiat 500 in the alley. <b>So Heng Tai Mansion</b> is a 200-year-old courtyard house with a diving pool in the middle, ฿100 with a drink.',
+    tips:['<b>Hong Sieng Kong</b> — riverside café built into 200-year-old ruins, best iced coffee of the day.','Holy Rosary Church (1897) at the river end.'],
     leg:{total:'12 min',cost:'฿0',hops:[{m:'walk',txt:'East along Song Wat → Charoen Krung Soi 22 → into the lanes',meta:'12 min'}]}},
-   {bonus:true,ic:'i-temple',n:'Wat Traimit, the Golden Buddha',short:'Wat Traimit',t:'16:00',stay:'45 min',cost:'฿100',hours:'08:00–17:00',ll:LL.traimit,lbl:'r',
-    p:'5.5 tonnes of solid gold hidden under plaster for 200 years, until a crane dropped it in 1955. Fills the gap before dinner perfectly.',
+   {bonus:true,ic:'i-temple',n:'Wat Traimit, the Golden Buddha',short:'Wat Traimit',t:'16:20',stay:'40 min',cost:'฿100',hours:'08:00–17:00',ll:LL.traimit,lbl:'r',
+    p:'5.5 tonnes of solid gold hidden under plaster for 200 years, until a crane dropped it in 1955. Last entry is 17:00, so this is the tight one of the day — don’t linger over the coffee.',
     leg:{total:'10 min',cost:'฿0',hops:[{m:'walk',txt:'Charoen Krung west → <b>Traimit Rd</b>',meta:'10 min'}]}},
-   {bonus:true,ic:'i-temple',n:'Wat Mangkon Kamalawat',short:'Wat Mangkon',t:'17:00',stay:'30 min',cost:'Free',hours:'06:00–18:00',ll:LL.mangkonWat,lbl:'r',
-    p:'Chinatown’s main Chinese temple — literally the <b>Dragon Lotus Temple</b>, so you get two dragon temples this trip. Incense clouds, red lanterns, gold leaf.',
-    leg:{total:'8 min',cost:'฿0',hops:[{m:'walk',txt:'North across Yaowarat → Charoen Krung',meta:'8 min'}]}},
-   {ref:8,ic:'i-food',n:'Charmgang',t:'18:00',stay:'1 h 30',cost:'~฿1,500 for two',hours:'Mon–Fri 18:00–21:30 · Sat–Sun also 12:00–14:00',ll:LL.charmgang,lbl:'r',
+   {bonus:true,ic:'i-temple',n:'Wat Mangkon Kamalawat',short:'Wat Mangkon',t:'17:10',stay:'25 min',cost:'Free',hours:'06:00–18:00',ll:LL.mangkonWat,lbl:'r',
+    p:'Chinatown’s main Chinese temple — literally the <b>Dragon Lotus Temple</b>, so you get two dragon temples in one day. Incense clouds, red lanterns, gold leaf, and it’s at its best as the light goes.',
+    leg:{total:'9 min',cost:'฿0',hops:[{m:'walk',txt:'North across Yaowarat → Charoen Krung',meta:'9 min'}]}},
+   {sun:'set',t:'17:48',n:'Ratchawong pier — the working river',ll:LL.ratchawong,
+    p:'Eight minutes downhill from the temple and the Chao Phraya opens up in front of you, facing <b>due west</b>: the sun goes down behind Thonburi with the express boats, rice barges and cross-river ferries all still running through it. Not a viewpoint anyone curates — just the pier, the commuters and an enormous orange sky.',
+    strip:[['Sunset','17:48'],['Be there','17:35'],['Dark','18:09']],
+    leg:{total:'8 min',cost:'฿0',hops:[{m:'walk',txt:'Down <b>Ratchawong Rd</b> to the pier gates',meta:'8 min'}]}},
+   {ref:8,ic:'i-food',n:'Charmgang',t:'18:45',stay:'1 h 30',cost:'~฿1,500 for two',hours:'Mon–Fri 18:00–21:30',ll:LL.charmgang,lbl:'r',
     p:'Michelin Bib Gourmand curry shop from three ex-Nahm chefs. Southern crab curry, smoked-duck red curry, grilled pork jowl with the house relish. <b>Reserve</b> on SevenRooms or +66 98 882 3251.',
-    leg:{total:'12 min',cost:'฿0',hops:[{m:'walk',txt:'Back south-east to <b>Soi Charoen Krung 35</b>, No. 14',meta:'12 min'}]}},
-   {ref:9,ic:'i-market',n:'Chinatown night market, Yaowarat',short:'Yaowarat',t:'19:45',stay:'1 h 30',cost:'~฿300 for two',hours:'18:00–midnight',ll:LL.yaowarat,lbl:'t',
-    p:'The stalls fire up at dusk. <b>Guay Jub Ouan Pochana</b> (peppery rolled noodles), Nai Ek Roll Noodle, T&K Seafood (the green shirts), Sweettime toast, bird’s-nest soup. Cash only; sharpen your elbows.',
+    leg:{total:'14 min',cost:'฿0',hops:[{m:'walk',txt:'Back along the river to <b>Soi Charoen Krung 35</b>, No. 14',meta:'14 min'}]}},
+   {ref:9,ic:'i-market',n:'Chinatown night market, Yaowarat',short:'Yaowarat',t:'20:25',stay:'1 h 30',cost:'~฿300 for two',hours:'18:00–midnight',ll:LL.yaowarat,lbl:'t',
+    p:'Full swing by now. <b>Guay Jub Ouan Pochana</b> (peppery rolled noodles), Nai Ek Roll Noodle, T&K Seafood (the green shirts), Sweettime toast, bird’s-nest soup. Cash only; sharpen your elbows.',
     leg:{total:'10 min',cost:'฿0',hops:[{m:'walk',txt:'Charoen Krung → <b>Yaowarat Rd</b>',meta:'10 min'}]}},
-   {base:true,ic:'i-home',n:'Back to base',short:'Hotel',t:'22:25',tl:'Home',ll:LL.hotel,lbl:false,
+   {base:true,ic:'i-home',n:'Back to base',short:'Base',t:'22:30',tl:'Home',ll:LL.hotel,lbl:false,
     p:'The MRT runs till midnight; the last BTS from Siam is around 00:00.',
     leg:{total:'~40 min',cost:'~฿55',hops:[
       {m:'walk',txt:'To <b>MRT Wat Mangkon</b> Exit 1',meta:'5 min'},
-      {m:'mrt',txt:'Wat Mangkon → <b>Silom</b> (3 stops, toward Lak Song)',meta:'7 min · ~฿24'},
+      {m:'mrt',txt:'Wat Mangkon → <b>Silom</b> (3 stops)',meta:'7 min · ~฿24'},
       {m:'walk',txt:'Up to <b>BTS Sala Daeng</b>',meta:'3 min'},
       {m:'silom',txt:'Sala Daeng → <b>Siam</b> (2 stops); cross the platform',meta:'5 min'},
-      {m:'suk',txt:'Siam → <b>Ratchathewi</b> (1 stop, toward Khu Khot)',meta:'2 min · ~฿30 for both'},
-      {m:'walk',txt:'Phaya Thai Rd → Phetchaburi → Soi 11',meta:'6 min'},
-      {m:'taxi',alt:true,txt:'Done in? A metered taxi from Yaowarat is ~฿90 and 20 min at this hour',meta:''}]}},
+      {m:'suk',txt:'Siam → <b>Ratchathewi</b> (1 stop)',meta:'2 min · ~฿30'},
+      {m:'walk',txt:'To Phetchaburi Soi 11',meta:'6 min'},
+      {m:'taxi',alt:true,txt:'Done in? Metered taxi from Yaowarat is ~฿90 and 20 min at this hour',meta:''}]}},
   ]},
 
 /* ---------------- DAY 4 ---------------- */
 { id:'sat', tab:'Sat 14', n:4, date:'Sat 14 Nov', title:'The Green Lung & the Long Green Line',
-  best:'Cycling through jungle before the heat, a <b>three-headed elephant</b>, then Sukhumvit’s slick side. The whole day rides one BTS line south and back north — the light-green line is your spine.',
-  tip:'Start on time. The Bang Krachao trails are shaded but the ride back at noon is not, and the floating market packs up by 16:00. Flagging by Pridi? Skip straight to Emsphere — Akara’s show is the non-negotiable.',
-  order:'<b>Hotel</b> → BTS to Bang Na → moto → ferry → floating market → cycling loop → ferry → moto → BTS → Erawan Museum → BTS → ChumChum → Pridi → BTS → Emsphere → Emquartier → BTS → Akara → BTS → <b>Hotel</b>',
+  best:'Cycling through jungle before the heat, a <b>three-headed elephant</b>, then Sukhumvit’s slick side with sunset from a rooftop. The whole day rides one BTS line south and back north.',
+  tip:'Start on time. The Bang Krachao trails are shaded but the ride back at noon is not, and the floating market packs up by 16:00. If you’re flagging by Pridi, skip it — the 17:30 rooftop is the one with the deadline.',
+  order:'<b>sunrise on the roof</b> → <b>Base</b> 06:45 → BTS → ferry → floating market → cycling loop → Erawan Museum → ChumChum → Pridi → Emsphere → <b>sunset at Tribeca</b> → Emquartier → Akara → <b>Base</b>',
   tally:[['Transport','~฿340'],['Tickets','฿400 + bikes ฿150'],['Cycling','~12 km'],['On foot','~4 km']],
   stops:[
-   {base:true,ic:'i-home',n:'Base camp — Pratunam',short:'Base',t:'07:15',tl:'Leave',ll:LL.hotel,lbl:'r',
+   {sun:'rise',t:'06:16',n:'The rooftop, then straight out',ll:LL.rooftop,
+    p:'Bang Krachao at sunrise would mean a 05:00 start and the first ferry, which is a lot to ask on day four. Take it from the roof instead, then leave early enough to be cycling while the trails are still cool.',
+    strip:[['Sunrise','06:16'],['Then leave','06:45']],
+    warn:'If you <b>do</b> want sunrise in the Green Lung: out at 05:05, first BTS from Ratchathewi ~05:25, ferry from 05:00 — you’d be on the trails by 06:10. Worth it once.'},
+   {base:true,ic:'i-home',n:'Base camp — Pratunam',short:'Base',t:'06:45',tl:'Leave',ll:LL.hotel,lbl:'r',
     p:'Sunscreen, hat, ฿500 in small notes for the ferry, bikes and breakfast.'},
-   {ref:'BK',ic:'i-market',n:'Bang Krachao: Bang Nam Phueng Floating Market',short:'Floating market',t:'08:25',stay:'1 h',cost:'breakfast ~฿200',hours:'Sat–Sun 08:00–16:00',ll:LL.floating,lbl:'b',
+   {ref:'BK',ic:'i-market',n:'Bang Krachao: Bang Nam Phueng Floating Market',short:'Floating market',t:'07:55',stay:'1 h',cost:'breakfast ~฿200',hours:'Sat–Sun 08:00–16:00',ll:LL.floating,lbl:'b',
     p:'Canal-side stalls rather than boats: khanom krok, grilled river fish, coconut everything, orchids. <b>Rent the bikes here</b> (฿100–150/day, ID as deposit) and eat before you ride.',
     leg:{total:'~1 h 05',cost:'~฿105',hops:[
       {m:'walk',txt:'Hotel → <b>BTS Ratchathewi</b>',meta:'6 min'},
       {m:'suk',txt:'Ratchathewi → <b>Bang Na</b> (14 stops, toward Kheha). Sit on the left for the Em towers.',meta:'30 min · ~฿59'},
       {m:'moto',txt:'Exit 1 → orange-vest stand → “<b>Wat Bang Na Nok</b>” pier. Prices on the board.',meta:'7 min · ฿40'},
-      {m:'walk',alt:true,txt:'Or walk: Sukhumvit toward Udom Suk, left down Sanphawut Rd to the river',meta:'30 min'},
-      {m:'ferry',txt:'Wat Bang Na Nok → <b>Wat Bang Nam Phueng Nok</b>; ฿6 with a bike',meta:'5 min · ฿5 · every ~15 min'}]}},
-   {ref:'BK',ic:'i-bike',n:'Bang Krachao by bicycle — the “Green Lung”',short:'Green Lung loop',t:'09:30',stay:'3 h',cost:'bike ฿100–150',hours:'Sri Nakhon Khuean Khan Park 05:00–19:00',ll:LL.greenLung,lbl:'r',
+      {m:'ferry',txt:'Wat Bang Na Nok → <b>Wat Bang Nam Phueng Nok</b>; ฿6 with a bike',meta:'5 min · ฿5 · every ~15 min'},
+      {m:'walk',alt:true,txt:'Or walk to the pier: Sukhumvit toward Udom Suk, left down Sanphawut Rd',meta:'30 min'}]}},
+   {ref:'BK',ic:'i-bike',n:'Bang Krachao by bicycle — the “Green Lung”',short:'Green Lung loop',t:'09:00',stay:'3 h',cost:'bike ฿100–150',hours:'park 05:00–19:00',ll:LL.greenLung,lbl:'r',
     p:'12 km of near-empty lanes and raised concrete boardwalks through nipa palms and coconut groves, river on three sides. Loop: market → <b>Sri Nakhon Khuean Khan Park</b> (bird tower, lake) → the botanical garden → back along the canals.',
-    tips:['Stay on the green-painted trails; Google will route you through private orchards.','Return the bikes by 12:30. Bring water — there are shrine cafés but they are spaced out.'],
+    tips:['Stay on the green-painted trails; Google will route you through private orchards.','Return the bikes by 12:15. Bring water — the shrine cafés are spaced out.'],
     leg:{total:'25 min riding',cost:'฿0',hops:[{m:'bike',txt:'Market → the park entrance on the elevated trail',meta:'25 min'}]}},
-   {ref:3,ic:'i-museum',n:'The Erawan Museum',t:'13:35',stay:'1 h 30',cost:'฿400',hours:'09:00–18:00 · last entry 17:00',ll:LL.erawanMuseum,lbl:'l',
+   {ref:3,ic:'i-museum',n:'The Erawan Museum',t:'13:30',stay:'1 h 30',cost:'฿400',hours:'09:00–18:00 · last entry 17:00',ll:LL.erawanMuseum,lbl:'l',
     p:'A 250-tonne three-headed copper elephant standing on a museum. Stained-glass zodiac ceiling, then a spiral staircase <b>up into the belly of the beast</b>. Lunch at the museum café or the noodle stalls at the gate.',
     leg:{total:'~50 min',cost:'~฿75',hops:[
       {m:'bike',txt:'Back to the pier; hand the bikes in',meta:'15 min'},
@@ -658,88 +720,96 @@ const DAYS=[
       {m:'moto',txt:'Pier → <b>BTS Bang Na</b>',meta:'7 min · ฿40'},
       {m:'suk',txt:'Bang Na → <b>Chang Erawan</b> (4 stops, toward Kheha)',meta:'9 min · ~฿30'},
       {m:'walk',txt:'Exit 2 — the elephant is unmissable',meta:'5 min'}]}},
-   {ref:16,ic:'i-coffee',n:'ChumChum Grocery',t:'15:55',stay:'45 min',cost:'~฿200',hours:'10:00–18:00 · closed Wed',ll:LL.chumchum,lbl:'r',
+   {ref:16,ic:'i-coffee',n:'ChumChum Grocery',t:'15:45',stay:'40 min',cost:'~฿200',hours:'10:00–18:00 · closed Wed',ll:LL.chumchum,lbl:'r',
     p:'A vintage Disney and tin-toy “grocery” downstairs, retro café upstairs (2F, Unform Building, Pridi 31). Carrot cake, Thai milk tea, and roughly four hundred Mickeys.',
     leg:{total:'~40 min',cost:'~฿77',hops:[
       {m:'suk',txt:'Chang Erawan → <b>Phra Khanong</b> (9 stops, toward Khu Khot)',meta:'20 min · ~฿47'},
-      {m:'moto',txt:'Exit 3 → up <b>Pridi Banomyong</b> (Sukhumvit 71) to Soi 31',meta:'6 min · ฿30'},
-      {m:'walk',alt:true,txt:'Or walk up Pridi — flat, leafy, 20 min',meta:''}]}},
-   {ref:15,ic:'i-coffee',n:'Pridi Banomyong, the café soi',short:'Pridi',t:'16:45',stay:'45 min',cost:'Free',hours:'cafés till ~18:00',ll:LL.pridi,lbl:'r',
-    p:'Bangkok’s café kids live here: low-rise sois of roasters, bakeries and dessert bars between Pridi 14 and 31. Walk south, drift into whichever has a queue, and end at Sukhumvit 71 for the BTS.',
+      {m:'moto',txt:'Exit 3 → up <b>Pridi Banomyong</b> (Sukhumvit 71) to Soi 31',meta:'6 min · ฿30'}]}},
+   {ref:15,ic:'i-coffee',n:'Pridi Banomyong, the café soi',short:'Pridi',t:'16:30',stay:'35 min',cost:'Free',hours:'cafés till ~18:00',ll:LL.pridi,lbl:'r',
+    p:'Bangkok’s café kids live here: low-rise sois of roasters, bakeries and dessert bars between Pridi 14 and 31. Walk south, drift into whichever has a queue, and be at the BTS by 17:10.',
     leg:{total:'walking',cost:'฿0',hops:[{m:'walk',txt:'South down Pridi, soi by soi',meta:'~1.5 km'}]}},
-   {ref:18,ic:'i-mall',n:'Emsphere',t:'18:00',stay:'1 h',cost:'—',hours:'10:00–22:00',ll:LL.emsphere,lbl:false,
-    p:'The newest of the three Ems: <b>EM Market</b> food hall on the ground floor, Tribeca rooftop bar up top for a post-sunset drink over Benjasiri Park.',
-    leg:{total:'~15 min',cost:'~฿26',hops:[
+   {ref:18,ic:'i-mall',n:'Emsphere',t:'17:30',stay:'1 h',cost:'—',hours:'10:00–22:00',ll:LL.emsphere,lbl:'b',
+    p:'The newest of the three Ems. Go straight up — you have eighteen minutes to sunset. <b>EM Market</b> food hall is on the ground floor for later.',
+    leg:{total:'~20 min',cost:'~฿26',hops:[
       {m:'walk',txt:'To <b>BTS Phra Khanong</b>',meta:'8 min'},
       {m:'suk',txt:'Phra Khanong → <b>Phrom Phong</b> (3 stops, toward Khu Khot)',meta:'7 min · ~฿26'},
-      {m:'walk',txt:'Exit 6 → straight in',meta:'1 min'}]}},
-   {ref:17,ic:'i-mall',n:'Emquartier',t:'19:05',stay:'1 h 15',cost:'dinner ~฿800 for two',hours:'10:00–22:00',ll:LL.emquartier,lbl:'t',
+      {m:'walk',txt:'Exit 6 → straight in, lifts to the roof',meta:'4 min'}]}},
+   {sun:'set',t:'17:48',n:'Tribeca rooftop, Emsphere',ll:LL.emsphere,
+    p:'Open-air on top of Emsphere, looking west straight down the Sukhumvit canyon with Benjasiri Park green below you and the Em towers catching the last of it. The sun drops between the towers rather than over a horizon — a city sunset, and the better one for it.',
+    strip:[['Sunset','17:48'],['Be up by','17:35'],['Dark','18:09']]},
+   {ref:17,ic:'i-mall',n:'Emquartier',t:'18:50',stay:'1 h 15',cost:'dinner ~฿800 for two',hours:'10:00–22:00',ll:LL.emquartier,lbl:'t',
     p:'The <b>Helix</b>: nine floors of restaurants spiralling round a hanging garden and an indoor waterfall. Dinner here — Greyhound Café or Roast if you want a sure thing.',
     leg:{total:'3 min',cost:'฿0',hops:[{m:'sky',txt:'Skybridge across Sukhumvit',meta:'3 min'}]}},
-   {ref:25,ic:'i-cocktail',n:'Akara Sky Hanuman',short:'Akara',t:'20:35',stay:'1 h 30',cost:'cocktails ~฿400+',hours:'17:00–01:00 · show from ~20:00',ll:LL.akara,lbl:'r',
-    p:'The bar is inside the open mouth of a giant white <b>Hanuman</b> on the 61st floor of One City Centre. Projection-mapped Thai dance and muay thai shows, a rooftop “sky night market” with old-school street games, and Bangkok Reflection — the mirrored observation room. Check the show board; you may catch the second set.',
+   {ref:25,ic:'i-cocktail',n:'Akara Sky Hanuman',short:'Akara',t:'20:20',stay:'1 h 30',cost:'cocktails ~฿400+',hours:'17:00–01:00 · show from ~20:00',ll:LL.akara,lbl:'r',
+    p:'The bar sits inside the open mouth of a giant white <b>Hanuman</b> on the 61st floor of One City Centre. Projection-mapped Thai dance and muay thai shows, a rooftop “sky night market” with old-school street games, and Bangkok Reflection, the mirrored observation room.',
     leg:{total:'~12 min',cost:'~฿26',hops:[
       {m:'suk',txt:'Phrom Phong → <b>Ploen Chit</b> (3 stops, toward Khu Khot)',meta:'6 min · ~฿26'},
       {m:'sky',txt:'Skywalk from Ploen Chit straight into <b>One City Centre</b>; lifts to 61F',meta:'4 min'}]}},
-   {base:true,ic:'i-home',n:'Back to base',short:'Hotel',t:'22:15',tl:'Home',ll:LL.hotel,lbl:false,
-    p:'Longest day done. Tomorrow starts at 09:30.',
+   {base:true,ic:'i-home',n:'Back to base',short:'Base',t:'22:15',tl:'Home',ll:LL.hotel,lbl:false,
+    p:'Longest day done. Tomorrow’s sunrise is the best of the week and it needs a 05:45 start — worth it.',
     leg:{total:'~12 min',cost:'~฿26',hops:[
       {m:'suk',txt:'Ploen Chit → <b>Ratchathewi</b> (3 stops, toward Khu Khot)',meta:'6 min · ~฿26'},
-      {m:'walk',txt:'Phaya Thai Rd → Phetchaburi → Soi 11',meta:'6 min'},
-      {m:'walk',alt:true,txt:'Or walk the whole way up Ratchaprarop',meta:'22 min'}]}},
+      {m:'walk',txt:'Phaya Thai Rd → Phetchaburi → Soi 11',meta:'6 min'}]}},
   ]},
 
 /* ---------------- DAY 5 ---------------- */
-{ id:'sun', tab:'Sun 15', n:5, date:'Sun 15 Nov', title:'Parks, Roof Gardens & the Sathorn Skyline',
-  best:'A slow green morning around Lumphini, then <b>the highest dinner of your life</b>. Krua Apsorn and the ice-cream shop are shut on Sundays — that is why they were Thursday.',
-  tip:'Two rooftops and a skywalk means dress codes: Mahanakhon is anything; the EA rooftop is smart-casual (no shorts or flip-flops after 18:00). It is a park day, not a hike — wear the nice thing all day.',
-  order:'<b>Hotel</b> → BTS → Lumphini Park → One Bangkok → Central Park → Roof Park → BTS → <b>Hotel reset</b> → BTS → Mahanakhon (sunset) → Le Du Kaan / Nobu → Unculture → BTS → <b>Hotel</b>',
-  tally:[['Transport','~฿130'],['Tickets','฿1,200'],['On foot','~6 km']],
+{ id:'sun', tab:'Sun 15', n:5, date:'Sun 15 Nov', title:'Lake at Dawn, Skyline at Dusk',
+  best:'The best pair of the week: <b>sunrise over Lumphini’s lake</b> with the whole park doing tai chi, and sunset from 314 metres up on a glass floor. A green morning and the highest dinner of your life.',
+  tip:'Two rooftops and a glass ledge means dress codes: Mahanakhon is anything, the EA rooftop is smart-casual (no shorts or flip-flops after 18:00). Book the 17:30 Mahanakhon slot and the EA table before you leave the room.',
+  order:'<b>Base</b> 05:45 → <b>sunrise at Lumphini</b> → park → One Bangkok → Central Park → Roof Park → <b>Base reset</b> → Mahanakhon → <b>sunset on the SkyWalk</b> → Le Du Kaan / Nobu → Unculture → <b>Base</b>',
+  tally:[['Transport','~฿160'],['Tickets','฿1,200'],['On foot','~7 km']],
   stops:[
-   {base:true,ic:'i-home',n:'Base camp — Pratunam',short:'Base',t:'09:30',tl:'Leave',ll:LL.hotel,lbl:'r',
-    p:'Book the Mahanakhon 17:30 slot and the EA dinner table before you leave, if you have not already.'},
-   {bonus:true,ic:'i-park',n:'Lumphini Park',t:'10:00',stay:'35 min',cost:'Free',hours:'04:30–22:00',ll:LL.lumphini,lbl:'l',
-    p:'Sunday-morning tai chi, aerobics with a boombox, and 2-metre <b>monitor lizards</b> ambling past the lake. Cut diagonally north-east; you come out at the Witthayu / Rama IV corner.',
-    leg:{total:'~20 min',cost:'~฿30',hops:[
+   {base:true,ic:'i-home',n:'Base camp — Pratunam',short:'Base',t:'05:45',tl:'Leave',ll:LL.hotel,lbl:'r',
+    p:'Second early one. The park is open from 04:30, so there’s no gate to wait at today.'},
+   {sun:'rise',t:'06:16',n:'Lumphini Park — the lake, facing east',ll:LL.lumphini,
+    p:'The one morning where the city performs for you. Sunday at dawn, Lumphini fills with tai chi circles, badminton, and aerobics classes with a boombox — and the sun comes up over the eastern treeline straight down the lake, with the Sathorn towers going gold behind it. Two-metre <b>monitor lizards</b> patrol the water’s edge and nobody blinks.',
+    strip:[['Dawn','05:55'],['Sunrise','06:16'],['Park opens','04:30']],
+    leg:{total:'~25 min',cost:'~฿30',hops:[
       {m:'walk',txt:'Hotel → <b>BTS Ratchathewi</b>',meta:'6 min'},
       {m:'suk',txt:'Ratchathewi → <b>Siam</b> (1 stop); cross the platform',meta:'2 min'},
-      {m:'silom',txt:'Siam → <b>Sala Daeng</b> (2 stops, toward Bang Wa)',meta:'5 min · ~฿30'},
-      {m:'walk',txt:'Exit 4 → into the park at the Rama IV gate',meta:'3 min'}]}},
-   {ref:31,ic:'i-mall',n:'One Bangkok',t:'10:40',stay:'1 h 35',cost:'brunch ~฿600',hours:'10:00–22:00',ll:LL.oneBangkok,lbl:'r',
-    p:'Thailand’s biggest development: <b>Parade</b> (retail), The Storeys (indie shops), Wireless House (heritage). Brunch in Parade’s ground-floor food quarter; all of it is air-conditioned.',
-    leg:{total:'12 min',cost:'฿0',hops:[
-      {m:'walk',txt:'Through the park → Witthayu Rd → the <b>Parade</b> entrance',meta:'12 min'},
-      {m:'mrt',alt:true,txt:'Or MRT Lumphini Exit 1 → Parade B1 directly',meta:''}]}},
-   {ref:12,ic:'i-mall',n:'Central Park at Dusit Central Park',short:'Central Park',t:'12:30',stay:'1 h',cost:'lunch',hours:'10:00–22:00',ll:LL.dusit,lbl:'b',
-    p:'The brand-new mall (opened Sept 2025) on the Silom–Rama IV corner where the old Dusit Thani hotel stood. Lunch here — the food floors face the park.',
+      {m:'silom',txt:'Siam → <b>Sala Daeng</b> (2 stops, toward Bang Wa). First trains from ~05:15.',meta:'5 min · ~฿30'},
+      {m:'walk',txt:'Exit 4 → into the park at the Rama IV gate, straight to the lake',meta:'6 min'}]}},
+   {bonus:true,ic:'i-park',n:'Lumphini Park, properly',short:'Lumphini',t:'06:40',stay:'2 h 20',cost:'Free',hours:'04:30–22:00',ll:LL.lumphini,lbl:'l',
+    p:'Stay in it. Walk the full loop, watch the lizards, get breakfast and coffee from the vendors by the Sala Daeng gate. One Bangkok doesn’t open until 10:00, so there’s no rush anywhere.',
+    leg:{total:'0 min',cost:'฿0',hops:[{m:'walk',txt:'You’re already here',meta:'—'}]}},
+   {ref:31,ic:'i-mall',n:'One Bangkok',t:'10:00',stay:'2 h',cost:'brunch ~฿600',hours:'10:00–22:00',ll:LL.oneBangkok,lbl:'r',
+    p:'Thailand’s biggest development: <b>Parade</b> (retail), The Storeys (indie shops), Wireless House (heritage). Brunch in Parade’s ground-floor food quarter; all of it is air-conditioned, which by now you will want.',
+    leg:{total:'14 min',cost:'฿0',hops:[
+      {m:'walk',txt:'North-east through the park → Witthayu Rd → the <b>Parade</b> entrance',meta:'14 min'},
+      {m:'mrt',alt:true,txt:'Or MRT Lumphini Exit 1 → Parade B1 directly, no daylight involved',meta:''}]}},
+   {ref:12,ic:'i-mall',n:'Central Park at Dusit Central Park',short:'Central Park',t:'12:15',stay:'1 h 10',cost:'lunch',hours:'10:00–22:00',ll:LL.dusit,lbl:'b',
+    p:'The mall that opened in Sept 2025 on the Silom–Rama IV corner where the old Dusit Thani hotel stood. Lunch here — the food floors face the park.',
     leg:{total:'15 min',cost:'฿0',hops:[
       {m:'walk',txt:'West along <b>Rama IV</b>, park on your left',meta:'15 min'},
       {m:'mrt',alt:true,txt:'Or MRT Lumphini → <b>Silom</b> (1 stop), Exit 2',meta:'~5 min · ฿17'}]}},
-   {ref:19,ic:'i-park',n:'Suan Dusit Arun Roof Park',short:'Roof Park',t:'13:45',stay:'1 h',cost:'Free',hours:'06:00–22:00',ll:LL.dusit,lbl:false,
-    p:'Thailand’s largest rooftop park: 11,200 m² of native trees, water features and lawns seven storeys up, looking straight over Lumphini to the towers you will be standing on tonight.',
+   {ref:19,ic:'i-park',n:'Suan Dusit Arun Roof Park',short:'Roof Park',t:'13:35',stay:'1 h',cost:'Free',hours:'06:00–22:00',ll:LL.dusit,lbl:false,
+    p:'Thailand’s largest rooftop park: 11,200 m² of native trees, water features and lawns seven storeys up, looking straight over Lumphini to the tower you’ll be standing on tonight.',
     leg:{total:'5 min',cost:'฿0',hops:[{m:'walk',txt:'Escalators through the mall to the roof level',meta:'5 min'}]}},
-   {base:true,ic:'i-home',n:'Hotel reset (optional siesta)',short:'Hotel',t:'15:15',tl:'Reset',ll:LL.hotel,lbl:false,
-    p:'Shower, change into something rooftop-worthy. Back out the door at <b>16:45</b>.',
+   {base:true,ic:'i-home',n:'Base camp — reset and change',short:'Base',t:'15:10',tl:'Reset',ll:LL.hotel,lbl:false,
+    p:'You’ve been up since 05:30. Shower, nap, change into something rooftop-worthy. Back out the door at <b>16:45</b>.',
     leg:{total:'~18 min',cost:'~฿30',hops:[
       {m:'walk',txt:'To <b>BTS Sala Daeng</b>',meta:'8 min'},
       {m:'silom',txt:'Sala Daeng → <b>Siam</b> (2 stops)',meta:'5 min'},
       {m:'suk',txt:'Siam → <b>Ratchathewi</b> (1 stop)',meta:'2 min · ~฿30'},
       {m:'walk',txt:'To the hotel',meta:'6 min'}]}},
-   {ref:22,ic:'i-tower',n:'King Power Mahanakhon SkyWalk',short:'Mahanakhon',t:'17:25',stay:'1 h 35',cost:'฿1,200 sunset ticket',hours:'10:00–00:00 · last entry 18:30',ll:LL.mahanakhon,lbl:'l',
-    p:'Book the <b>17:30 SkyWalk + SkyVerse</b> slot online. 74F indoor deck, then 78F: the glass tray over a 314-metre drop and the open-air rooftop for sunset at 17:47.',
-    tips:['Glass tray: shoe covers provided, no tripods.','Skipping sunset? The ฿350 indoor-only late slot exists.'],
+   {ref:22,ic:'i-tower',n:'King Power Mahanakhon SkyWalk',short:'Mahanakhon',t:'17:10',stay:'1 h 40',cost:'฿1,200 sunset ticket',hours:'10:00–00:00 · last entry 18:30',ll:LL.mahanakhon,lbl:'l',
+    p:'Book the <b>17:30 SkyWalk + SkyVerse</b> slot online. 74F indoor deck first, then 78F: the glass tray over a 314-metre drop, and the open-air rooftop.',
+    tips:['Glass tray: shoe covers provided, no tripods.','Go up as soon as you’re through — you want to be on 78F before 17:35.'],
     leg:{total:'~20 min',cost:'~฿36',hops:[
       {m:'walk',txt:'Hotel → <b>BTS Ratchathewi</b>',meta:'6 min'},
       {m:'suk',txt:'Ratchathewi → <b>Siam</b> (1 stop); cross the platform',meta:'2 min'},
       {m:'silom',txt:'Siam → <b>Chong Nonsi</b> (3 stops, toward Bang Wa)',meta:'6 min · ~฿36'},
       {m:'sky',txt:'Exit 3 → skybridge straight into the tower',meta:'3 min'}]}},
+   {sun:'set',t:'17:48',n:'The 78th-floor rooftop, Mahanakhon',ll:LL.mahanakhon,
+    p:'The highest open-air spot in the city and the only sunset this week where you can see the whole shape of Bangkok — the river bending west through Thonburi, the Old Town flat and low where you stood yesterday, and the sun going down past all of it. Then the city lights come up underneath you while you’re still standing there.',
+    strip:[['Sunset','17:48'],['Be on 78F','17:35'],['Lights up','18:15']]},
    {ref:26,ic:'i-food',n:'Le Du Kaan or Nobu — EA rooftop, Empire Tower',short:'EA rooftop',t:'19:15',stay:'2 h',cost:'฿2,500–4,000 for two',hours:'from 17:30 · reserve',ll:LL.empire,lbl:'b',
     p:'Two of Bangkok’s biggest dining names share one rooftop complex. <b>Le Du Kaan</b> (56F): chef Ton’s à-la-carte take on his Michelin-starred Le Du. <b>Nobu</b> (57–58F): the world’s highest Nobu, black-cod miso and all. Pick one, book it now.',
     leg:{total:'8 min',cost:'฿0',hops:[{m:'walk',txt:'Down Narathiwat Rd; Empire Tower is the tall one on Sathorn — lifts to <b>“EA”</b>',meta:'8 min'}]}},
    {ref:23,ic:'i-cocktail',n:'Unculture Silom Rooftop Bar',short:'Unculture',t:'21:30',stay:'1 h 15',cost:'cocktails ~฿300',hours:'17:00–02:00 · live bands nightly',ll:LL.unculture,lbl:'r',
-    p:'A scruffy, brilliant rooftop with the <b>BTS gliding past at eye level</b> every few minutes. Live neo-soul to punk, grapefruit soju, fried corn. Five flights of stairs, no lift.',
+    p:'A scruffy, brilliant rooftop with the <b>BTS gliding past at eye level</b> every few minutes — the perfect comedown after two hours of fine dining. Live neo-soul to punk, grapefruit soju, fried corn. Five flights of stairs, no lift.',
     leg:{total:'7 min',cost:'฿0',hops:[{m:'walk',txt:'Back up Narathiwat to <b>Silom Plaza</b>, No. 36',meta:'7 min'}]}},
-   {base:true,ic:'i-home',n:'Back to base',short:'Hotel',t:'23:00',tl:'Home',ll:LL.hotel,lbl:false,
+   {base:true,ic:'i-home',n:'Back to base',short:'Base',t:'23:00',tl:'Home',ll:LL.hotel,lbl:false,
     p:'Last BTS from Chong Nonsi is around 23:50. If you miss it, a metered taxi is ~฿100.',
     leg:{total:'~18 min',cost:'~฿36',hops:[
       {m:'walk',txt:'To <b>BTS Chong Nonsi</b>',meta:'4 min'},
@@ -750,15 +820,18 @@ const DAYS=[
 
 /* ---------------- DAY 6 ---------------- */
 { id:'mon', tab:'Mon 16', n:6, date:'Mon 16 Nov', title:'Slow Morning, then the Airport Train',
-  best:'Last coffee among books, last souvenirs, and a <b>30-minute train from your own neighbourhood</b> straight to the departures hall.',
+  best:'One last sunrise from the roof, coffee among books, the souvenir run — and a <b>30-minute train from your own neighbourhood</b> straight to the departures hall.',
   tip:'Keep ฿200 in small notes for the last coffee; the Airport Link itself is contactless — tap the same card you used on the MRT. Ask reception for a shower after check-out; most hotels here say yes.',
-  order:'<b>Hotel</b> → Open House → Eathai → Erawan Shrine → Pratunam → <b>Hotel</b> (bags) → Airport Link → Suvarnabhumi',
+  order:'<b>sunrise on the roof</b> → <b>Base</b> → Open House → Eathai → Erawan Shrine → Pratunam → <b>Base</b> (bags) → Airport Link → Suvarnabhumi → <b>sunset from the gate</b>',
   tally:[['Transport','~฿45'],['Tickets','฿0'],['On foot','~3.5 km']],
   stops:[
+   {sun:'rise',t:'06:16',n:'The rooftop, one last time',ll:LL.rooftop,
+    p:'You don’t have to be up for this one — but it’s the last one, the lift is right there, and you’ll be sitting in an airport by this evening. Coffee, the Sukhumvit skyline going gold, then back to bed if you want.',
+    strip:[['Sunrise','06:16'],['Check-out','12:00']]},
    {base:true,ic:'i-home',n:'Base camp — Pratunam',short:'Base',t:'09:45',tl:'Leave',ll:LL.hotel,lbl:'l',
     p:'Breakfast, pack, leave the bags with reception (check-out is noon).'},
    {ref:14,ic:'i-book',n:'Open House, Central Embassy 6F',short:'Open House',t:'10:10',stay:'1 h 30',cost:'coffee ~฿150',hours:'10:00–22:00',ll:LL.openHouse,lbl:'r',
-    p:'A co-living floor more than a bookshop: <b>Hardcover</b> (art and design books), window seats in the light, a coffee bar, a kids’ corner and a dozen restaurants. Sit down and write the postcards.',
+    p:'A co-living floor more than a bookshop: <b>Hardcover</b> (art and design books), window seats in the light, a coffee bar, and a dozen restaurants. Sit down and write the postcards.',
     leg:{total:'~20 min',cost:'฿0',hops:[
       {m:'walk',txt:'South on Ratchadamri → left on <b>Ploenchit</b> → Central Embassy; lifts to 6F',meta:'20 min'},
       {m:'suk',alt:true,txt:'Or BTS Ratchathewi → <b>Ploen Chit</b> (3 stops), skywalk entrance',meta:'~10 min · ~฿26'}]}},
@@ -768,7 +841,7 @@ const DAYS=[
    {bonus:true,ic:'i-temple',n:'Erawan Shrine & Pratunam — last lap',short:'Erawan Shrine',t:'13:00',stay:'45 min',cost:'Free',hours:'Platinum Mall 09:00–20:00',ll:LL.erawanShrine,lbl:'b',
     p:'A last wai at the shrine, then home through Pratunam: Platinum Fashion Mall for anything you promised someone, Pratunam market for the things you didn’t.',
     leg:{total:'12 min',cost:'฿0',hops:[{m:'walk',txt:'West along Ploenchit to Ratchaprasong',meta:'12 min'}]}},
-   {base:true,ic:'i-home',n:'Base camp: collect the bags',short:'Hotel',t:'14:00',tl:'Bags',ll:LL.hotel,lbl:false,
+   {base:true,ic:'i-home',n:'Base camp: collect the bags',short:'Base',t:'14:00',tl:'Bags',ll:LL.hotel,lbl:false,
     p:'Shower if they let you, change, repack the curry pastes into the checked bag.',
     leg:{total:'15 min',cost:'฿0',hops:[{m:'walk',txt:'Ratchadamri north → Phetchaburi → Soi 11',meta:'15 min'}]}},
    {base:true,ic:'i-plane',n:'Suvarnabhumi Airport',short:'Suvarnabhumi · 28 km',t:'16:25',tl:'Flight out',ll:LL.airport,off:'E',
@@ -777,6 +850,9 @@ const DAYS=[
       {m:'walk',txt:'Hotel → <b>ARL Ratchaprarop</b>',meta:'6 min'},
       {m:'arl',txt:'City Line → <b>Suvarnabhumi</b>, the last stop (6 stops). Every 15 min till midnight.',meta:'30 min · ฿40'},
       {m:'walk',txt:'Train arrives at B1 → lifts to <b>Level 4 Departures</b>',meta:'4 min'}]}},
+   {sun:'set',t:'17:48',n:'From the gate, or the window seat',
+    p:'The last one is through glass. Suvarnabhumi’s concourses are all floor-to-ceiling and face west down the runways, so if you’re at the gate you get it properly — planes taxiing across an orange sky. Six sunsets, six different heights: a hotel roof, a river, a pier, a mall roof, a glass ledge at 314 metres, and an airport window.',
+    strip:[['Sunset','17:48'],['Dark','18:09']]},
   ]},
 ];
 
@@ -786,10 +862,11 @@ const RULES=[
  {ic:'i-boat',h:'The canal boat is your secret weapon',p:'Pratunam pier is a 7-minute walk from the hotel. The Golden Mount line drops you at Wat Saket in 15 minutes for about ฿18 — faster than any taxi to the Old Town. Weekdays till 20:30, weekends till 19:00.'},
  {ic:'i-scarf',h:'Temple dress',p:'Shoulders and knees covered at Wat Arun, Wat Saket, Wat Samphran and Wat Traimit. Carry a scarf; wear shoes you can slip off.'},
  {ic:'i-check',h:'Book these three now',p:'<b>Charmgang</b> (Fri 18:00, SevenRooms) · <b>Mahanakhon</b> sunset slot (Sun 17:30, online) · <b>Le Du Kaan</b> or <b>Nobu</b> (Sun 19:15). Everything else is walk-in.'},
- {ic:'i-sun',h:'Sunset is 17:47',p:'Every “be on top by” time in here is built around it: the Golden Mount on Thursday, Mahanakhon on Sunday. Sunrise is 06:20 if you ever want the river empty.'},
+ {ic:'i-sun',h:'Sunrise 06:15 · sunset 17:48',p:'Neither moves more than two minutes all week. Every day has a <b>sunrise card (gold)</b> and a <b>sunset card (rust)</b>. The sky starts glowing at dawn, <b>05:54</b> — about twenty minutes before the sun clears the horizon — and stays good until 18:09.'},
+ {ic:'i-sunrise',h:'The 05:30 alarm is real',p:'Sunrise is <b>06:15</b>, so “ready by 06:30” misses it every time. On the mornings that go somewhere, the gold card gives the hour to actually be out of the door. On the rest the checkpoint is your own rooftop, so 06:30 is fine.'},
 ];
 const NEAR=[['arl','ARL Ratchaprarop · 5 min'],['suk','BTS Ratchathewi · 6 min'],['canal','Pratunam canal pier · 7 min'],['suk','BTS Phaya Thai · 8 min']];
-const CHECK=[[1,'Dragon temple → Wat Samphran','Thu'],[2,'Wat Arun','Thu'],[3,'The Erawan Museum','Sat'],[4,'Krua Apsorn','Thu'],[5,'Nattaporn ice cream','Thu'],[6,'Local Boys Coffee Co','Fri'],[7,'Oyster and Things','Fri'],[8,'Charmgang','Fri'],[9,'Chinatown market','Fri'],[10,'Talat Noi','Fri'],[11,'House of Vintage / Songwat','Fri'],[12,'Central Park (Dusit)','Sun'],[13,'“Adidas” % Arabica Songwat','Fri'],[14,'Open House, Central Embassy','Mon'],[15,'Pridi area','Sat'],[16,'ChumChum Grocery, Pridi','Sat'],[17,'Emquartier','Sat'],[18,'Emsphere','Sat'],[19,'Dusit Arun Roof Park','Sun'],[20,'Wat Saket','Thu'],[21,'JEDI Café &amp; Bar','Thu'],[22,'Mahanakhon Skywalk','Sun'],[23,'Unculture Silom','Sun'],[24,'Muse Speakeasy','Wed'],[25,'Akara Sky Hanuman','Sat'],[26,'Nobu &amp; Le Du Kaan','Sun'],[27,'Siam Square','Wed'],[28,'Siam BTS','Wed'],[29,'Erawan Shrine','Wed'],[30,'Chit Lom BTS','Wed'],[31,'One Bangkok','Sun'],[32,'Jude and Records → Get Back &amp; Jude','Fri'],['+','Bang Krachao, cycling','Sat']];
+const CHECK=[[1,'Dragon temple → Wat Samphran','Fri'],[2,'Wat Arun','Thu'],[3,'The Erawan Museum','Sat'],[4,'Krua Apsorn','Thu'],[5,'Nattaporn ice cream','Thu'],[6,'Local Boys Coffee Co','Fri'],[7,'Oyster and Things','Fri'],[8,'Charmgang','Fri'],[9,'Chinatown market','Fri'],[10,'Talat Noi','Fri'],[11,'House of Vintage / Songwat','Fri'],[12,'Central Park (Dusit)','Sun'],[13,'“Adidas” % Arabica Songwat','Fri'],[14,'Open House, Central Embassy','Mon'],[15,'Pridi area','Sat'],[16,'ChumChum Grocery, Pridi','Sat'],[17,'Emquartier','Sat'],[18,'Emsphere','Sat'],[19,'Dusit Arun Roof Park','Sun'],[20,'Wat Saket','Thu'],[21,'JEDI Café &amp; Bar','Thu'],[22,'Mahanakhon Skywalk','Sun'],[23,'Unculture Silom','Sun'],[24,'Muse Speakeasy','Wed'],[25,'Akara Sky Hanuman','Sat'],[26,'Nobu &amp; Le Du Kaan','Sun'],[27,'Siam Square','Wed'],[28,'Siam BTS','Wed'],[29,'Erawan Shrine','Wed'],[30,'Chit Lom BTS','Wed'],[31,'One Bangkok','Sun'],[32,'Jude and Records → Get Back &amp; Jude','Fri'],['+','Bang Krachao, cycling','Sat']];
 
 /* ============================================================
    MAP GEOMETRY  (lat, lon)
@@ -831,7 +908,7 @@ const legModes=L=>L?[...new Set(L.hops.filter(h=>!h.alt).map(h=>h.m))]:[];
 const legColor=L=>{const ms=legModes(L);const m=ms.find(x=>x!=='walk'&&x!=='sky')||ms[0]||'walk';return LINEC[m]||MODES[m].bg};
 
 function dayGeo(day){
-  const seq=day.stops.filter(s=>s.ll);
+  const seq=day.stops.filter(s=>s.ll&&!s.sun);
   const on=seq.filter(s=>!s.off).map(s=>P(s.ll));
   const minX=Math.min(...on.map(p=>p[0])),maxX=Math.max(...on.map(p=>p[0])),minY=Math.min(...on.map(p=>p[1])),maxY=Math.max(...on.map(p=>p[1]));
   const cx=(minX+maxX)/2,cy=(minY+maxY)/2;
@@ -900,9 +977,25 @@ function renderMap(day,sfx=''){
     <defs><filter id="${fid}" x="-10%" y="-10%" width="120%" height="120%"><feTurbulence type="fractalNoise" baseFrequency="${f1(0.018/u)}" numOctaves="2" seed="7"/><feDisplacementMap in="SourceGraphic" scale="${f1(7*u)}"/></filter></defs>${g}</svg>`;
 }
 const MAPKEY=`<div class="map-key"><span><i class="dash"></i>today’s route</span><span><i style="--k:#8CC152"></i>BTS Sukhumvit</span><span><i style="--k:#0B6E3A"></i>BTS Silom</span><span><i style="--k:#1F4E9C"></i>MRT Blue</span><span><i style="--k:#B0263A"></i>Airport Link</span><span><i style="--k:#98BBCD"></i>river &amp; canal</span></div>`;
+const legBlock=L=>`<li class="leg"><div class="leg-spine"></div><div class="leg-body">
+  <div class="leg-sum"><span class="lbl">Getting there</span><b>${L.total}</b>${L.cost?`<span>·</span><b>${L.cost}</b>`:''}</div>${hopsHtml(L)}</div></li>`;
 const hopsHtml=L=>`<ol class="hops">${L.hops.map(h=>`<li class="hop ${h.alt?'alt':''}">${patch(h.m)}<span class="hop-txt">${h.txt}</span><span class="hop-meta">${h.meta||''}</span></li>`).join('')}</ol>`;
 
+function renderSun(s){
+  const rise=s.sun==='rise';
+  const leg=s.leg?legBlock(s.leg):'';
+  const strip=(s.strip||[]).map(([k,v])=>`<span>${k} <b>${v}</b></span>`).join('');
+  return `${leg}<li class="stop is-sun ${rise?'is-rise':'is-set'}">
+    <div class="stop-spine"><div class="num">${icon(rise?'i-sunrise':'i-sunset')}</div></div>
+    <article class="card suncard"><div class="card-main">
+      <div class="sun-head"><span class="lbl">${rise?'Sunrise':'Sunset'}</span><span class="sun-t">${s.t}</span></div>
+      <h3>${s.n}</h3><p>${s.p}</p>
+      ${strip?`<div class="sun-strip">${strip}</div>`:''}
+      ${s.warn?`<div class="sun-warn">${s.warn}</div>`:''}
+    </div></article></li>`;}
+
 function renderStop(s,idx,num){
+  if(s.sun)return renderSun(s);
   const cls=['stop',s.base?'is-base':'',s.bonus?'is-bonus':''].join(' ');
   const badge=s.base?icon(s.ic):num;
   const ref=s.bonus?`<span class="ref">Bonus</span>`:s.ref?`<span class="ref">№ ${s.ref}</span>`:'';
@@ -911,8 +1004,7 @@ function renderStop(s,idx,num){
   const stay=s.stay?`<span class="t"><small>Stay</small>${s.stay}</span>`:'';
   const tl=s.tl?`<span class="t"><small>${s.tl}</small>${s.t}</span>`:`<span class="t"><small>Arrive</small>${s.t}</span>`;
   const tips=s.tips?`<ul class="tips">${s.tips.map(t=>`<li>${t}</li>`).join('')}</ul>`:'';
-  const leg=s.leg?`<li class="leg"><div class="leg-spine"></div><div class="leg-body">
-      <div class="leg-sum"><span class="lbl">Getting there</span><b>${s.leg.total}</b>${s.leg.cost?`<span>·</span><b>${s.leg.cost}</b>`:''}</div>${hopsHtml(s.leg)}</div></li>`:'';
+  const leg=s.leg?legBlock(s.leg):'';
   return `${leg}<li class="${cls}"><div class="stop-spine"><div class="num">${badge}</div></div>
     <article class="card"><div class="card-main">
       <h3>${s.n}${ref}</h3>
@@ -923,7 +1015,7 @@ function renderStop(s,idx,num){
 
 function renderDay(d,i){
   let num=0;
-  const stops=d.stops.map((s,j)=>{if(!s.base)num++;return renderStop(s,j,num)}).join('');
+  const stops=d.stops.map((s,j)=>{if(!s.base&&!s.sun)num++;return renderStop(s,j,num)}).join('');
   return `<section class="day" id="day-${d.id}" role="tabpanel" ${i?'hidden':''}>
     <header class="day-head">
       <div><h2>Day ${d.n} Route<em>${d.title}</em></h2><p class="best">${d.best}</p></div>
@@ -934,7 +1026,7 @@ function renderDay(d,i){
         <button class="expand" type="button" aria-label="Open the map full screen"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M14 4h6v6M20 4l-7 7M10 20H4v-6M4 20l7-7"/></svg></button>
         ${renderMap(d)}${MAPKEY}
         <div class="map-cap">Tap the map to open it · hover a dashed route to preview the leg</div>
-        <div class="map-foot"><span class="lbl">Map snippet · not to be trusted for driving</span><span>${d.stops.filter(s=>!s.base).length} stops</span></div></div></div>
+        <div class="map-foot"><span class="lbl">Map snippet · not to be trusted for driving</span><span>${d.stops.filter(s=>!s.base&&!s.sun).length} stops</span></div></div></div>
       <ol class="stops">${stops}</ol>
     </div>
     <div class="day-foot">
