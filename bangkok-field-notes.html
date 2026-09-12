@@ -1,0 +1,1040 @@
+<title>Bangkok Field Notes</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,600;0,9..144,700;1,9..144,400;1,9..144,600&family=Lora:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Barlow+Condensed:wght@500;600;700&display=swap">
+<style>
+:root{
+  --paper:#F4EDDF;
+  --paper-2:#EBE1CC;
+  --card:#FBF7EE;
+  --ink:#2B4530;
+  --ink-2:#4B604E;
+  --muted:#7E8A78;
+  --rule:#D8CDB4;
+  --forest:#3A6A45;
+  --forest-soft:#DCE6D2;
+  --rust:#B4452B;
+  --rust-soft:#F3DDD4;
+  --mustard:#B9862A;
+  --mustard-soft:#F5E8C9;
+  --kraft:#D9C6A0;
+  --water:#BFD6E1;
+  --water-deep:#98BBCD;
+  --land:#E6E6CF;
+  --park:#C5D6AA;
+  --shadow:0 1px 0 rgba(43,69,48,.06), 0 10px 30px -18px rgba(43,69,48,.35);
+  --grain:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='160' height='160'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 .07 0'/></filter><rect width='100%' height='100%' filter='url(%23n)'/></svg>");
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+  margin:0;background:var(--paper);background-image:var(--grain);
+  color:var(--ink);font-family:"Lora",Georgia,"Times New Roman",serif;
+  font-size:16px;line-height:1.62;-webkit-font-smoothing:antialiased;
+  -webkit-tap-highlight-color:rgba(58,106,69,.14);text-size-adjust:100%;-webkit-text-size-adjust:100%;overflow-x:hidden;
+}
+.wrap{max-width:1040px;margin:0 auto;padding:16px 13px calc(56px + env(safe-area-inset-bottom));padding-left:max(13px,env(safe-area-inset-left));padding-right:max(13px,env(safe-area-inset-right))}
+button,a,.map-card,.leg-g,.stop-g{touch-action:manipulation}
+h1,h2,h3,h4{margin:0;text-wrap:balance;font-family:"Fraunces",Georgia,serif;font-variation-settings:"SOFT" 60,"WONK" 1}
+svg.ic{width:1em;height:1em;stroke:currentColor;fill:none;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round;flex:none}
+.lbl{font-family:"Barlow Condensed",Arial Narrow,sans-serif;text-transform:uppercase;letter-spacing:.12em;font-weight:600}
+
+/* ================= cover ================= */
+.cover{display:grid;grid-template-columns:1fr;gap:20px;align-items:start}
+.cover-title .lbl{font-size:12.5px;color:var(--rust);display:flex;align-items:center;gap:10px}
+.cover-title .lbl::before{content:"";width:26px;height:2px;background:var(--rust)}
+h1{font-size:clamp(46px,8.4vw,86px);line-height:.95;font-weight:600;letter-spacing:-.02em;margin:14px 0 0;color:var(--ink)}
+h1 span{display:block;font-weight:400;font-style:italic;font-size:.5em;letter-spacing:0;color:var(--forest);margin-top:10px}
+.deck{margin:22px 0 0;max-width:56ch;color:var(--ink-2);font-size:16.5px}
+.deck b{color:var(--ink);font-weight:600}
+
+.stamp-wall{display:flex;flex-wrap:wrap;gap:10px;margin-top:26px}
+.pass{
+  display:inline-flex;flex-direction:column;gap:1px;padding:9px 14px 8px;border:2px solid var(--ink);
+  border-radius:8px;background:var(--card);box-shadow:3px 3px 0 var(--ink);
+}
+.pass .lbl{font-size:10.5px;color:var(--muted)}
+.pass strong{font-family:"Fraunces",serif;font-weight:600;font-size:18px;line-height:1.1}
+.pass small{color:var(--ink-2);font-size:12.5px;font-style:italic}
+
+/* the hotel "patch" */
+.basecamp{
+  position:relative;margin-top:2px;padding:22px 22px 20px 22px;
+  background:var(--card);border:2.5px solid var(--forest);border-radius:18px 18px 18px 18px/22px;
+  box-shadow:var(--shadow);transform:rotate(-.5deg);
+}
+.basecamp::before{
+  content:"";position:absolute;inset:6px;border:1.5px dashed var(--forest);border-radius:12px;opacity:.6;pointer-events:none;
+}
+.basecamp .lbl{font-size:11px;color:var(--forest);display:flex;gap:8px;align-items:center}
+.basecamp h2{font-size:26px;font-weight:600;margin:6px 0 4px;line-height:1.1}
+.basecamp p{margin:0;color:var(--ink-2);font-size:14px}
+.basecamp .near{display:flex;flex-wrap:wrap;gap:6px;margin-top:12px}
+
+/* ================= patches (transport) ================= */
+.patch{
+  display:inline-flex;align-items:center;gap:6px;padding:3px 9px 3px 7px;border-radius:7px;
+  border:2px solid rgba(0,0,0,.18);font-family:"Barlow Condensed",sans-serif;font-weight:600;
+  font-size:12.5px;letter-spacing:.06em;text-transform:uppercase;line-height:1.35;white-space:nowrap;
+  color:var(--pc,#fff);background:var(--pb,#555);
+  box-shadow:inset 0 0 0 1.5px rgba(255,255,255,.35);
+}
+.patch .ic{width:14px;height:14px;stroke-width:2}
+
+/* ================= trail rules ================= */
+.section-head{display:flex;align-items:center;gap:14px;margin:46px 0 16px}
+.section-head .lbl{font-size:12px;color:var(--muted);white-space:nowrap}
+.section-head::after{content:"";flex:1;height:2px;background:repeating-linear-gradient(90deg,var(--rule) 0 8px,transparent 8px 14px)}
+.rules{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:12px}
+.rule{
+  background:var(--card);border:2px solid var(--kraft);border-radius:10px;padding:14px 16px 15px;
+  box-shadow:var(--shadow);position:relative;
+}
+.rule:nth-child(odd){transform:rotate(.4deg)}
+.rule:nth-child(even){transform:rotate(-.5deg)}
+.rule h3{font-size:17px;font-weight:600;line-height:1.2;display:flex;align-items:center;gap:8px}
+.rule h3 .ic{color:var(--rust);width:18px;height:18px}
+.rule p{margin:7px 0 0;font-size:14px;color:var(--ink-2)}
+.rule b{color:var(--ink);font-weight:600}
+
+/* ================= day tabs ================= */
+.tabs{
+  position:sticky;top:0;z-index:20;display:flex;gap:6px;overflow-x:auto;padding:10px 2px 10px;
+  margin:26px -4px 18px;background:var(--paper);background-image:var(--grain);box-shadow:0 12px 14px -12px rgba(43,69,48,.22);scrollbar-width:none;
+  scroll-snap-type:x proximity;overscroll-behavior-x:contain;
+}
+.tabs::-webkit-scrollbar{display:none}
+.tab{
+  flex:none;cursor:pointer;background:var(--card);border:2px solid var(--rule);border-radius:9px;
+  padding:7px 13px 6px;display:flex;flex-direction:column;align-items:flex-start;gap:0;line-height:1.15;
+  transition:transform .15s,border-color .15s;min-height:44px;
+}
+.tab{scroll-snap-align:start}
+.tab .lbl{font-size:10.5px;color:var(--muted)}
+.tab b{font-family:"Fraunces",serif;font-weight:600;font-size:15px;color:var(--ink)}
+.tab:hover{border-color:var(--forest);transform:translateY(-1px)}
+.tab[aria-selected="true"]{background:var(--forest);border-color:var(--forest)}
+.tab[aria-selected="true"] .lbl,.tab[aria-selected="true"] b{color:#F4EDDF}
+.tab:focus-visible{outline:3px solid var(--mustard);outline-offset:2px}
+
+/* ================= day page ================= */
+.day{animation:fade .25s ease-out;scroll-margin-top:72px}
+@keyframes fade{from{opacity:.4;transform:translateY(4px)}to{opacity:1;transform:none}}
+.day-head{display:grid;grid-template-columns:1fr auto;gap:18px;align-items:start;margin-bottom:22px}
+.day-head h2{font-size:clamp(34px,6vw,56px);font-weight:600;line-height:1;letter-spacing:-.015em}
+.day-head h2 em{display:block;font-style:italic;font-weight:400;font-size:.52em;color:var(--forest);margin-top:8px;letter-spacing:0}
+.day-head .best{margin:14px 0 0;max-width:58ch;color:var(--ink-2);font-size:15.5px}
+.day-head .best b{color:var(--ink);font-weight:600}
+.stamp{
+  width:74px;height:74px;border-radius:50%;border:2.5px double var(--rust);color:var(--rust);
+  display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;
+  transform:rotate(-7deg);background:radial-gradient(circle at 50% 50%,rgba(180,69,43,.05),transparent 70%);
+  font-family:"Barlow Condensed",sans-serif;text-transform:uppercase;letter-spacing:.1em;line-height:1.05;
+  mix-blend-mode:multiply;flex:none;
+}
+.stamp .n{font-family:"Fraunces",serif;font-size:25px;font-weight:700;letter-spacing:0;line-height:1;margin:2px 0 3px}
+.stamp small{font-size:10.5px;font-weight:600}
+.stamp .pg{font-size:9.5px;opacity:.75;margin-top:2px}
+
+.day-grid{display:grid;grid-template-columns:1fr;gap:16px;align-items:start}
+.map-col{position:static}
+
+/* ---- map card ---- */
+.map-card{
+  background:var(--card);background-image:var(--grain);border:2px solid var(--ink);border-radius:14px;
+  padding:10px;box-shadow:4px 4px 0 var(--ink);
+}
+.map-card svg.map{display:block;width:100%;aspect-ratio:1/1.05;border-radius:8px;overflow:hidden}
+.map-foot{display:flex;justify-content:space-between;align-items:center;gap:10px;padding:9px 6px 2px;color:var(--muted);font-size:12px}
+.map-foot .lbl{font-size:10.5px}
+.map-key{display:flex;flex-wrap:wrap;gap:5px 12px;padding:8px 6px 2px;font-size:11.5px;color:var(--ink-2)}
+.map-key span{display:inline-flex;align-items:center;gap:5px}
+.map-key i{display:inline-block;width:16px;height:3px;border-radius:2px;background:var(--k)}
+.map-key i.dash{background:repeating-linear-gradient(90deg,var(--forest) 0 4px,transparent 4px 7px);height:2.5px}
+
+/* ---- stops ---- */
+.stops{list-style:none;margin:0;padding:0}
+.stop{display:grid;grid-template-columns:34px 1fr;gap:10px;position:relative}
+.stop-spine{position:relative;display:flex;justify-content:center}
+.stop-spine::before{
+  content:"";position:absolute;top:0;bottom:0;left:50%;width:0;
+  border-left:2.5px dashed var(--forest);opacity:.55;translate:-50% 0;
+}
+.stop:first-child .stop-spine::before{top:20px}
+.stop:last-child .stop-spine::before{bottom:calc(100% - 20px)}
+.num{
+  position:relative;z-index:1;width:30px;height:30px;border-radius:50%;background:var(--forest);color:#F4EDDF;
+  display:grid;place-items:center;font-family:"Barlow Condensed",sans-serif;font-weight:700;font-size:15px;
+  margin-top:13px;border:2.5px solid var(--card);box-shadow:0 0 0 2px var(--forest);
+}
+.stop.is-base .num{background:var(--rust);box-shadow:0 0 0 2px var(--rust);border-radius:9px}
+.stop.is-base .num .ic{width:17px;height:17px;stroke-width:2.1}
+.stop.is-bonus .num{background:var(--mustard);box-shadow:0 0 0 2px var(--mustard)}
+
+.card{
+  background:var(--card);border:1.5px solid var(--rule);border-radius:12px;padding:15px 17px 16px;
+  box-shadow:var(--shadow);margin-bottom:8px;display:grid;grid-template-columns:1fr;gap:6px 14px;
+}
+.stop.is-base .card{background:var(--paper-2);border-color:var(--kraft);box-shadow:none}
+.card-main{min-width:0}
+.medal{
+  width:46px;height:46px;border-radius:50%;border:1.5px solid var(--forest);display:none;place-items:center;
+  color:var(--forest);background:var(--card);grid-row:1/3;align-self:start;margin-top:2px;
+}
+.medal .ic{width:22px;height:22px;stroke-width:1.6}
+.stop.is-base .medal{border-color:var(--rust);color:var(--rust)}
+.stop.is-bonus .medal{border-color:var(--mustard);color:var(--mustard)}
+.card h3{font-size:19px;font-weight:600;line-height:1.2;letter-spacing:-.005em}
+.card h3 .ref{
+  font-family:"Barlow Condensed",sans-serif;font-weight:600;font-size:11.5px;letter-spacing:.08em;color:var(--muted);
+  border:1.5px solid var(--rule);border-radius:5px;padding:1px 6px;vertical-align:3px;margin-left:6px;white-space:nowrap;
+}
+.timerow{display:flex;flex-wrap:wrap;align-items:baseline;gap:6px 12px;margin-top:5px}
+.t{font-family:"Barlow Condensed",sans-serif;font-weight:700;font-size:16px;letter-spacing:.04em;color:var(--forest);font-variant-numeric:tabular-nums}
+.stop.is-base .t{color:var(--rust)}
+.t small{font-weight:500;font-size:11px;letter-spacing:.1em;color:var(--muted);margin-right:3px}
+.pill{
+  display:inline-block;font-family:"Barlow Condensed",sans-serif;font-weight:600;font-size:12px;letter-spacing:.08em;
+  text-transform:uppercase;padding:2px 8px;border-radius:6px;background:var(--mustard-soft);color:#7A5A16;border:1px solid #E1CB93;
+}
+.pill.free{background:var(--forest-soft);color:var(--forest);border-color:#BFD0B3}
+.pill.hours{background:transparent;color:var(--ink-2);border-color:var(--rule);text-transform:none;letter-spacing:.02em;font-weight:500}
+.card p{margin:9px 0 0;font-size:15px;color:var(--ink-2)}
+.card p b{color:var(--ink);font-weight:600}
+.tips{margin:10px 0 0;padding:0;list-style:none;display:grid;gap:5px}
+.tips li{position:relative;padding-left:16px;font-size:14.5px;color:var(--ink-2)}
+.tips li::before{content:"";position:absolute;left:1px;top:.6em;width:7px;height:7px;background:var(--rust);clip-path:polygon(50% 0,100% 50%,50% 100%,0 50%)}
+.tips b{color:var(--ink);font-weight:600}
+
+/* ---- legs ---- */
+.leg{display:grid;grid-template-columns:34px 1fr;gap:10px}
+.leg-spine{position:relative}
+.leg-spine::before{content:"";position:absolute;top:0;bottom:0;left:50%;border-left:2.5px dashed var(--forest);opacity:.55;translate:-50% 0}
+.leg-body{padding:6px 0 12px}
+.leg-sum{display:flex;align-items:center;gap:8px;flex-wrap:wrap;color:var(--muted);font-size:12px;margin:0 0 7px 2px}
+.leg-sum .lbl{font-size:10.5px}
+.leg-sum b{color:var(--ink-2);font-family:"Barlow Condensed",sans-serif;font-size:14px;letter-spacing:.05em;font-weight:600;font-variant-numeric:tabular-nums}
+.hops{list-style:none;margin:0;padding:0;display:grid;gap:6px}
+.hop{
+  display:grid;grid-template-columns:auto 1fr;gap:4px 10px;align-items:center;
+  background:rgba(251,247,238,.7);border:1.5px dashed var(--kraft);border-radius:9px;padding:8px 11px;
+}
+.hop:nth-child(odd) .patch{transform:rotate(-1.1deg)}
+.hop:nth-child(even) .patch{transform:rotate(.9deg)}
+.hop-txt{font-size:14.5px;color:var(--ink-2);min-width:0}
+.hop-txt b{color:var(--ink);font-weight:600}
+.hop-meta{font-family:"Barlow Condensed",sans-serif;font-size:13px;letter-spacing:.05em;color:var(--muted);white-space:nowrap;text-align:left;grid-column:2;font-variant-numeric:tabular-nums}
+.hop.alt{border-style:dotted;background:transparent;opacity:.85}
+
+/* ---- day footer boxes ---- */
+.day-foot{display:grid;grid-template-columns:1fr;gap:12px;margin-top:18px}
+.tipbox,.orderbox{background:var(--card);border:2px solid var(--kraft);border-radius:12px;padding:14px 16px;box-shadow:var(--shadow)}
+.tipbox{display:grid;grid-template-columns:auto 1fr;gap:12px;align-items:start}
+.tipbox .medal{grid-row:auto;width:42px;height:42px;display:grid}
+.tipbox .lbl{font-size:10.5px;color:var(--muted);display:block;margin-bottom:2px}
+.tipbox p{margin:0;font-size:14px;color:var(--ink-2)}
+.orderbox .lbl{font-size:10.5px;color:var(--muted);display:block;margin-bottom:6px}
+.orderbox p{margin:0;font-size:14px;color:var(--ink-2);line-height:1.75}
+.orderbox p b{color:var(--ink);font-weight:600}
+.tally{display:flex;flex-wrap:wrap;gap:8px;margin-top:12px}
+.tally span{font-family:"Barlow Condensed",sans-serif;font-size:13px;letter-spacing:.06em;text-transform:uppercase;color:var(--ink-2);border:1.5px solid var(--rule);border-radius:6px;padding:3px 9px;background:var(--card)}
+.tally span b{color:var(--ink);font-variant-numeric:tabular-nums}
+
+/* ================= checklist ================= */
+.check{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:6px 18px}
+.check div{display:grid;grid-template-columns:26px 1fr auto;gap:8px;align-items:baseline;font-size:14px;padding:5px 0;border-bottom:1px dotted var(--rule)}
+.check .n{font-family:"Barlow Condensed",sans-serif;font-weight:700;color:var(--muted);font-size:13px}
+.check .d{font-family:"Barlow Condensed",sans-serif;font-weight:600;font-size:11.5px;letter-spacing:.08em;text-transform:uppercase;color:var(--forest)}
+footer{margin-top:46px;padding-top:18px;border-top:2px dashed var(--rule);color:var(--muted);font-size:13px;font-style:italic}
+
+/* ========= progressive enhancement for bigger screens ========= */
+@media (min-width:600px){
+  .wrap{padding:24px 20px 72px}
+  .stop,.leg{grid-template-columns:44px 1fr;gap:14px}
+  .num{width:34px;height:34px;font-size:17px;margin-top:14px}
+  .card{padding:15px 17px 16px;grid-template-columns:1fr auto}
+  .medal{display:grid}
+  .hop{grid-template-columns:auto 1fr auto;row-gap:0;padding:7px 11px}
+  .hop-meta{grid-column:auto;text-align:right}
+  .stamp{width:92px;height:92px}
+  .stamp .n{font-size:31px}
+  .day-foot{grid-template-columns:1fr 1.4fr;gap:14px}
+  .modal-head p{display:block}
+}
+@media (min-width:901px){
+  body{font-size:15.5px;line-height:1.6}
+  .wrap{padding:26px 20px 80px}
+  .cover{grid-template-columns:1.25fr .9fr;gap:28px}
+  .basecamp{transform:rotate(-1.2deg);margin-top:8px}
+  .day-grid{grid-template-columns:400px 1fr;gap:26px}
+  .map-col{position:sticky;top:78px}
+  .card p{font-size:14.5px}
+  .tips li{font-size:13.5px}
+  .hop-txt{font-size:13.5px}
+  .hop-meta{font-size:12.5px}
+  .tabs{margin:36px -4px 22px}
+}
+@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+@media print{
+  .tabs{display:none}.day[hidden]{display:block!important}.day{break-before:page}
+  .map-col{position:static}.card,.rule,.map-card{box-shadow:none}
+  body{background:#fff}
+}
+
+/* ================= interactive map ================= */
+.map-card{position:relative;cursor:zoom-in}
+.map-card .expand{position:absolute;top:14px;right:14px;width:44px;height:44px;border-radius:9px;border:1.5px solid var(--ink);background:var(--card);display:grid;place-items:center;cursor:pointer;color:var(--ink);z-index:2;padding:0}
+.map-card .expand .ic{width:17px;height:17px;stroke-width:2}
+.map-card .expand:hover{background:var(--forest);color:#F4EDDF;border-color:var(--forest)}
+.map-card .expand:focus-visible{outline:3px solid var(--mustard);outline-offset:2px}
+.map-cap{padding:8px 6px 0;font-size:12.5px;color:var(--ink-2);font-style:italic;min-height:26px}
+.map-cap b{color:var(--ink);font-style:normal}
+svg.map .leg-g{cursor:pointer}
+svg.map .leg-g .hit{fill:none;stroke:transparent;stroke-width:22px;vector-effect:non-scaling-stroke;stroke-linecap:round}
+svg.map .leg-g .halo{fill:none;stroke:var(--card);stroke-width:6.5px;vector-effect:non-scaling-stroke;stroke-linecap:round;opacity:.92;transition:opacity .15s}
+svg.map .leg-g .line{fill:none;stroke:var(--forest);stroke-width:2.6px;stroke-dasharray:6 5;stroke-linecap:round;vector-effect:non-scaling-stroke;transition:stroke-width .15s,opacity .15s,stroke .15s}
+svg.map .leg-g:hover .line{stroke-width:4.5px}
+svg.map .leg-g.sel .line{stroke:var(--legc,var(--rust));stroke-width:6px;stroke-dasharray:none}
+svg.map .leg-g.sel .halo{stroke-width:11px}
+svg.map.has-sel .leg-g:not(.sel) .line{opacity:.32}
+svg.map.has-sel .leg-g:not(.sel) .halo{opacity:.35}
+svg.map .stop-g{cursor:pointer}
+svg.map .stop-g .ring{display:none;fill:none;stroke:var(--legc,var(--rust));stroke-width:3px;vector-effect:non-scaling-stroke}
+svg.map .stop-g.sel .ring,svg.map .stop-g.end .ring{display:block}
+svg.map .stop-g.sel .ring{stroke:var(--rust);stroke-dasharray:4 3}
+/* modal */
+.modal{position:fixed;inset:0;z-index:100;background:var(--paper);display:flex;align-items:flex-start;justify-content:center;padding:0;overflow:auto;overscroll-behavior:contain}
+.modal[hidden]{display:none}
+.modal-box{background:var(--paper);background-image:var(--grain);border:0;border-radius:0;width:100%;min-height:100%;display:flex;flex-direction:column;overflow:visible}
+.modal-head{display:flex;justify-content:space-between;align-items:flex-start;gap:12px;padding:calc(12px + env(safe-area-inset-top)) 14px 10px;position:sticky;top:0;z-index:3;background:var(--paper);background-image:var(--grain);border-bottom:1.5px dashed var(--rule)}
+.modal-head p{display:none}
+.modal-head .lbl{font-size:11px;color:var(--rust)}
+.modal-head h2{font-size:clamp(22px,3vw,30px);font-weight:600;line-height:1.1;margin-top:3px}
+.modal-head p{margin:5px 0 0;font-size:13.5px;color:var(--muted);font-style:italic}
+.modal-close{width:44px;height:44px;border-radius:50%;border:2px solid var(--ink);background:var(--card);cursor:pointer;color:var(--ink);flex:none;display:grid;place-items:center;padding:0}
+.modal-close .ic{width:18px;height:18px;stroke-width:2.2}
+.modal-close:hover{background:var(--rust);border-color:var(--rust);color:#F4EDDF}
+.modal-close:focus-visible{outline:3px solid var(--mustard);outline-offset:2px}
+.modal-grid{display:grid;grid-template-columns:1fr;min-height:0;flex:1;overflow:visible}
+.modal-map{padding:12px 12px 8px;min-height:0;display:flex}
+.modal-map .map-card{width:100%;cursor:default;display:flex;flex-direction:column}
+.modal-map svg.map{aspect-ratio:1/1;flex:none;height:auto;width:100%}
+.modal-panel{border-top:2px dashed var(--rule);padding:14px 14px calc(26px + env(safe-area-inset-bottom));overflow:visible;min-height:0}
+.modal-panel .section-head{margin:22px 0 10px}
+.modal-panel .hop{grid-template-columns:auto 1fr;row-gap:2px}
+.modal-panel .hop-meta{grid-column:2;text-align:left}
+.detail h3{font-size:21px;font-weight:600;line-height:1.15;margin-top:3px}
+.detail .arr{color:var(--rust);font-weight:400;margin:0 4px}
+.detail .ref{font-family:"Barlow Condensed",sans-serif;font-weight:600;font-size:11.5px;letter-spacing:.08em;color:var(--muted);border:1.5px solid var(--rule);border-radius:5px;padding:1px 6px;vertical-align:3px;margin-left:6px;white-space:nowrap}
+.detail-meta{margin:6px 0 10px;font-family:"Barlow Condensed",sans-serif;font-size:15px;letter-spacing:.05em;color:var(--ink-2);font-variant-numeric:tabular-nums}
+.detail-meta b{color:var(--ink);font-weight:600}
+.detail-modes{display:flex;flex-wrap:wrap;gap:6px;align-items:center;margin-bottom:12px}
+.detail-modes .lbl{font-size:10.5px;color:var(--muted);margin-right:2px}
+.detail-arrive{margin-top:12px;padding:10px 12px;border:1.5px dashed var(--kraft);border-radius:9px;font-size:13.5px;color:var(--ink-2)}
+.detail-arrive b{color:var(--ink)}
+.detail .timerow{margin:6px 0 4px}
+.detail p{margin:8px 0 0;font-size:14.5px;color:var(--ink-2)}
+.detail p b{color:var(--ink)}
+.detail .hint{font-style:italic;color:var(--muted)}
+.leglist{list-style:none;margin:0;padding:0;display:grid;gap:6px}
+.legrow{display:grid;grid-template-columns:28px 1fr auto;gap:10px;align-items:center;padding:8px 10px;border:1.5px solid var(--rule);border-radius:9px;background:var(--card);cursor:pointer;text-align:left;font:inherit;color:inherit;width:100%;min-height:48px}
+.legrow:hover{border-color:var(--forest)}
+.legrow:focus-visible{outline:3px solid var(--mustard);outline-offset:2px}
+.legrow.sel{border-color:var(--legc,var(--rust));box-shadow:inset 0 0 0 1.5px var(--legc,var(--rust))}
+.legno{width:26px;height:26px;border-radius:50%;background:var(--forest);color:#F4EDDF;display:grid;place-items:center;font-family:"Barlow Condensed",sans-serif;font-weight:700;font-size:13px}
+.legrow.sel .legno{background:var(--legc,var(--rust))}
+.legrow-main{min-width:0}
+.legrow-main b{font-size:14px;font-weight:600;display:block;line-height:1.25}
+.legrow-modes{display:flex;align-items:center;gap:4px;margin-top:3px;font-size:12px;color:var(--ink-2);flex-wrap:wrap}
+.legrow-modes i{width:12px;height:12px;border-radius:3px;display:inline-block;border:1px solid rgba(0,0,0,.15);flex:none}
+.legrow-meta{font-family:"Barlow Condensed",sans-serif;font-size:12.5px;letter-spacing:.04em;color:var(--muted);text-align:right;white-space:nowrap;line-height:1.3;font-variant-numeric:tabular-nums}
+@media (min-width:901px){
+  .modal{background:rgba(43,69,48,.42);backdrop-filter:blur(3px);-webkit-backdrop-filter:blur(3px);align-items:center;padding:18px}
+  .modal-box{border:2.5px solid var(--ink);border-radius:18px;box-shadow:6px 6px 0 var(--ink);width:min(1180px,100%);min-height:0;max-height:calc(100vh - 36px);overflow:hidden}
+  .modal-head{position:static;border-bottom:0;padding:16px 20px 8px}
+  .modal-grid{grid-template-columns:1.15fr .85fr;overflow:hidden}
+  .modal-map{padding:6px 14px 18px 20px;display:flex}
+  .modal-map svg.map{aspect-ratio:auto;flex:1;min-height:0;height:min(66vh,620px)}
+  .modal-panel{border-top:0;border-left:2px dashed var(--rule);padding:6px 20px 22px;overflow:auto}
+  .modal-panel .hop{grid-template-columns:auto 1fr;row-gap:2px}
+  .modal-panel .hop-meta{grid-column:2;text-align:left}
+}
+</style>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <defs>
+    <symbol id="i-home" viewBox="0 0 24 24"><path d="M4 10.5 12 4l8 6.5V19a1.5 1.5 0 0 1-1.5 1.5h-13A1.5 1.5 0 0 1 4 19v-8.5Z"/><path d="M10 20.5v-6h4v6"/></symbol>
+    <symbol id="i-temple" viewBox="0 0 24 24"><path d="M12 2.5v3M7 9.5l5-4 5 4"/><path d="M6 9.5h12M7.5 9.5v9.5M16.5 9.5v9.5M10 19v-5h4v5"/><path d="M4 19h16"/></symbol>
+    <symbol id="i-coffee" viewBox="0 0 24 24"><path d="M5 8h11v6a4 4 0 0 1-4 4H9a4 4 0 0 1-4-4V8Z"/><path d="M16 10h1.5a2 2 0 0 1 0 4H16M6 21h10"/><path d="M9 5c0-1 .8-1 .8-2M12.5 5c0-1 .8-1 .8-2"/></symbol>
+    <symbol id="i-shop" viewBox="0 0 24 24"><path d="M6 8h12l1 12H5L6 8Z"/><path d="M9 8V6.5a3 3 0 0 1 6 0V8"/></symbol>
+    <symbol id="i-vinyl" viewBox="0 0 24 24"><circle cx="12" cy="12" r="8.5"/><circle cx="12" cy="12" r="2.2"/><path d="M12 6.5a5.5 5.5 0 0 1 5.5 5.5"/></symbol>
+    <symbol id="i-market" viewBox="0 0 24 24"><path d="M9.5 3h5M12 3v2.5"/><path d="M7 7.5c-2 4-2 8 0 11.5h10c2-3.5 2-7.5 0-11.5H7Z"/><path d="M12 19v2.5M9.5 7.5v11.5M14.5 7.5v11.5"/></symbol>
+    <symbol id="i-park" viewBox="0 0 24 24"><path d="M12 21.5v-6"/><path d="M12 15.5c-4.5 0-7-2.5-6-6 .7-2.5 3-5.5 6-6.5 3 1 5.3 4 6 6.5 1 3.5-1.5 6-6 6Z"/></symbol>
+    <symbol id="i-bike" viewBox="0 0 24 24"><circle cx="6" cy="16" r="3.5"/><circle cx="18" cy="16" r="3.5"/><path d="M6 16l4-7h5l3 7M10 9h4M12 9l2 7"/></symbol>
+    <symbol id="i-museum" viewBox="0 0 24 24"><path d="M4 9l8-5 8 5H4Z"/><path d="M6 9v8M10 9v8M14 9v8M18 9v8M4 17h16v3H4Z"/></symbol>
+    <symbol id="i-tower" viewBox="0 0 24 24"><path d="M9 21V9l3-6.5L15 9v12"/><path d="M9 13h6M9 17h6M6 21h12"/></symbol>
+    <symbol id="i-cocktail" viewBox="0 0 24 24"><path d="M4 4h16l-8 9-8-9Z"/><path d="M12 13v7M8 20h8M7 7.5h10"/></symbol>
+    <symbol id="i-food" viewBox="0 0 24 24"><path d="M4 12h16a8 8 0 0 1-16 0Z"/><path d="M9 8.5c0-2 1-2 1-4M13 8.5c0-2 1-2 1-4M5 20h14"/></symbol>
+    <symbol id="i-book" viewBox="0 0 24 24"><path d="M4 5a2 2 0 0 1 2-2h5v16H6a2 2 0 0 0-2 2V5Z"/><path d="M20 5a2 2 0 0 0-2-2h-5v16h5a2 2 0 0 1 2 2V5Z"/></symbol>
+    <symbol id="i-mall" viewBox="0 0 24 24"><path d="M4 20V9l8-5 8 5v11H4Z"/><path d="M9 20v-6h6v6M4 12h16"/></symbol>
+    <symbol id="i-plane" viewBox="0 0 24 24"><path d="M3 13l18-9-5 9 5 9-18-9Z"/><path d="M8 13h8"/></symbol>
+    <symbol id="i-boat" viewBox="0 0 24 24"><path d="M3 15.5h18l-2.2 4.2a2 2 0 0 1-1.8 1.1H7a2 2 0 0 1-1.8-1.1L3 15.5Z"/><path d="M12 15.5V4M12 4l6 4.5-6 2"/></symbol>
+    <symbol id="i-walk" viewBox="0 0 24 24"><circle cx="13" cy="4" r="2"/><path d="M13.5 7.5 10 9.5l-1.2 4 2.2 1.2.6 6.3M13.5 7.5l2.6 1.6 1 3.4 2.4.9M11.6 14.7 8.2 20.9"/></symbol>
+    <symbol id="i-train" viewBox="0 0 24 24"><rect x="5" y="3" width="14" height="14" rx="4.5"/><path d="M5.5 10.5h13"/><circle cx="9.2" cy="13.8" r="1.2" fill="currentColor" stroke="none"/><circle cx="14.8" cy="13.8" r="1.2" fill="currentColor" stroke="none"/><path d="M9 17.5 6.5 21M15 17.5 17.5 21"/></symbol>
+    <symbol id="i-bus" viewBox="0 0 24 24"><path d="M5 4h14a1 1 0 0 1 1 1v12H4V5a1 1 0 0 1 1-1Z"/><path d="M4 11h16M7 17v3M17 17v3"/><circle cx="8" cy="14" r="1" fill="currentColor" stroke="none"/><circle cx="16" cy="14" r="1" fill="currentColor" stroke="none"/></symbol>
+    <symbol id="i-moto" viewBox="0 0 24 24"><circle cx="5.5" cy="17" r="2.8"/><circle cx="18.5" cy="17" r="2.8"/><path d="M8 17l3-6h4.5l2 3.5h3M12 8h4l2.5 3"/></symbol>
+    <symbol id="i-taxi" viewBox="0 0 24 24"><path d="M3.5 15v-2.2l2-4.6A2 2 0 0 1 7.3 7h9.4a2 2 0 0 1 1.8 1.2l2 4.6V15"/><path d="M3.5 15h17M5.5 12.6h13M10 7V5h4v2"/><circle cx="7.5" cy="17.2" r="1.6"/><circle cx="16.5" cy="17.2" r="1.6"/></symbol>
+    <symbol id="i-sun" viewBox="0 0 24 24"><circle cx="12" cy="12" r="4"/><path d="M12 2.5v2.5M12 19v2.5M2.5 12H5M19 12h2.5M5.3 5.3l1.8 1.8M16.9 16.9l1.8 1.8M5.3 18.7l1.8-1.8M16.9 7.1l1.8-1.8"/></symbol>
+    <symbol id="i-card" viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="14" rx="2.5"/><path d="M3 10h18M7 15h4"/></symbol>
+    <symbol id="i-cash" viewBox="0 0 24 24"><rect x="3" y="6" width="18" height="12" rx="2"/><circle cx="12" cy="12" r="2.8"/><path d="M6.5 9.5h.01M17.5 14.5h.01"/></symbol>
+    <symbol id="i-scarf" viewBox="0 0 24 24"><path d="M7 4h10l-1 8H8L7 4Z"/><path d="M8 12l-2 8h5l1-8M16 12l2 8h-5l-1-8"/></symbol>
+    <symbol id="i-pin" viewBox="0 0 24 24"><path d="M12 21.5s-6.5-6.2-6.5-11A6.5 6.5 0 0 1 19 10.5c0 4.8-7 11-7 11Z"/><circle cx="12" cy="10.5" r="2.3"/></symbol>
+    <symbol id="i-check" viewBox="0 0 24 24"><path d="M4.5 12.5l4.5 4.5L19.5 6.5"/></symbol>
+  </defs>
+</svg>
+
+<div class="wrap">
+
+  <section class="cover">
+    <div class="cover-title">
+      <span class="lbl">Field notes · Bangkok · 11–16 Nov 2026</span>
+      <h1>Bangkok Field Notes<span>six days by skytrain, canal boat &amp; ferry</span></h1>
+      <p class="deck">Every day starts and ends at your hotel door. Every arrow between two stops tells you <b>which line, which direction, which exit, what it costs and how long it takes</b>. All 32 places from your list are in here, plus Bang Krachao and a handful of bonus stops that were too close to skip.</p>
+      <div class="stamp-wall">
+        <div class="pass"><span class="lbl">Arrive</span><strong>Wed 11 Nov</strong><small>Suvarnabhumi (BKK)</small></div>
+        <div class="pass"><span class="lbl">Depart</span><strong>Mon 16 Nov</strong><small>Suvarnabhumi (BKK)</small></div>
+        <div class="pass"><span class="lbl">Grab rides</span><strong>0</strong><small>two metered taxis, one dragon</small></div>
+      </div>
+    </div>
+    <aside class="basecamp" aria-label="Base camp">
+      <span class="lbl"><svg class="ic"><use href="#i-home"/></svg> Base camp</span>
+      <h2>Base camp — Pratunam</h2>
+      <p>Phetchaburi Soi 11, Ratchathewi. You are sitting on three transport systems at once, which is why this itinerary barely needs a taxi.</p>
+      <div class="near" id="basecamp-near"></div>
+    </aside>
+  </section>
+
+  <div class="section-head"><span class="lbl">Trail rules · read once, then forget</span></div>
+  <section class="rules" id="rules"></section>
+
+  <nav class="tabs" id="tabs" role="tablist" aria-label="Days"></nav>
+  <main id="days"></main>
+
+  <div class="section-head"><span class="lbl">Roll call · your list, all 32 + 1</span></div>
+  <section class="check" id="check"></section>
+
+  <footer>Timings assume a comfortable pace and Bangkok’s November heat (sunset ≈ 17:47). Prices are Sept 2026 adult rates and can drift a few baht. Rail fares shown are approximate single-journey prices.</footer>
+</div>
+<script>
+/* ============================================================
+   DATA
+   ============================================================ */
+const MODES={
+  walk: {n:'Walk',          bg:'#D9C6A0',fg:'#2B4530',ic:'i-walk'},
+  sky:  {n:'Skywalk',       bg:'#B9C6CE',fg:'#1F2E36',ic:'i-walk'},
+  suk:  {n:'BTS Sukhumvit', bg:'#8CC152',fg:'#1D361D',ic:'i-train'},
+  silom:{n:'BTS Silom',     bg:'#0B6E3A',fg:'#F4EDDF',ic:'i-train'},
+  mrt:  {n:'MRT Blue',      bg:'#1F4E9C',fg:'#F4EDDF',ic:'i-train'},
+  arl:  {n:'Airport Link',  bg:'#B0263A',fg:'#F4EDDF',ic:'i-train'},
+  canal:{n:'Canal boat',    bg:'#2E8B84',fg:'#F4EDDF',ic:'i-boat'},
+  ferry:{n:'River ferry',   bg:'#3F7FAF',fg:'#F4EDDF',ic:'i-boat'},
+  bus:  {n:'Bus 73',        bg:'#D9641E',fg:'#F4EDDF',ic:'i-bus'},
+  moto: {n:'Moto taxi',     bg:'#E8A21C',fg:'#2B2B2B',ic:'i-moto'},
+  taxi: {n:'Metered taxi',  bg:'#C94A85',fg:'#F4EDDF',ic:'i-taxi'},
+  bike: {n:'Bicycle',       bg:'#5E8F4A',fg:'#F4EDDF',ic:'i-bike'},
+  plane:{n:'Flight',        bg:'#4A5A6A',fg:'#F4EDDF',ic:'i-plane'},
+};
+const LL={
+  hotel:[13.7528,100.5372], airport:[13.6900,100.7501],
+  erawanShrine:[13.7442,100.5404], chitlom:[13.7441,100.5432], siamBts:[13.7456,100.5343], siamSq:[13.7446,100.5326],
+  muse:[13.7395,100.5437], samphran:[13.7163,100.2262], watArun:[13.7437,100.4889], kruaApsorn:[13.7540,100.5020],
+  natthaphon:[13.7517,100.4992], watSuthat:[13.7512,100.5010], jedi:[13.7531,100.5054], watSaket:[13.7538,100.5066],
+  localBoys:[13.7381,100.5072], arabica:[13.7377,100.5084], soul:[13.7364,100.5122], oyster:[13.7370,100.5103],
+  jude:[13.7392,100.5100], talatNoi:[13.7333,100.5132], traimit:[13.7378,100.5138], mangkonWat:[13.7428,100.5106],
+  charmgang:[13.7344,100.5152], yaowarat:[13.7401,100.5116],
+  floating:[13.6790,100.5745], greenLung:[13.6952,100.5680], erawanMuseum:[13.6228,100.5918], chumchum:[13.7255,100.5935],
+  pridi:[13.7205,100.5922], emsphere:[13.7290,100.5690], emquartier:[13.7318,100.5695], akara:[13.7435,100.5478],
+  lumphini:[13.7310,100.5415], oneBangkok:[13.7278,100.5468], dusit:[13.7292,100.5362], mahanakhon:[13.7233,100.5285],
+  empire:[13.7218,100.5303], unculture:[13.7245,100.5300], openHouse:[13.7440,100.5468],
+};
+
+const DAYS=[
+/* ---------------- DAY 1 ---------------- */
+{ id:'wed', tab:'Wed 11', n:1, date:'Wed 11 Nov', title:'Touchdown & the Home Turf',
+  best:'Shaking off the flight and learning your <b>15-minute radius</b>. Everything tonight is walkable or one BTS stop away, and it ends with a rooftop drink twenty minutes’ stroll from your bed.',
+  tip:'Buy your Rabbit Card tonight at Siam BTS (฿100 card + ฿200 credit, no passport needed). You’ll ride the BTS about fourteen times this trip and the ticket-machine queue at Siam is the worst in the city.',
+  order:'Suvarnabhumi → Airport Link → <b>Hotel</b> → Erawan Shrine → Chit Lom BTS → skywalk → Siam BTS → Siam Square (dinner) → Speakeasy rooftop → <b>Hotel</b>',
+  tally:[['Transport','~฿80'],['Tickets','฿0'],['On foot','~4 km']],
+  stops:[
+   {base:true,ic:'i-plane',n:'Suvarnabhumi Airport',short:'Suvarnabhumi · 28 km',t:'14:10',tl:'Land',ll:LL.airport,off:'E',
+    p:'Immigration and bags ≈ 60 min. Grab a SIM at the arrivals hall (AIS or TrueMove, ~฿300 for 8 days) and pull baht from an ATM <b>before</b> heading down to the train.'},
+   {base:true,ic:'i-home',n:'Base camp — Pratunam',short:'Base',t:'16:05',tl:'Check in',ll:LL.hotel,lbl:'l',
+    p:'Drop bags, shower, change into sandals. Out the door by 17:30 — the shrine is prettier at dusk.',
+    leg:{total:'~40 min',cost:'฿40',hops:[
+      {m:'walk',txt:'Follow <b>“Train to City”</b> signs down to <b>B1</b>',meta:'3 min'},
+      {m:'arl',txt:'City Line → <b>Ratchaprarop</b> (6 stops). Tap a contactless card at the gate.',meta:'28 min · ฿40 · every 15 min'},
+      {m:'walk',txt:'Exit → Ratchaprarop Rd → left into <b>Phetchaburi Soi 11</b>',meta:'6 min'}]}},
+   {ref:29,ic:'i-temple',n:'Erawan Shrine',t:'17:50',stay:'25 min',cost:'Free',hours:'06:00–22:00 · dancers on request',ll:LL.erawanShrine,lbl:'l',
+    p:'Four-faced Brahma on the busiest corner in the city. A ฿50 garland-and-incense set at the gate is the done thing; if someone has paid the dancers, you get the show for nothing.',
+    leg:{total:'18 min',cost:'฿0',hops:[
+      {m:'walk',txt:'South down <b>Ratchadamri Rd</b> past Pratunam market and Big C to the Ratchaprasong corner',meta:'18 min'},
+      {m:'suk',alt:true,txt:'Too hot? BTS Ratchathewi → <b>Chit Lom</b> (2 stops) then 3 min walk',meta:'~10 min · ฿20'}]}},
+   {ref:'30 · 28',ic:'i-walk',n:'Chit Lom BTS & the skywalk to Siam',short:'Chit Lom',t:'18:15',stay:'15 min',cost:'Free',ll:LL.chitlom,lbl:'r',
+    p:'Climb up to Chit Lom station and take the covered <b>R-Walk skywalk</b> west, past Gaysorn and CentralWorld, straight into Siam BTS. It is how locals cross Ratchaprasong without touching the pavement.',
+    leg:{total:'4 min',cost:'฿0',hops:[{m:'walk',txt:'Across the intersection to the station stairs',meta:'4 min'}]}},
+   {ref:27,ic:'i-food',n:'Siam Square',t:'18:35',stay:'1 h 40',cost:'~฿400 for two',hours:'shops till 22:00',ll:LL.siamSq,lbl:'l',
+    p:'Bangkok’s teen-fashion grid, rebuilt around Siam Square One and the Lido Connect arcade. Dinner here.',
+    tips:['<b>Somtam Nua</b> (Siam Sq Soi 5): som tam and fried chicken, ~฿120 a plate.','<b>Inter</b> (Soi 9): old-school Thai plates since 1981, nothing over ฿150.','Sois 2–7 for indie Thai streetwear; Siam Sq One roof for a breeze.'],
+    leg:{total:'12 min',cost:'฿0',hops:[{m:'sky',txt:'Skywalk Chit Lom → <b>Siam BTS</b>; down the Exit 2 stairs into the Square',meta:'12 min'}]}},
+   {ref:24,ic:'i-cocktail',n:'The Speakeasy Rooftop Bar, Hotel Muse',short:'Speakeasy',t:'20:30',stay:'1 h 15',cost:'cocktails ~฿380+',hours:'17:00–02:00 · DJ Thu–Sat from 20:30',ll:LL.muse,lbl:'r',
+    p:'Two floors of 1920s Europe on the 24th–25th: a retractable-roof terrace below, an open-air Secret Garden and glass domes above. Smart-casual; a Negroni and the skyline and then bed.',
+    leg:{total:'~10 min',cost:'฿17',hops:[
+      {m:'suk',txt:'Siam → <b>Chit Lom</b> (1 stop, toward Kheha)',meta:'2 min · ฿17'},
+      {m:'walk',txt:'Exit 4 → south down <b>Lang Suan Rd</b>; Hotel Muse on your right, lifts to 24F',meta:'7 min'}]}},
+   {base:true,ic:'i-home',n:'Back to base',short:'Hotel',t:'22:00',tl:'Home',ll:LL.hotel,lbl:false,
+    p:'Sleep. Tomorrow is the early one.',
+    leg:{total:'20 min',cost:'฿0',hops:[
+      {m:'walk',txt:'Lang Suan → Ratchadamri north → left on Phetchaburi → <b>Soi 11</b>',meta:'20 min'},
+      {m:'suk',alt:true,txt:'Or Chit Lom → <b>Ratchathewi</b> (2 stops) + 6 min walk',meta:'~10 min · ฿20'}]}},
+  ]},
+
+/* ---------------- DAY 2 ---------------- */
+{ id:'thu', tab:'Thu 12', n:2, date:'Thu 12 Nov', title:'Dragons, the River & the Old Town',
+  best:'The two temple photographs you came for, then the Old Town on foot with the <b>best plate of crab in Bangkok</b> in the middle. Long day, early start, canal boat home.',
+  tip:'This is the one day with taxis, because no train goes within 12 km of the dragon. Insist on the meter (“meter, ka”); about ฿160 each way from MRT Lak Song. If a driver refuses, the next one won’t.',
+  order:'<b>Hotel</b> → BTS → MRT → taxi → Wat Samphran → taxi → MRT → Wat Arun → ferry → Krua Apsorn → Natthaphon → Wat Suthat → JEDI → Wat Saket (sunset) → canal boat → <b>Hotel</b>',
+  tally:[['Transport','~฿560'],['Tickets','฿400–500'],['On foot','~6 km']],
+  stops:[
+   {base:true,ic:'i-home',n:'Base camp — Pratunam',short:'Base',t:'07:00',tl:'Leave',ll:LL.hotel,lbl:'r',
+    p:'Coffee to go. Temples want shoulders and knees covered — pack the scarf.'},
+   {ref:1,ic:'i-temple',n:'Wat Samphran, the Dragon Temple',short:'Wat Samphran · 38 km',t:'08:35',stay:'1 h',cost:'Free · donation',hours:'06:00–18:00',ll:LL.samphran,off:'W',
+    p:'A 17-storey pink cylinder with an 80-metre green dragon coiled around it, in a sleepy Nakhon Pathom suburb. When the door is open you climb up <b>inside the dragon’s body</b> to the top.',
+    tips:['Working monastery — modest dress, quiet voices.','Morning light hits the dragon head-on from the car-park side.'],
+    leg:{total:'~1 h 30',cost:'~฿245',hops:[
+      {m:'walk',txt:'Hotel → <b>BTS Ratchathewi</b>',meta:'6 min'},
+      {m:'suk',txt:'Ratchathewi → <b>Siam</b> (1 stop); cross the platform',meta:'2 min'},
+      {m:'silom',txt:'Siam → <b>Bang Wa</b>, the last stop (13 stops)',meta:'30 min · ~฿59'},
+      {m:'mrt',txt:'Covered link to MRT Bang Wa → <b>Lak Song</b> (4 stops, toward Lak Song)',meta:'9 min · ~฿24'},
+      {m:'taxi',txt:'Lak Song Exit 2 → <b>“Wat Samphran, Sam Phran”</b>. The only leg of the trip no rail reaches.',meta:'22 min · ~฿160'},
+      {m:'bus',alt:true,txt:'Purist route: bus 84 (AC) from Bang Wa toward Om Noi, then a songthaew the last 4 km — adds ~45 min',meta:'~฿25 + ฿20'}]}},
+   {ref:2,ic:'i-temple',n:'Wat Arun, Temple of Dawn',short:'Wat Arun',t:'10:45',stay:'1 h',cost:'฿200',hours:'08:00–18:00',ll:LL.watArun,lbl:'l',
+    p:'Porcelain-mosaic prang on the west bank; you can climb the first two terraces. Late morning the light is flat but the crowds are thinner than at sunset, and your ticket includes a water.',
+    tips:['Thai-dress rental at the gate (~฿200–500) if you want the photo.','Best angle: from the river steps on the left as you exit.'],
+    leg:{total:'~1 h 05',cost:'~฿190',hops:[
+      {m:'taxi',txt:'Back to <b>MRT Lak Song</b>',meta:'22 min · ~฿160'},
+      {m:'mrt',txt:'Lak Song → <b>Itsaraphap</b> (7 stops, toward Tha Phra / Hua Lamphong)',meta:'15 min · ~฿30'},
+      {m:'walk',txt:'Exit 2 → left along Itsaraphap Rd → right on <b>Wang Doem Rd</b> until the prang appears',meta:'12 min'}]}},
+   {ref:4,ic:'i-food',n:'Krua Apsorn @Dinso',short:'Krua Apsorn',t:'12:25',stay:'1 h',cost:'~฿700 for two',hours:'Mon–Sat 10:30–19:30 · closed Sun',ll:LL.kruaApsorn,lbl:'t',
+    p:'Bib Gourmand, royal-household-approved, unchanged for decades. Order the <b>fluffy crab omelette</b> (khai jiao poo), stir-fried crab in yellow curry, and the tom yum. No lunch reservations — be there by 12:30.',
+    leg:{total:'~30 min',cost:'฿5',hops:[
+      {m:'ferry',txt:'Wat Arun pier → <b>Tha Tien</b>, pay ฿5 cash at the turnstile',meta:'4 min · ฿5'},
+      {m:'walk',txt:'Maha Rat Rd north past the Grand Palace wall → Na Phra Lan → Ratchadamnoen → <b>Dinso Rd</b>',meta:'22 min'},
+      {m:'taxi',alt:true,txt:'If the sun is winning: tuk-tuk from Tha Tien, agree ฿80–100 first',meta:'8 min'}]}},
+   {ref:5,ic:'i-food',n:'Natthaphon Coconut Ice Cream',short:'Natthaphon',t:'13:35',stay:'20 min',cost:'฿30–50',hours:'Mon–Sat 09:00–17:00',ll:LL.natthaphon,lbl:'l',
+    p:'Third-generation coconut ice cream from the same shophouse since 1947, on the loveliest old square in the city. Cup, with sticky rice, sweetcorn and roasted peanuts on top.',
+    leg:{total:'5 min',cost:'฿0',hops:[{m:'walk',txt:'Dinso Rd → <b>Phraeng Phuthon</b> square',meta:'5 min'}]}},
+   {bonus:true,ic:'i-temple',n:'Wat Suthat & the Giant Swing',short:'Wat Suthat',t:'14:00',stay:'40 min',cost:'฿100',hours:'08:30–20:00',ll:LL.watSuthat,lbl:'b',
+    p:'The calm one. The best murals in the Old Town and almost nobody inside; the red Giant Swing out front is free and 21 metres tall.',
+    leg:{total:'4 min',cost:'฿0',hops:[{m:'walk',txt:'Across the square to the swing',meta:'4 min'}]}},
+   {ref:21,ic:'i-coffee',n:'JEDI Café & Bar',short:'JEDI',t:'14:55',stay:'1 h 10',cost:'~฿150',hours:'daytime into evening',ll:LL.jedi,lbl:false,
+    p:'Air-conditioned siesta on a canal terrace around the corner from the Golden Mount. Jedi Latte, coconut pie, feet up until the sun drops a bit.',
+    leg:{total:'12 min',cost:'฿0',hops:[{m:'walk',txt:'East along <b>Bamrung Mueang Rd</b> (the Buddha-statue supply street) → right on Boripat Rd',meta:'12 min'}]}},
+   {ref:20,ic:'i-temple',n:'Wat Saket, the Golden Mount',short:'Golden Mount',t:'16:15',stay:'1 h 30',cost:'฿100',hours:'07:30–19:00',ll:LL.watSaket,lbl:'r',
+    p:'344 gentle spiral steps past bells and gongs to a 360° terrace over the Old Town. Be on top by <b>17:15</b>; sunset is 17:47 and the chedi glows as the city lights come on.',
+    tips:['Ring every bell on the way up — it is expected.','Toilets and cold water at the base.'],
+    leg:{total:'4 min',cost:'฿0',hops:[{m:'walk',txt:'Boripat Rd → the temple gate',meta:'4 min'}]}},
+   {base:true,ic:'i-home',n:'Back to base by canal boat',short:'Hotel',t:'18:35',tl:'Home',ll:LL.hotel,lbl:false,
+    p:'Duck when the boys shout — a tarp comes up against splash. Dinner: Pratunam street food along Phetchaburi Soi 19 or the Platinum Mall food court.',
+    leg:{total:'~26 min',cost:'~฿18',hops:[
+      {m:'walk',txt:'Down to <b>Phanfa Lilat pier</b>, right below the temple',meta:'4 min'},
+      {m:'canal',txt:'Golden Mount Line → <b>Pratunam</b>, the last stop. Pay on board; runs till 20:30 weekdays.',meta:'15 min · ~฿18'},
+      {m:'walk',txt:'Pratunam pier → Ratchaprarop → <b>Phetchaburi Soi 11</b>',meta:'7 min'}]}},
+  ]},
+
+/* ---------------- DAY 3 ---------------- */
+{ id:'fri', tab:'Fri 13', n:3, date:'Fri 13 Nov', title:'Song Wat, Talat Noi & Chinatown After Dark',
+  best:'Coffee, vintage shops and riverside shophouses by day, then the <b>best street-food night in Asia</b>. Almost entirely on foot once you are there — eight of your list in one square kilometre.',
+  tip:'Cash day. The Song Wat cafés take cards, but Talat Noi, the bus and every Yaowarat stall are cash or Thai QR. Bring ~฿2,000 in small notes. Book Charmgang this week — it seats about thirty.',
+  order:'<b>Hotel</b> → bus 73 → Local Boys → % Arabica → Soul Songwat → Oyster & Things → Jude Records → Talat Noi → Wat Traimit → Wat Mangkon → Charmgang → Yaowarat → MRT → BTS → <b>Hotel</b>',
+  tally:[['Transport','~฿120'],['Tickets','฿100–200'],['On foot','~6.5 km']],
+  stops:[
+   {base:true,ic:'i-home',n:'Base camp — Pratunam',short:'Base',t:'08:50',tl:'Leave',ll:LL.hotel,lbl:'r',
+    p:'No rush today; the first café opens at 08:30 and nothing else before 10:00.'},
+   {ref:6,ic:'i-coffee',n:'Local Boys Coffee Co.',short:'Local Boys',t:'09:40',stay:'40 min',cost:'~฿150',hours:'08:30–18:00',ll:LL.localBoys,lbl:'l',
+    p:'Orange-signed shophouse down a lane of wholesalers; neon and graffiti inside. The <b>peanut-butter coffee in a can</b> is the order.',
+    leg:{total:'~45 min',cost:'~฿20',hops:[
+      {m:'walk',txt:'To the bus stop <b>opposite Indra Square</b> on Ratchaprarop Rd',meta:'4 min'},
+      {m:'bus',txt:'Bus 73 (orange, AC) south → off at <b>Chaloem Buri junction / Yaowarat</b>. Say “Yaowarat” to the conductor.',meta:'30–35 min · ~฿20 cash'},
+      {m:'walk',txt:'South down Yaowarat Rd → <b>Song Wat Rd</b>',meta:'7 min'},
+      {m:'mrt',alt:true,txt:'Rail fallback if no 73 in ten minutes: BTS Ratchathewi → Siam → Sala Daeng, walk to MRT Silom → <b>Wat Mangkon</b> Exit 1, 10 min walk',meta:'~40 min · ~฿70'}]}},
+   {ref:13,ic:'i-coffee',n:'% Arabica × adidas Originals, Song Wat',short:'% Arabica',t:'10:25',stay:'30 min',cost:'~฿150',hours:'09:00–19:30',ll:LL.arabica,lbl:false,
+    p:'Yes — a coffee bar inside an adidas store inside a restored Chinese shophouse. Take the cup upstairs to the <b>panoramic river window</b>.',
+    leg:{total:'3 min',cost:'฿0',hops:[{m:'walk',txt:'Along Song Wat',meta:'3 min'}]}},
+   {ref:11,ic:'i-shop',n:'Soul Songwat & House of Vintage',short:'Soul Songwat',t:'11:00',stay:'50 min',cost:'Free to browse',hours:'10:00–22:00',ll:LL.soul,lbl:'b',
+    p:'A row of 1900s riverside warehouses turned into shops and cafés. <b>House of Vintage</b> on the upper floors: watches, denim, toys. Clay Circle ceramics downstairs is the bonus.',
+    leg:{total:'5 min',cost:'฿0',hops:[{m:'walk',txt:'East along Song Wat to No. 1300',meta:'5 min'}]}},
+   {ref:7,ic:'i-shop',n:'Oyster & Things @songwat',short:'Oyster & Things',t:'11:55',stay:'30 min',cost:'browse',hours:'~11:00–19:00',ll:LL.oyster,lbl:false,
+    p:'1970s-mermaid home goods: shell cutlery, ceramic plates, tiny knick-knacks. Their newer Thonglor shop is bigger; this is the original building.',
+    leg:{total:'3 min',cost:'฿0',hops:[{m:'walk',txt:'Back west to No. 1194',meta:'3 min'}]}},
+   {ref:32,ic:'i-vinyl',n:'Get Back and Jude Records',short:'Jude Records',t:'12:30',stay:'30 min',cost:'browse',hours:'11:00–20:00',ll:LL.jude,lbl:'r',
+    p:'Hidden record shop: ’60s rock, Britpop, disco, Thai alternative, and a wall of first-pressing 7-inches. Records, tapes, CDs and a drink while you dig.',
+    leg:{total:'5 min',cost:'฿0',hops:[{m:'walk',txt:'North to <b>Yaowaphanit Rd</b>, No. 399',meta:'5 min'}]}},
+   {ref:10,ic:'i-pin',n:'Talat Noi',t:'13:15',stay:'2 h 30',cost:'So Heng Tai ฿100 incl. drink',hours:'Hong Sieng Kong 10:00–20:00',ll:LL.talatNoi,lbl:'l',
+    p:'The old Hokkien quarter: rusting engine parts, shrines, street art on Soi Wanit 2, the famous Fiat 500 in the alley. Late lunch at <b>Hong Sieng Kong</b>, a riverside café built into 200-year-old ruins.',
+    tips:['<b>So Heng Tai Mansion</b>: 200-year-old courtyard house with a diving pool in the middle; ฿100 with a drink.','Holy Rosary Church (1897) at the river end; Chinese shrine Chow Sue Kong nearby.'],
+    leg:{total:'12 min',cost:'฿0',hops:[{m:'walk',txt:'East along Song Wat → Charoen Krung Soi 22 → into the lanes',meta:'12 min'}]}},
+   {bonus:true,ic:'i-temple',n:'Wat Traimit, the Golden Buddha',short:'Wat Traimit',t:'16:00',stay:'45 min',cost:'฿100',hours:'08:00–17:00',ll:LL.traimit,lbl:'r',
+    p:'5.5 tonnes of solid gold hidden under plaster for 200 years, until a crane dropped it in 1955. Fills the gap before dinner perfectly.',
+    leg:{total:'10 min',cost:'฿0',hops:[{m:'walk',txt:'Charoen Krung west → <b>Traimit Rd</b>',meta:'10 min'}]}},
+   {bonus:true,ic:'i-temple',n:'Wat Mangkon Kamalawat',short:'Wat Mangkon',t:'17:00',stay:'30 min',cost:'Free',hours:'06:00–18:00',ll:LL.mangkonWat,lbl:'r',
+    p:'Chinatown’s main Chinese temple — literally the <b>Dragon Lotus Temple</b>, so you get two dragon temples this trip. Incense clouds, red lanterns, gold leaf.',
+    leg:{total:'8 min',cost:'฿0',hops:[{m:'walk',txt:'North across Yaowarat → Charoen Krung',meta:'8 min'}]}},
+   {ref:8,ic:'i-food',n:'Charmgang',t:'18:00',stay:'1 h 30',cost:'~฿1,500 for two',hours:'Mon–Fri 18:00–21:30 · Sat–Sun also 12:00–14:00',ll:LL.charmgang,lbl:'r',
+    p:'Michelin Bib Gourmand curry shop from three ex-Nahm chefs. Southern crab curry, smoked-duck red curry, grilled pork jowl with the house relish. <b>Reserve</b> on SevenRooms or +66 98 882 3251.',
+    leg:{total:'12 min',cost:'฿0',hops:[{m:'walk',txt:'Back south-east to <b>Soi Charoen Krung 35</b>, No. 14',meta:'12 min'}]}},
+   {ref:9,ic:'i-market',n:'Chinatown night market, Yaowarat',short:'Yaowarat',t:'19:45',stay:'1 h 30',cost:'~฿300 for two',hours:'18:00–midnight',ll:LL.yaowarat,lbl:'t',
+    p:'The stalls fire up at dusk. <b>Guay Jub Ouan Pochana</b> (peppery rolled noodles), Nai Ek Roll Noodle, T&K Seafood (the green shirts), Sweettime toast, bird’s-nest soup. Cash only; sharpen your elbows.',
+    leg:{total:'10 min',cost:'฿0',hops:[{m:'walk',txt:'Charoen Krung → <b>Yaowarat Rd</b>',meta:'10 min'}]}},
+   {base:true,ic:'i-home',n:'Back to base',short:'Hotel',t:'22:25',tl:'Home',ll:LL.hotel,lbl:false,
+    p:'The MRT runs till midnight; the last BTS from Siam is around 00:00.',
+    leg:{total:'~40 min',cost:'~฿55',hops:[
+      {m:'walk',txt:'To <b>MRT Wat Mangkon</b> Exit 1',meta:'5 min'},
+      {m:'mrt',txt:'Wat Mangkon → <b>Silom</b> (3 stops, toward Lak Song)',meta:'7 min · ~฿24'},
+      {m:'walk',txt:'Up to <b>BTS Sala Daeng</b>',meta:'3 min'},
+      {m:'silom',txt:'Sala Daeng → <b>Siam</b> (2 stops); cross the platform',meta:'5 min'},
+      {m:'suk',txt:'Siam → <b>Ratchathewi</b> (1 stop, toward Khu Khot)',meta:'2 min · ~฿30 for both'},
+      {m:'walk',txt:'Phaya Thai Rd → Phetchaburi → Soi 11',meta:'6 min'},
+      {m:'taxi',alt:true,txt:'Done in? A metered taxi from Yaowarat is ~฿90 and 20 min at this hour',meta:''}]}},
+  ]},
+
+/* ---------------- DAY 4 ---------------- */
+{ id:'sat', tab:'Sat 14', n:4, date:'Sat 14 Nov', title:'The Green Lung & the Long Green Line',
+  best:'Cycling through jungle before the heat, a <b>three-headed elephant</b>, then Sukhumvit’s slick side. The whole day rides one BTS line south and back north — the light-green line is your spine.',
+  tip:'Start on time. The Bang Krachao trails are shaded but the ride back at noon is not, and the floating market packs up by 16:00. Flagging by Pridi? Skip straight to Emsphere — Akara’s show is the non-negotiable.',
+  order:'<b>Hotel</b> → BTS to Bang Na → moto → ferry → floating market → cycling loop → ferry → moto → BTS → Erawan Museum → BTS → ChumChum → Pridi → BTS → Emsphere → Emquartier → BTS → Akara → BTS → <b>Hotel</b>',
+  tally:[['Transport','~฿340'],['Tickets','฿400 + bikes ฿150'],['Cycling','~12 km'],['On foot','~4 km']],
+  stops:[
+   {base:true,ic:'i-home',n:'Base camp — Pratunam',short:'Base',t:'07:15',tl:'Leave',ll:LL.hotel,lbl:'r',
+    p:'Sunscreen, hat, ฿500 in small notes for the ferry, bikes and breakfast.'},
+   {ref:'BK',ic:'i-market',n:'Bang Krachao: Bang Nam Phueng Floating Market',short:'Floating market',t:'08:25',stay:'1 h',cost:'breakfast ~฿200',hours:'Sat–Sun 08:00–16:00',ll:LL.floating,lbl:'b',
+    p:'Canal-side stalls rather than boats: khanom krok, grilled river fish, coconut everything, orchids. <b>Rent the bikes here</b> (฿100–150/day, ID as deposit) and eat before you ride.',
+    leg:{total:'~1 h 05',cost:'~฿105',hops:[
+      {m:'walk',txt:'Hotel → <b>BTS Ratchathewi</b>',meta:'6 min'},
+      {m:'suk',txt:'Ratchathewi → <b>Bang Na</b> (14 stops, toward Kheha). Sit on the left for the Em towers.',meta:'30 min · ~฿59'},
+      {m:'moto',txt:'Exit 1 → orange-vest stand → “<b>Wat Bang Na Nok</b>” pier. Prices on the board.',meta:'7 min · ฿40'},
+      {m:'walk',alt:true,txt:'Or walk: Sukhumvit toward Udom Suk, left down Sanphawut Rd to the river',meta:'30 min'},
+      {m:'ferry',txt:'Wat Bang Na Nok → <b>Wat Bang Nam Phueng Nok</b>; ฿6 with a bike',meta:'5 min · ฿5 · every ~15 min'}]}},
+   {ref:'BK',ic:'i-bike',n:'Bang Krachao by bicycle — the “Green Lung”',short:'Green Lung loop',t:'09:30',stay:'3 h',cost:'bike ฿100–150',hours:'Sri Nakhon Khuean Khan Park 05:00–19:00',ll:LL.greenLung,lbl:'r',
+    p:'12 km of near-empty lanes and raised concrete boardwalks through nipa palms and coconut groves, river on three sides. Loop: market → <b>Sri Nakhon Khuean Khan Park</b> (bird tower, lake) → the botanical garden → back along the canals.',
+    tips:['Stay on the green-painted trails; Google will route you through private orchards.','Return the bikes by 12:30. Bring water — there are shrine cafés but they are spaced out.'],
+    leg:{total:'25 min riding',cost:'฿0',hops:[{m:'bike',txt:'Market → the park entrance on the elevated trail',meta:'25 min'}]}},
+   {ref:3,ic:'i-museum',n:'The Erawan Museum',t:'13:35',stay:'1 h 30',cost:'฿400',hours:'09:00–18:00 · last entry 17:00',ll:LL.erawanMuseum,lbl:'l',
+    p:'A 250-tonne three-headed copper elephant standing on a museum. Stained-glass zodiac ceiling, then a spiral staircase <b>up into the belly of the beast</b>. Lunch at the museum café or the noodle stalls at the gate.',
+    leg:{total:'~50 min',cost:'~฿75',hops:[
+      {m:'bike',txt:'Back to the pier; hand the bikes in',meta:'15 min'},
+      {m:'ferry',txt:'Wat Bang Nam Phueng Nok → <b>Wat Bang Na Nok</b>',meta:'5 min · ฿5'},
+      {m:'moto',txt:'Pier → <b>BTS Bang Na</b>',meta:'7 min · ฿40'},
+      {m:'suk',txt:'Bang Na → <b>Chang Erawan</b> (4 stops, toward Kheha)',meta:'9 min · ~฿30'},
+      {m:'walk',txt:'Exit 2 — the elephant is unmissable',meta:'5 min'}]}},
+   {ref:16,ic:'i-coffee',n:'ChumChum Grocery',t:'15:55',stay:'45 min',cost:'~฿200',hours:'10:00–18:00 · closed Wed',ll:LL.chumchum,lbl:'r',
+    p:'A vintage Disney and tin-toy “grocery” downstairs, retro café upstairs (2F, Unform Building, Pridi 31). Carrot cake, Thai milk tea, and roughly four hundred Mickeys.',
+    leg:{total:'~40 min',cost:'~฿77',hops:[
+      {m:'suk',txt:'Chang Erawan → <b>Phra Khanong</b> (9 stops, toward Khu Khot)',meta:'20 min · ~฿47'},
+      {m:'moto',txt:'Exit 3 → up <b>Pridi Banomyong</b> (Sukhumvit 71) to Soi 31',meta:'6 min · ฿30'},
+      {m:'walk',alt:true,txt:'Or walk up Pridi — flat, leafy, 20 min',meta:''}]}},
+   {ref:15,ic:'i-coffee',n:'Pridi Banomyong, the café soi',short:'Pridi',t:'16:45',stay:'45 min',cost:'Free',hours:'cafés till ~18:00',ll:LL.pridi,lbl:'r',
+    p:'Bangkok’s café kids live here: low-rise sois of roasters, bakeries and dessert bars between Pridi 14 and 31. Walk south, drift into whichever has a queue, and end at Sukhumvit 71 for the BTS.',
+    leg:{total:'walking',cost:'฿0',hops:[{m:'walk',txt:'South down Pridi, soi by soi',meta:'~1.5 km'}]}},
+   {ref:18,ic:'i-mall',n:'Emsphere',t:'18:00',stay:'1 h',cost:'—',hours:'10:00–22:00',ll:LL.emsphere,lbl:false,
+    p:'The newest of the three Ems: <b>EM Market</b> food hall on the ground floor, Tribeca rooftop bar up top for a post-sunset drink over Benjasiri Park.',
+    leg:{total:'~15 min',cost:'~฿26',hops:[
+      {m:'walk',txt:'To <b>BTS Phra Khanong</b>',meta:'8 min'},
+      {m:'suk',txt:'Phra Khanong → <b>Phrom Phong</b> (3 stops, toward Khu Khot)',meta:'7 min · ~฿26'},
+      {m:'walk',txt:'Exit 6 → straight in',meta:'1 min'}]}},
+   {ref:17,ic:'i-mall',n:'Emquartier',t:'19:05',stay:'1 h 15',cost:'dinner ~฿800 for two',hours:'10:00–22:00',ll:LL.emquartier,lbl:'t',
+    p:'The <b>Helix</b>: nine floors of restaurants spiralling round a hanging garden and an indoor waterfall. Dinner here — Greyhound Café or Roast if you want a sure thing.',
+    leg:{total:'3 min',cost:'฿0',hops:[{m:'sky',txt:'Skybridge across Sukhumvit',meta:'3 min'}]}},
+   {ref:25,ic:'i-cocktail',n:'Akara Sky Hanuman',short:'Akara',t:'20:35',stay:'1 h 30',cost:'cocktails ~฿400+',hours:'17:00–01:00 · show from ~20:00',ll:LL.akara,lbl:'r',
+    p:'The bar is inside the open mouth of a giant white <b>Hanuman</b> on the 61st floor of One City Centre. Projection-mapped Thai dance and muay thai shows, a rooftop “sky night market” with old-school street games, and Bangkok Reflection — the mirrored observation room. Check the show board; you may catch the second set.',
+    leg:{total:'~12 min',cost:'~฿26',hops:[
+      {m:'suk',txt:'Phrom Phong → <b>Ploen Chit</b> (3 stops, toward Khu Khot)',meta:'6 min · ~฿26'},
+      {m:'sky',txt:'Skywalk from Ploen Chit straight into <b>One City Centre</b>; lifts to 61F',meta:'4 min'}]}},
+   {base:true,ic:'i-home',n:'Back to base',short:'Hotel',t:'22:15',tl:'Home',ll:LL.hotel,lbl:false,
+    p:'Longest day done. Tomorrow starts at 09:30.',
+    leg:{total:'~12 min',cost:'~฿26',hops:[
+      {m:'suk',txt:'Ploen Chit → <b>Ratchathewi</b> (3 stops, toward Khu Khot)',meta:'6 min · ~฿26'},
+      {m:'walk',txt:'Phaya Thai Rd → Phetchaburi → Soi 11',meta:'6 min'},
+      {m:'walk',alt:true,txt:'Or walk the whole way up Ratchaprarop',meta:'22 min'}]}},
+  ]},
+
+/* ---------------- DAY 5 ---------------- */
+{ id:'sun', tab:'Sun 15', n:5, date:'Sun 15 Nov', title:'Parks, Roof Gardens & the Sathorn Skyline',
+  best:'A slow green morning around Lumphini, then <b>the highest dinner of your life</b>. Krua Apsorn and the ice-cream shop are shut on Sundays — that is why they were Thursday.',
+  tip:'Two rooftops and a skywalk means dress codes: Mahanakhon is anything; the EA rooftop is smart-casual (no shorts or flip-flops after 18:00). It is a park day, not a hike — wear the nice thing all day.',
+  order:'<b>Hotel</b> → BTS → Lumphini Park → One Bangkok → Central Park → Roof Park → BTS → <b>Hotel reset</b> → BTS → Mahanakhon (sunset) → Le Du Kaan / Nobu → Unculture → BTS → <b>Hotel</b>',
+  tally:[['Transport','~฿130'],['Tickets','฿1,200'],['On foot','~6 km']],
+  stops:[
+   {base:true,ic:'i-home',n:'Base camp — Pratunam',short:'Base',t:'09:30',tl:'Leave',ll:LL.hotel,lbl:'r',
+    p:'Book the Mahanakhon 17:30 slot and the EA dinner table before you leave, if you have not already.'},
+   {bonus:true,ic:'i-park',n:'Lumphini Park',t:'10:00',stay:'35 min',cost:'Free',hours:'04:30–22:00',ll:LL.lumphini,lbl:'l',
+    p:'Sunday-morning tai chi, aerobics with a boombox, and 2-metre <b>monitor lizards</b> ambling past the lake. Cut diagonally north-east; you come out at the Witthayu / Rama IV corner.',
+    leg:{total:'~20 min',cost:'~฿30',hops:[
+      {m:'walk',txt:'Hotel → <b>BTS Ratchathewi</b>',meta:'6 min'},
+      {m:'suk',txt:'Ratchathewi → <b>Siam</b> (1 stop); cross the platform',meta:'2 min'},
+      {m:'silom',txt:'Siam → <b>Sala Daeng</b> (2 stops, toward Bang Wa)',meta:'5 min · ~฿30'},
+      {m:'walk',txt:'Exit 4 → into the park at the Rama IV gate',meta:'3 min'}]}},
+   {ref:31,ic:'i-mall',n:'One Bangkok',t:'10:40',stay:'1 h 35',cost:'brunch ~฿600',hours:'10:00–22:00',ll:LL.oneBangkok,lbl:'r',
+    p:'Thailand’s biggest development: <b>Parade</b> (retail), The Storeys (indie shops), Wireless House (heritage). Brunch in Parade’s ground-floor food quarter; all of it is air-conditioned.',
+    leg:{total:'12 min',cost:'฿0',hops:[
+      {m:'walk',txt:'Through the park → Witthayu Rd → the <b>Parade</b> entrance',meta:'12 min'},
+      {m:'mrt',alt:true,txt:'Or MRT Lumphini Exit 1 → Parade B1 directly',meta:''}]}},
+   {ref:12,ic:'i-mall',n:'Central Park at Dusit Central Park',short:'Central Park',t:'12:30',stay:'1 h',cost:'lunch',hours:'10:00–22:00',ll:LL.dusit,lbl:'b',
+    p:'The brand-new mall (opened Sept 2025) on the Silom–Rama IV corner where the old Dusit Thani hotel stood. Lunch here — the food floors face the park.',
+    leg:{total:'15 min',cost:'฿0',hops:[
+      {m:'walk',txt:'West along <b>Rama IV</b>, park on your left',meta:'15 min'},
+      {m:'mrt',alt:true,txt:'Or MRT Lumphini → <b>Silom</b> (1 stop), Exit 2',meta:'~5 min · ฿17'}]}},
+   {ref:19,ic:'i-park',n:'Suan Dusit Arun Roof Park',short:'Roof Park',t:'13:45',stay:'1 h',cost:'Free',hours:'06:00–22:00',ll:LL.dusit,lbl:false,
+    p:'Thailand’s largest rooftop park: 11,200 m² of native trees, water features and lawns seven storeys up, looking straight over Lumphini to the towers you will be standing on tonight.',
+    leg:{total:'5 min',cost:'฿0',hops:[{m:'walk',txt:'Escalators through the mall to the roof level',meta:'5 min'}]}},
+   {base:true,ic:'i-home',n:'Hotel reset (optional siesta)',short:'Hotel',t:'15:15',tl:'Reset',ll:LL.hotel,lbl:false,
+    p:'Shower, change into something rooftop-worthy. Back out the door at <b>16:45</b>.',
+    leg:{total:'~18 min',cost:'~฿30',hops:[
+      {m:'walk',txt:'To <b>BTS Sala Daeng</b>',meta:'8 min'},
+      {m:'silom',txt:'Sala Daeng → <b>Siam</b> (2 stops)',meta:'5 min'},
+      {m:'suk',txt:'Siam → <b>Ratchathewi</b> (1 stop)',meta:'2 min · ~฿30'},
+      {m:'walk',txt:'To the hotel',meta:'6 min'}]}},
+   {ref:22,ic:'i-tower',n:'King Power Mahanakhon SkyWalk',short:'Mahanakhon',t:'17:25',stay:'1 h 35',cost:'฿1,200 sunset ticket',hours:'10:00–00:00 · last entry 18:30',ll:LL.mahanakhon,lbl:'l',
+    p:'Book the <b>17:30 SkyWalk + SkyVerse</b> slot online. 74F indoor deck, then 78F: the glass tray over a 314-metre drop and the open-air rooftop for sunset at 17:47.',
+    tips:['Glass tray: shoe covers provided, no tripods.','Skipping sunset? The ฿350 indoor-only late slot exists.'],
+    leg:{total:'~20 min',cost:'~฿36',hops:[
+      {m:'walk',txt:'Hotel → <b>BTS Ratchathewi</b>',meta:'6 min'},
+      {m:'suk',txt:'Ratchathewi → <b>Siam</b> (1 stop); cross the platform',meta:'2 min'},
+      {m:'silom',txt:'Siam → <b>Chong Nonsi</b> (3 stops, toward Bang Wa)',meta:'6 min · ~฿36'},
+      {m:'sky',txt:'Exit 3 → skybridge straight into the tower',meta:'3 min'}]}},
+   {ref:26,ic:'i-food',n:'Le Du Kaan or Nobu — EA rooftop, Empire Tower',short:'EA rooftop',t:'19:15',stay:'2 h',cost:'฿2,500–4,000 for two',hours:'from 17:30 · reserve',ll:LL.empire,lbl:'b',
+    p:'Two of Bangkok’s biggest dining names share one rooftop complex. <b>Le Du Kaan</b> (56F): chef Ton’s à-la-carte take on his Michelin-starred Le Du. <b>Nobu</b> (57–58F): the world’s highest Nobu, black-cod miso and all. Pick one, book it now.',
+    leg:{total:'8 min',cost:'฿0',hops:[{m:'walk',txt:'Down Narathiwat Rd; Empire Tower is the tall one on Sathorn — lifts to <b>“EA”</b>',meta:'8 min'}]}},
+   {ref:23,ic:'i-cocktail',n:'Unculture Silom Rooftop Bar',short:'Unculture',t:'21:30',stay:'1 h 15',cost:'cocktails ~฿300',hours:'17:00–02:00 · live bands nightly',ll:LL.unculture,lbl:'r',
+    p:'A scruffy, brilliant rooftop with the <b>BTS gliding past at eye level</b> every few minutes. Live neo-soul to punk, grapefruit soju, fried corn. Five flights of stairs, no lift.',
+    leg:{total:'7 min',cost:'฿0',hops:[{m:'walk',txt:'Back up Narathiwat to <b>Silom Plaza</b>, No. 36',meta:'7 min'}]}},
+   {base:true,ic:'i-home',n:'Back to base',short:'Hotel',t:'23:00',tl:'Home',ll:LL.hotel,lbl:false,
+    p:'Last BTS from Chong Nonsi is around 23:50. If you miss it, a metered taxi is ~฿100.',
+    leg:{total:'~18 min',cost:'~฿36',hops:[
+      {m:'walk',txt:'To <b>BTS Chong Nonsi</b>',meta:'4 min'},
+      {m:'silom',txt:'Chong Nonsi → <b>Siam</b> (3 stops)',meta:'6 min'},
+      {m:'suk',txt:'Siam → <b>Ratchathewi</b> (1 stop)',meta:'2 min · ~฿36'},
+      {m:'walk',txt:'To the hotel',meta:'6 min'}]}},
+  ]},
+
+/* ---------------- DAY 6 ---------------- */
+{ id:'mon', tab:'Mon 16', n:6, date:'Mon 16 Nov', title:'Slow Morning, then the Airport Train',
+  best:'Last coffee among books, last souvenirs, and a <b>30-minute train from your own neighbourhood</b> straight to the departures hall.',
+  tip:'Keep ฿200 in small notes for the last coffee; the Airport Link itself is contactless — tap the same card you used on the MRT. Ask reception for a shower after check-out; most hotels here say yes.',
+  order:'<b>Hotel</b> → Open House → Eathai → Erawan Shrine → Pratunam → <b>Hotel</b> (bags) → Airport Link → Suvarnabhumi',
+  tally:[['Transport','~฿45'],['Tickets','฿0'],['On foot','~3.5 km']],
+  stops:[
+   {base:true,ic:'i-home',n:'Base camp — Pratunam',short:'Base',t:'09:45',tl:'Leave',ll:LL.hotel,lbl:'l',
+    p:'Breakfast, pack, leave the bags with reception (check-out is noon).'},
+   {ref:14,ic:'i-book',n:'Open House, Central Embassy 6F',short:'Open House',t:'10:10',stay:'1 h 30',cost:'coffee ~฿150',hours:'10:00–22:00',ll:LL.openHouse,lbl:'r',
+    p:'A co-living floor more than a bookshop: <b>Hardcover</b> (art and design books), window seats in the light, a coffee bar, a kids’ corner and a dozen restaurants. Sit down and write the postcards.',
+    leg:{total:'~20 min',cost:'฿0',hops:[
+      {m:'walk',txt:'South on Ratchadamri → left on <b>Ploenchit</b> → Central Embassy; lifts to 6F',meta:'20 min'},
+      {m:'suk',alt:true,txt:'Or BTS Ratchathewi → <b>Ploen Chit</b> (3 stops), skywalk entrance',meta:'~10 min · ~฿26'}]}},
+   {bonus:true,ic:'i-food',n:'Eathai, Central Embassy LG',short:'Eathai',t:'11:45',stay:'1 h',cost:'lunch ~฿400 for two',hours:'10:00–22:00',ll:LL.openHouse,lbl:false,
+    p:'The Thai food hall styled as a market, and the <b>best packaged-souvenir aisle in town</b>: curry pastes, dried mango, Chiang Mai chilli crisps, Thai tea. Lunch, then shop.',
+    leg:{total:'3 min',cost:'฿0',hops:[{m:'walk',txt:'Escalators down to LG',meta:'3 min'}]}},
+   {bonus:true,ic:'i-temple',n:'Erawan Shrine & Pratunam — last lap',short:'Erawan Shrine',t:'13:00',stay:'45 min',cost:'Free',hours:'Platinum Mall 09:00–20:00',ll:LL.erawanShrine,lbl:'b',
+    p:'A last wai at the shrine, then home through Pratunam: Platinum Fashion Mall for anything you promised someone, Pratunam market for the things you didn’t.',
+    leg:{total:'12 min',cost:'฿0',hops:[{m:'walk',txt:'West along Ploenchit to Ratchaprasong',meta:'12 min'}]}},
+   {base:true,ic:'i-home',n:'Base camp: collect the bags',short:'Hotel',t:'14:00',tl:'Bags',ll:LL.hotel,lbl:false,
+    p:'Shower if they let you, change, repack the curry pastes into the checked bag.',
+    leg:{total:'15 min',cost:'฿0',hops:[{m:'walk',txt:'Ratchadamri north → Phetchaburi → Soi 11',meta:'15 min'}]}},
+   {base:true,ic:'i-plane',n:'Suvarnabhumi Airport',short:'Suvarnabhumi · 28 km',t:'16:25',tl:'Flight out',ll:LL.airport,off:'E',
+    p:'Three hours before the flight. Check-in is Level 4; the Level 1 food court is half the price of anything airside.',
+    leg:{total:'~40 min',cost:'฿40',hops:[
+      {m:'walk',txt:'Hotel → <b>ARL Ratchaprarop</b>',meta:'6 min'},
+      {m:'arl',txt:'City Line → <b>Suvarnabhumi</b>, the last stop (6 stops). Every 15 min till midnight.',meta:'30 min · ฿40'},
+      {m:'walk',txt:'Train arrives at B1 → lifts to <b>Level 4 Departures</b>',meta:'4 min'}]}},
+  ]},
+];
+
+const RULES=[
+ {ic:'i-card',h:'Two rail systems, two wallets',p:'<b>BTS</b> (light &amp; dark green, Gold): no bank-card tap yet — Rabbit Card or single tickets. <b>MRT Blue</b> and the <b>Airport Link</b>: tap your Visa / Mastercard / Apple Pay straight at the gate.'},
+ {ic:'i-cash',h:'Boats and buses are cash',p:'Canal boat ฿16–26 paid on board, cross-river ferry ฿5, bus 73 about ฿20 to the conductor, motorbike taxi ฿30–40 from the price board at the stand. Keep ฿20 notes and coins.'},
+ {ic:'i-boat',h:'The canal boat is your secret weapon',p:'Pratunam pier is a 7-minute walk from the hotel. The Golden Mount line drops you at Wat Saket in 15 minutes for about ฿18 — faster than any taxi to the Old Town. Weekdays till 20:30, weekends till 19:00.'},
+ {ic:'i-scarf',h:'Temple dress',p:'Shoulders and knees covered at Wat Arun, Wat Saket, Wat Samphran and Wat Traimit. Carry a scarf; wear shoes you can slip off.'},
+ {ic:'i-check',h:'Book these three now',p:'<b>Charmgang</b> (Fri 18:00, SevenRooms) · <b>Mahanakhon</b> sunset slot (Sun 17:30, online) · <b>Le Du Kaan</b> or <b>Nobu</b> (Sun 19:15). Everything else is walk-in.'},
+ {ic:'i-sun',h:'Sunset is 17:47',p:'Every “be on top by” time in here is built around it: the Golden Mount on Thursday, Mahanakhon on Sunday. Sunrise is 06:20 if you ever want the river empty.'},
+];
+const NEAR=[['arl','ARL Ratchaprarop · 5 min'],['suk','BTS Ratchathewi · 6 min'],['canal','Pratunam canal pier · 7 min'],['suk','BTS Phaya Thai · 8 min']];
+const CHECK=[[1,'Dragon temple → Wat Samphran','Thu'],[2,'Wat Arun','Thu'],[3,'The Erawan Museum','Sat'],[4,'Krua Apsorn','Thu'],[5,'Nattaporn ice cream','Thu'],[6,'Local Boys Coffee Co','Fri'],[7,'Oyster and Things','Fri'],[8,'Charmgang','Fri'],[9,'Chinatown market','Fri'],[10,'Talat Noi','Fri'],[11,'House of Vintage / Songwat','Fri'],[12,'Central Park (Dusit)','Sun'],[13,'“Adidas” % Arabica Songwat','Fri'],[14,'Open House, Central Embassy','Mon'],[15,'Pridi area','Sat'],[16,'ChumChum Grocery, Pridi','Sat'],[17,'Emquartier','Sat'],[18,'Emsphere','Sat'],[19,'Dusit Arun Roof Park','Sun'],[20,'Wat Saket','Thu'],[21,'JEDI Café &amp; Bar','Thu'],[22,'Mahanakhon Skywalk','Sun'],[23,'Unculture Silom','Sun'],[24,'Muse Speakeasy','Wed'],[25,'Akara Sky Hanuman','Sat'],[26,'Nobu &amp; Le Du Kaan','Sun'],[27,'Siam Square','Wed'],[28,'Siam BTS','Wed'],[29,'Erawan Shrine','Wed'],[30,'Chit Lom BTS','Wed'],[31,'One Bangkok','Sun'],[32,'Jude and Records → Get Back &amp; Jude','Fri'],['+','Bang Krachao, cycling','Sat']];
+
+/* ============================================================
+   MAP GEOMETRY  (lat, lon)
+   ============================================================ */
+const RIVER=[[13.800,100.512],[13.786,100.508],[13.774,100.503],[13.762,100.494],[13.752,100.489],[13.744,100.490],[13.738,100.499],[13.735,100.509],[13.729,100.515],[13.719,100.513],[13.708,100.506],[13.696,100.512],[13.685,100.526],[13.680,100.536],[13.688,100.548],[13.699,100.560],[13.699,100.572],[13.690,100.581],[13.676,100.583],[13.662,100.580],[13.653,100.568],[13.654,100.555],[13.662,100.545],[13.668,100.538],[13.660,100.530],[13.645,100.528],[13.625,100.532],[13.605,100.540],[13.585,100.550],[13.570,100.560]];
+const ISLAND=RIVER.slice(13,24);
+const CANAL=[[13.7566,100.5060],[13.7535,100.5180],[13.7505,100.5300],[13.7500,100.5405],[13.7475,100.5520],[13.7440,100.5650],[13.7405,100.5800],[13.7380,100.6000]];
+const RAIL=[
+ {c:'#8CC152',pts:[[13.802,100.554],[13.780,100.545],[13.763,100.537],[13.757,100.534],[13.752,100.532],[13.7456,100.5343],[13.7441,100.5432],[13.7433,100.5490],[13.741,100.555],[13.737,100.560],[13.7305,100.5698],[13.724,100.579],[13.7195,100.5855],[13.7148,100.5915],[13.706,100.601],[13.697,100.605],[13.689,100.609],[13.680,100.610],[13.668,100.6045],[13.661,100.602],[13.646,100.596],[13.637,100.592],[13.6215,100.5905],[13.608,100.594],[13.600,100.598]]},
+ {c:'#0B6E3A',pts:[[13.746,100.529],[13.7456,100.5343],[13.740,100.540],[13.7285,100.5342],[13.7237,100.5293],[13.720,100.523],[13.719,100.518],[13.719,100.514],[13.721,100.503],[13.721,100.495],[13.719,100.486],[13.714,100.477],[13.713,100.468],[13.721,100.457]]},
+ {c:'#1F4E9C',pts:[[13.721,100.402],[13.7215,100.420],[13.7215,100.440],[13.721,100.457],[13.7225,100.468],[13.729,100.476],[13.7405,100.4856],[13.7440,100.4940],[13.7462,100.5010],[13.7418,100.5093],[13.7378,100.5170],[13.732,100.529],[13.7295,100.5367],[13.7258,100.5455],[13.7222,100.5540],[13.7230,100.5600],[13.7380,100.5610],[13.7490,100.5630],[13.7570,100.5650],[13.7660,100.5700],[13.7800,100.5740]]},
+ {c:'#B0263A',pts:[[13.757,100.534],[13.7538,100.5427],[13.751,100.561],[13.742,100.600],[13.738,100.645],[13.720,100.700],[13.690,100.750]]},
+ {c:'#B99A4A',pts:[[13.721,100.503],[13.726,100.510],[13.730,100.507]]},
+];
+const REGIONS=[['OLD TOWN',13.7515,100.4960],['CHINATOWN',13.7362,100.5165],['SILOM',13.7205,100.5335],['SUKHUMVIT',13.7270,100.5760],['BANG KRACHAO',13.6800,100.5600],['SAMUT PRAKAN',13.6320,100.5980],['THONBURI',13.7340,100.4720],['CHAO PHRAYA',13.6120,100.5230],['PRATUNAM',13.7612,100.5468]];
+
+/* ============================================================
+   RENDER
+   ============================================================ */
+const K=4000,LATK=4120,LON0=100.38,LAT0=13.83;
+const P=ll=>[(ll[1]-LON0)*K,(LAT0-ll[0])*LATK];
+const f1=n=>Math.round(n*10)/10;
+function smooth(pts,closed){
+  if(closed) pts=[...pts,pts[0]];
+  let d='M'+pts[0].map(f1).join(' ');
+  for(let i=0;i<pts.length-1;i++){
+    const p0=pts[i-1]||pts[i],p1=pts[i],p2=pts[i+1],p3=pts[i+2]||p2;
+    const c1=[p1[0]+(p2[0]-p0[0])/6,p1[1]+(p2[1]-p0[1])/6],c2=[p2[0]-(p3[0]-p1[0])/6,p2[1]-(p3[1]-p1[1])/6];
+    d+=`C${c1.map(f1).join(' ')} ${c2.map(f1).join(' ')} ${p2.map(f1).join(' ')}`;
+  }
+  return d+(closed?'Z':'');
+}
+const icon=(id,cls='ic')=>`<svg class="${cls}" aria-hidden="true"><use href="#${id}"/></svg>`;
+const patch=m=>{const M=MODES[m];return `<span class="patch" style="--pb:${M.bg};--pc:${M.fg}">${icon(M.ic)}${M.n}</span>`};
+
+const LINEC={walk:'#8A7A55',sky:'#6F8794',moto:'#C98B0F',suk:'#6FA83A'};
+const nm=s=>(s.short||s.n).replace(/ · \d+ km$/,'');
+const legModes=L=>L?[...new Set(L.hops.filter(h=>!h.alt).map(h=>h.m))]:[];
+const legColor=L=>{const ms=legModes(L);const m=ms.find(x=>x!=='walk'&&x!=='sky')||ms[0]||'walk';return LINEC[m]||MODES[m].bg};
+
+function dayGeo(day){
+  const seq=day.stops.filter(s=>s.ll);
+  const on=seq.filter(s=>!s.off).map(s=>P(s.ll));
+  const minX=Math.min(...on.map(p=>p[0])),maxX=Math.max(...on.map(p=>p[0])),minY=Math.min(...on.map(p=>p[1])),maxY=Math.max(...on.map(p=>p[1]));
+  const cx=(minX+maxX)/2,cy=(minY+maxY)/2;
+  const side=Math.max(maxX-minX,(maxY-minY)/1.05,200);
+  const hasOff=seq.some(s=>s.off);
+  const pad=side*0.26+(hasOff?44:26);
+  const W=side+pad*2,H=side*1.05+pad*2,x0=cx-W/2,y0=cy-H/2,u=W/400;
+  const tabPt=s=>{const y=Math.min(Math.max(P(s.ll)[1],y0+H*0.18),y0+H*0.82);return s.off==='W'?[x0+28*u,y]:[x0+W-28*u,y]};
+  return {seq,x0,y0,W,H,u,pt:s=>s.off?tabPt(s):P(s.ll)};
+}
+
+function renderMap(day,sfx=''){
+  const G=dayGeo(day),{seq,x0,y0,W,H,u}=G,fid=`wob-${day.id}${sfx}`;
+  const inView=(p,m=0)=>p[0]>x0-m&&p[0]<x0+W+m&&p[1]>y0-m&&p[1]<y0+H+m;
+  let g='';
+  g+=`<rect x="${f1(x0)}" y="${f1(y0)}" width="${f1(W)}" height="${f1(H)}" fill="var(--land)"/>`;
+  g+=`<path d="${smooth(ISLAND.map(P),true)}" fill="var(--park)" filter="url(#${fid})"/>`;
+  const river=smooth(RIVER.map(P));
+  g+=`<path d="${river}" fill="none" stroke="var(--water-deep)" stroke-width="${f1(34*u/1.6)}" stroke-linecap="round" filter="url(#${fid})"/>`;
+  g+=`<path d="${river}" fill="none" stroke="var(--water)" stroke-width="${f1(22*u/1.6)}" stroke-linecap="round" filter="url(#${fid})"/>`;
+  g+=`<path d="${smooth(CANAL.map(P))}" fill="none" stroke="var(--water-deep)" stroke-width="${f1(3.2*u)}" stroke-linecap="round" opacity=".9"/>`;
+  RAIL.forEach(r=>{g+=`<path d="${smooth(r.pts.map(P))}" fill="none" stroke="${r.c}" stroke-width="${f1(3*u)}" stroke-linecap="round" opacity=".55"/>`});
+  REGIONS.forEach(([t,la,lo])=>{const p=P([la,lo]);if(!inView(p,-20*u))return;
+    g+=`<text x="${f1(p[0])}" y="${f1(p[1])}" text-anchor="middle" font-family="Barlow Condensed,sans-serif" font-weight="600" font-size="${f1(11*u)}" letter-spacing="${f1(2.2*u)}" fill="var(--ink)" opacity=".38">${t}</text>`});
+  // legs — one clickable group per segment
+  for(let i=1;i<seq.length;i++){
+    const a=G.pt(seq[i-1]),b=G.pt(seq[i]),dx=b[0]-a[0],dy=b[1]-a[1],len=Math.hypot(dx,dy);
+    if(len<1)continue;
+    const sign=i%2?1:-1,mx=(a[0]+b[0])/2-dy*0.16*sign,my=(a[1]+b[1])/2+dx*0.16*sign;
+    const d=`M${f1(a[0])} ${f1(a[1])}Q${f1(mx)} ${f1(my)} ${f1(b[0])} ${f1(b[1])}`;
+    g+=`<g class="leg-g" data-leg="${i}" style="--legc:${legColor(seq[i].leg)}"><path class="hit" d="${d}"/><path class="halo" d="${d}"/><path class="line" d="${d}"/></g>`;
+  }
+  // markers
+  let num=0;const placed=new Set(),placedPts=[];
+  const spread=(p,r)=>{let q=[p[0],p[1]];for(let k=0;k<4;k++){if(!placedPts.some(o=>Math.hypot(o[0]-q[0],o[1]-q[1])<r*1.9))break;q=[q[0]+r*2.1,q[1]];}placedPts.push(q);return q;};
+  seq.forEach((s,i)=>{
+    const isBase=!!s.base;if(!isBase)num++;
+    let p=G.pt(s);const key=p.map(v=>Math.round(v/(6*u))).join(',');
+    const dup=placed.has(key);placed.add(key);
+    const r=(isBase?10.5:9.5)*u,fill=isBase?'var(--rust)':s.bonus?'var(--mustard)':'var(--forest)';
+    if(dup&&isBase)return;
+    if(!isBase&&!s.off)p=spread(p,r);
+    let m=`<g class="stop-g" data-stop="${i}">`;
+    if(s.off){
+      const label=(s.short||s.n),tw=label.length*5.9*u+56*u,left=s.off==='W';
+      const rx=left?x0+8*u:x0+W-8*u-tw,ry=p[1]-15*u,cxm=left?rx+16*u:rx+tw-16*u;
+      m+=`<rect class="ring" x="${f1(rx-3*u)}" y="${f1(ry-3*u)}" width="${f1(tw+6*u)}" height="${f1(36*u)}" rx="${f1(10*u)}"/>`;
+      m+=`<rect x="${f1(rx)}" y="${f1(ry)}" width="${f1(tw)}" height="${f1(30*u)}" rx="${f1(8*u)}" fill="var(--card)" stroke="var(--ink)" stroke-width="${f1(1.6*u)}"/>`;
+      m+=isBase?`<rect x="${f1(cxm-9*u)}" y="${f1(p[1]-9*u)}" width="${f1(18*u)}" height="${f1(18*u)}" rx="${f1(5*u)}" fill="${fill}"/>`:`<circle cx="${f1(cxm)}" cy="${f1(p[1])}" r="${f1(9.5*u)}" fill="${fill}"/><text x="${f1(cxm)}" y="${f1(p[1]+3.6*u)}" text-anchor="middle" font-family="Barlow Condensed,sans-serif" font-weight="700" font-size="${f1(11*u)}" fill="#F4EDDF">${num}</text>`;
+      m+=`<text x="${f1(left?rx+30*u:rx+tw-30*u)}" y="${f1(p[1]+3.6*u)}" text-anchor="${left?'start':'end'}" font-family="Lora,serif" font-style="italic" font-size="${f1(10.6*u)}" fill="var(--ink)">${left?'← ':''}${label}${left?'':' →'}</text></g>`;
+      g+=m;return;}
+    m+=`<circle class="ring" cx="${f1(p[0])}" cy="${f1(p[1])}" r="${f1(r+5*u)}"/>`;
+    if(isBase){m+=`<rect x="${f1(p[0]-r)}" y="${f1(p[1]-r)}" width="${f1(2*r)}" height="${f1(2*r)}" rx="${f1(6*u)}" fill="${fill}" stroke="var(--card)" stroke-width="${f1(2.4*u)}"/><path transform="translate(${f1(p[0]-7*u)} ${f1(p[1]-7.4*u)}) scale(${f1(0.6*u)})" d="M4 10.5 12 4l8 6.5V19a1.5 1.5 0 0 1-1.5 1.5h-13A1.5 1.5 0 0 1 4 19v-8.5Z" fill="none" stroke="#F4EDDF" stroke-width="2.2" stroke-linejoin="round"/>`;}
+    else{m+=`<circle cx="${f1(p[0])}" cy="${f1(p[1])}" r="${f1(r)}" fill="${fill}" stroke="var(--card)" stroke-width="${f1(2.4*u)}"/><text x="${f1(p[0])}" y="${f1(p[1]+4*u)}" text-anchor="middle" font-family="Barlow Condensed,sans-serif" font-weight="700" font-size="${f1(11*u)}" fill="#F4EDDF">${num}</text>`;}
+    if(s.lbl!==false&&!(dup&&!isBase)){const t=s.short||s.n,side=s.lbl||'r';
+      let tx=p[0],ty=p[1],anchor='start';
+      if(side==='r'){tx+=r+5*u;ty+=3.8*u}else if(side==='l'){tx-=r+5*u;ty+=3.8*u;anchor='end'}else if(side==='t'){ty-=r+5*u;anchor='middle'}else{ty+=r+13*u;anchor='middle'}
+      m+=`<text x="${f1(tx)}" y="${f1(ty)}" text-anchor="${anchor}" font-family="Lora,serif" font-style="italic" font-weight="500" font-size="${f1(11.2*u)}" fill="var(--ink)" stroke="var(--card)" stroke-width="${f1(3.2*u)}" paint-order="stroke" stroke-linejoin="round">${t}</text>`;}
+    g+=m+'</g>';
+  });
+  const km=0.00925*K,sx=x0+16*u,sy=y0+H-16*u;
+  g+=`<g stroke="var(--ink)" stroke-width="${f1(1.6*u)}" fill="none"><path d="M${f1(sx)} ${f1(sy-4*u)}v${f1(4*u)}h${f1(km)}v${f1(-4*u)}"/></g><text x="${f1(sx+km/2)}" y="${f1(sy-7*u)}" text-anchor="middle" font-family="Barlow Condensed,sans-serif" font-size="${f1(9.5*u)}" letter-spacing="${f1(1*u)}" fill="var(--ink)">1 KM</text>`;
+  const nx=x0+W-22*u,ny=y0+26*u;
+  g+=`<g fill="var(--ink)"><path d="M${f1(nx)} ${f1(ny-12*u)}l${f1(5*u)} ${f1(16*u)}-${f1(5*u)}-${f1(5*u)}-${f1(5*u)} ${f1(5*u)}Z"/><text x="${f1(nx)}" y="${f1(ny-15*u)}" text-anchor="middle" font-family="Fraunces,serif" font-weight="700" font-size="${f1(11*u)}">N</text></g>`;
+  return `<svg class="map" viewBox="${f1(x0)} ${f1(y0)} ${f1(W)} ${f1(H)}" role="img" aria-label="Hand-drawn map of Bangkok showing the day’s route and numbered stops">
+    <defs><filter id="${fid}" x="-10%" y="-10%" width="120%" height="120%"><feTurbulence type="fractalNoise" baseFrequency="${f1(0.018/u)}" numOctaves="2" seed="7"/><feDisplacementMap in="SourceGraphic" scale="${f1(7*u)}"/></filter></defs>${g}</svg>`;
+}
+const MAPKEY=`<div class="map-key"><span><i class="dash"></i>today’s route</span><span><i style="--k:#8CC152"></i>BTS Sukhumvit</span><span><i style="--k:#0B6E3A"></i>BTS Silom</span><span><i style="--k:#1F4E9C"></i>MRT Blue</span><span><i style="--k:#B0263A"></i>Airport Link</span><span><i style="--k:#98BBCD"></i>river &amp; canal</span></div>`;
+const hopsHtml=L=>`<ol class="hops">${L.hops.map(h=>`<li class="hop ${h.alt?'alt':''}">${patch(h.m)}<span class="hop-txt">${h.txt}</span><span class="hop-meta">${h.meta||''}</span></li>`).join('')}</ol>`;
+
+function renderStop(s,idx,num){
+  const cls=['stop',s.base?'is-base':'',s.bonus?'is-bonus':''].join(' ');
+  const badge=s.base?icon(s.ic):num;
+  const ref=s.bonus?`<span class="ref">Bonus</span>`:s.ref?`<span class="ref">№ ${s.ref}</span>`:'';
+  const cost=s.cost?`<span class="pill ${/^free/i.test(s.cost)?'free':''}">${s.cost}</span>`:'';
+  const hours=s.hours?`<span class="pill hours">${s.hours}</span>`:'';
+  const stay=s.stay?`<span class="t"><small>Stay</small>${s.stay}</span>`:'';
+  const tl=s.tl?`<span class="t"><small>${s.tl}</small>${s.t}</span>`:`<span class="t"><small>Arrive</small>${s.t}</span>`;
+  const tips=s.tips?`<ul class="tips">${s.tips.map(t=>`<li>${t}</li>`).join('')}</ul>`:'';
+  const leg=s.leg?`<li class="leg"><div class="leg-spine"></div><div class="leg-body">
+      <div class="leg-sum"><span class="lbl">Getting there</span><b>${s.leg.total}</b>${s.leg.cost?`<span>·</span><b>${s.leg.cost}</b>`:''}</div>${hopsHtml(s.leg)}</div></li>`:'';
+  return `${leg}<li class="${cls}"><div class="stop-spine"><div class="num">${badge}</div></div>
+    <article class="card"><div class="card-main">
+      <h3>${s.n}${ref}</h3>
+      <div class="timerow">${tl}${stay}${cost}${hours}</div>
+      <p>${s.p}</p>${tips}</div>
+      <div class="medal">${icon(s.ic)}</div></article></li>`;
+}
+
+function renderDay(d,i){
+  let num=0;
+  const stops=d.stops.map((s,j)=>{if(!s.base)num++;return renderStop(s,j,num)}).join('');
+  return `<section class="day" id="day-${d.id}" role="tabpanel" ${i?'hidden':''}>
+    <header class="day-head">
+      <div><h2>Day ${d.n} Route<em>${d.title}</em></h2><p class="best">${d.best}</p></div>
+      <div class="stamp"><small>${d.date.split(' ')[0]}</small><span class="n">${d.n}</span><small>${d.date.slice(4)}</small><span class="pg">${d.n} / ${DAYS.length}</span></div>
+    </header>
+    <div class="day-grid">
+      <div class="map-col"><div class="map-card" data-day="${d.id}" title="Open the map">
+        <button class="expand" type="button" aria-label="Open the map full screen"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M14 4h6v6M20 4l-7 7M10 20H4v-6M4 20l7-7"/></svg></button>
+        ${renderMap(d)}${MAPKEY}
+        <div class="map-cap">Tap the map to open it · hover a dashed route to preview the leg</div>
+        <div class="map-foot"><span class="lbl">Map snippet · not to be trusted for driving</span><span>${d.stops.filter(s=>!s.base).length} stops</span></div></div></div>
+      <ol class="stops">${stops}</ol>
+    </div>
+    <div class="day-foot">
+      <div class="tipbox"><div class="medal">${icon('i-walk')}</div><div><span class="lbl">Tip</span><p>${d.tip}</p></div></div>
+      <div class="orderbox"><span class="lbl">Suggested order</span><p>${d.order}</p><div class="tally">${d.tally.map(([k,v])=>`<span>${k} <b>${v}</b></span>`).join('')}</div></div>
+    </div></section>`;
+}
+
+document.getElementById('basecamp-near').innerHTML=NEAR.map(([m,t])=>{const M=MODES[m];return `<span class="patch" style="--pb:${M.bg};--pc:${M.fg}">${icon(M.ic)}${t}</span>`}).join('');
+document.getElementById('rules').innerHTML=RULES.map(r=>`<article class="rule"><h3>${icon(r.ic)}${r.h}</h3><p>${r.p}</p></article>`).join('');
+document.getElementById('tabs').innerHTML=DAYS.map((d,i)=>`<button class="tab" role="tab" data-id="${d.id}" aria-selected="${i===0}" aria-controls="day-${d.id}"><span class="lbl">Day ${d.n}</span><b>${d.tab}</b></button>`).join('');
+document.getElementById('days').innerHTML=DAYS.map(renderDay).join('');
+document.getElementById('check').innerHTML=CHECK.map(([n,t,d])=>`<div><span class="n">${n}</span><span>${t}</span><span class="d">${d}</span></div>`).join('');
+
+function show(id,push=true){
+  document.querySelectorAll('.tab').forEach(b=>b.setAttribute('aria-selected',b.dataset.id===id));
+  document.querySelectorAll('.day').forEach(s=>{s.hidden=s.id!=='day-'+id});
+  if(push){try{history.replaceState(null,'','#'+id)}catch(e){}}
+}
+document.getElementById('tabs').addEventListener('click',e=>{const b=e.target.closest('.tab');if(!b)return;show(b.dataset.id);
+  b.scrollIntoView({inline:'center',block:'nearest',behavior:'smooth'});
+  const bar=document.getElementById('tabs');if(bar.getBoundingClientRect().top<0)bar.scrollIntoView({block:'start'});});
+const start=location.hash.slice(1);if(DAYS.some(d=>d.id===start))show(start,false);
+
+/* ============================================================
+   INTERACTIVE MAP · modal + leg / stop selection
+   ============================================================ */
+document.body.insertAdjacentHTML('beforeend',`<div class="modal" id="modal" hidden role="dialog" aria-modal="true" aria-labelledby="modal-title">
+  <div class="modal-box">
+    <header class="modal-head"><div><span class="lbl" id="modal-kicker"></span><h2 id="modal-title"></h2><p>Tap a dashed route to see exactly how you get there, or a numbered stop for its details.</p></div>
+      <button class="modal-close" id="modal-close" type="button" aria-label="Close map"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 5l14 14M19 5L5 19"/></svg></button></header>
+    <div class="modal-grid">
+      <div class="modal-map"><div class="map-card" id="modal-map"></div></div>
+      <aside class="modal-panel"><div id="modal-detail"></div>
+        <div class="section-head"><span class="lbl">Route legs · tap to highlight</span></div><ol class="leglist" id="modal-legs"></ol></aside>
+    </div></div></div>`);
+const modal=document.getElementById('modal');
+let mDay=null,mSel=null,lastFocus=null;
+const dayById=id=>DAYS.find(d=>d.id===id);
+
+function legCaption(day,i){const {seq}=dayGeo(day),L=seq[i].leg;if(!L)return '';
+  return `<b>Leg ${i}</b> · ${nm(seq[i-1])} → ${nm(seq[i])} · ${legModes(L).map(m=>MODES[m].n).join(' + ')} · ${L.total}${L.cost?' · '+L.cost:''}`;}
+
+function legDetail(day,i){const {seq}=dayGeo(day),from=seq[i-1],to=seq[i],L=to.leg;
+  if(!L)return `<div class="detail"><span class="lbl">Leg ${i}</span><h3>${nm(from)}<span class="arr">→</span>${nm(to)}</h3><p class="hint">No transport needed — same place.</p></div>`;
+  const arrive=to.base?`${to.tl||'Arrive'} <b>${to.t}</b>`:`Arrive <b>${to.t}</b>${to.stay?` · stay ${to.stay}`:''}${to.cost?` · ${to.cost}`:''}${to.hours?` · ${to.hours}`:''}`;
+  return `<div class="detail"><span class="lbl">Leg ${i} of ${seq.length-1}</span>
+    <h3>${nm(from)}<span class="arr">→</span>${nm(to)}</h3>
+    <div class="detail-meta"><b>${L.total}</b>${L.cost?` · <b>${L.cost}</b>`:''}</div>
+    <div class="detail-modes"><span class="lbl">Includes</span>${legModes(L).map(patch).join('')}</div>
+    ${hopsHtml(L)}
+    <div class="detail-arrive">${arrive}</div></div>`;}
+
+function stopDetail(day,i){const {seq}=dayGeo(day),s=seq[i];
+  const ref=s.bonus?`<span class="ref">Bonus</span>`:s.ref?`<span class="ref">№ ${s.ref}</span>`:'';
+  const cost=s.cost?`<span class="pill ${/^free/i.test(s.cost)?'free':''}">${s.cost}</span>`:'';
+  const hours=s.hours?`<span class="pill hours">${s.hours}</span>`:'';
+  const stay=s.stay?`<span class="t"><small>Stay</small>${s.stay}</span>`:'';
+  const tl=s.tl?`<span class="t"><small>${s.tl}</small>${s.t}</span>`:`<span class="t"><small>Arrive</small>${s.t}</span>`;
+  const tips=s.tips?`<ul class="tips">${s.tips.map(t=>`<li>${t}</li>`).join('')}</ul>`:'';
+  const how=s.leg?`<div class="leg-sum" style="margin-top:14px"><span class="lbl">How you get here</span><b>${s.leg.total}</b>${s.leg.cost?`<span>·</span><b>${s.leg.cost}</b>`:''}</div>${hopsHtml(s.leg)}`:'';
+  return `<div class="detail"><span class="lbl">Stop ${i} of ${seq.length-1}</span><h3>${s.n}${ref}</h3>
+    <div class="timerow">${tl}${stay}${cost}${hours}</div><p>${s.p}</p>${tips}${how}</div>`;}
+
+function daySummary(day){const {seq}=dayGeo(day);const ms=[...new Set(seq.flatMap(s=>legModes(s.leg)))];
+  return `<div class="detail"><span class="lbl">Day ${day.n} · ${day.date}</span><h3>${day.title}</h3>
+    <div class="detail-modes"><span class="lbl">Today you ride</span>${ms.map(patch).join('')}</div>
+    <p class="hint">${seq.length-1} legs, ${seq.filter(s=>!s.base).length} stops. Tap any dashed line on the map — it lights up in the colour of the line you ride, and the exact hops appear here.</p>
+    <div class="tally">${day.tally.map(([k,v])=>`<span>${k} <b>${v}</b></span>`).join('')}</div></div>`;}
+
+function legRows(day){const {seq}=dayGeo(day);let out='';
+  for(let i=1;i<seq.length;i++){const L=seq[i].leg,ms=legModes(L);
+    out+=`<li><button type="button" class="legrow" data-leg="${i}" style="--legc:${legColor(L)}"><span class="legno">${i}</span>
+      <span class="legrow-main"><b>${nm(seq[i-1])} → ${nm(seq[i])}</b><span class="legrow-modes">${ms.map(m=>`<i style="background:${MODES[m].bg}"></i>`).join('')}<span>${ms.map(m=>MODES[m].n).join(' · ')||'—'}</span></span></span>
+      <span class="legrow-meta">${L?L.total:''}${L&&L.cost?'<br>'+L.cost:''}</span></button></li>`;}
+  return out;}
+
+function applySel(){
+  const svg=modal.querySelector('svg.map');if(!svg)return;
+  svg.classList.toggle('has-sel',!!mSel);
+  svg.querySelectorAll('.leg-g').forEach(g=>g.classList.toggle('sel',!!mSel&&mSel.type==='leg'&&+g.dataset.leg===mSel.i));
+  svg.querySelectorAll('.stop-g').forEach(g=>{g.classList.remove('sel','end');g.style.removeProperty('--legc');
+    if(!mSel)return;const k=+g.dataset.stop;
+    if(mSel.type==='stop'&&k===mSel.i)g.classList.add('sel');
+    if(mSel.type==='leg'&&(k===mSel.i||k===mSel.i-1)){g.classList.add('end');const lg=svg.querySelector(`.leg-g[data-leg="${mSel.i}"]`);if(lg)g.style.setProperty('--legc',lg.style.getPropertyValue('--legc'));}});
+  modal.querySelectorAll('.legrow').forEach(b=>b.classList.toggle('sel',!!mSel&&mSel.type==='leg'&&+b.dataset.leg===mSel.i));
+  const det=document.getElementById('modal-detail');
+  det.innerHTML=!mSel?daySummary(mDay):mSel.type==='leg'?legDetail(mDay,mSel.i):stopDetail(mDay,mSel.i);
+  if(mSel&&window.matchMedia('(max-width:900px)').matches)det.scrollIntoView({block:'start',behavior:'smooth'});
+}
+function openModal(id,sel){
+  mDay=dayById(id);if(!mDay)return;mSel=sel||null;lastFocus=document.activeElement;
+  document.getElementById('modal-kicker').textContent=`Day ${mDay.n} · ${mDay.date} · route map`;
+  document.getElementById('modal-title').textContent=mDay.title;
+  document.getElementById('modal-map').innerHTML=renderMap(mDay,'-m')+MAPKEY;
+  document.getElementById('modal-legs').innerHTML=legRows(mDay);
+  modal.hidden=false;document.documentElement.style.overflow='hidden';
+  applySel();document.getElementById('modal-close').focus();
+}
+function closeModal(){modal.hidden=true;document.documentElement.style.overflow='';if(lastFocus&&lastFocus.focus)lastFocus.focus();}
+
+document.addEventListener('click',e=>{
+  const legG=e.target.closest('.leg-g'),stopG=e.target.closest('.stop-g');
+  if(e.target.closest('#modal')){
+    if(e.target===modal||e.target.closest('#modal-close'))return closeModal();
+    const row=e.target.closest('.legrow');
+    if(row)mSel={type:'leg',i:+row.dataset.leg};
+    else if(legG)mSel={type:'leg',i:+legG.dataset.leg};
+    else if(stopG)mSel={type:'stop',i:+stopG.dataset.stop};
+    else if(e.target.closest('svg.map'))mSel=null;
+    else return;
+    return applySel();
+  }
+  const card=e.target.closest('.map-card');if(!card)return;
+  const id=card.dataset.day;
+  if(legG)openModal(id,{type:'leg',i:+legG.dataset.leg});
+  else if(stopG)openModal(id,{type:'stop',i:+stopG.dataset.stop});
+  else openModal(id);
+});
+document.addEventListener('keydown',e=>{if(e.key==='Escape'&&!modal.hidden)closeModal();});
+document.addEventListener('mouseover',e=>{
+  const card=e.target.closest('.map-card');if(!card||card.closest('#modal'))return;
+  const cap=card.querySelector('.map-cap');if(!cap)return;const g=e.target.closest('.leg-g');
+  cap.innerHTML=g?legCaption(dayById(card.dataset.day),+g.dataset.leg):'Tap the map to open it · hover a dashed route to preview the leg';
+});
+</script>
